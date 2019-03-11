@@ -1,0 +1,32 @@
+.nav-menu {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  flex-wrap: nowrap;
+  overflow: auto;
+  margin: 5px 0 0;
+  //box-shadow: 0 2px 15px #888;
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+
+}
+
+.nav-menu-item {
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.nav-link {
+  text-decoration: none;
+  color:red;
+  padding: 8px 10px;
+  width: 100%;
+  text-align: center;
+  display: block;
+  border-right: 1px solid #fff;
+  font-size: 14px
+}
+.nav-link-active
+{
+    border-bottom:solid 1px red 
+}
