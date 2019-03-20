@@ -9,12 +9,20 @@ import { SinglePostComponent } from './components/single-post/single-post.compon
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { NewsTemplateComponent } from './templates/news-template/news-template.component';
+import { LoaderComponent } from './templates/loader/loader.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SingleLoaderComponent } from './templates/single-loader/single-loader.component';
+import { SearchResultsComponent } from './components/search-results/search-results.component'
+
 
 @NgModule({
-  declarations: [CommonComponent, ArchivePostComponent, SinglePostComponent, HomeComponent, FooterComponent, HeaderComponent],
+  declarations: [CommonComponent, ArchivePostComponent, SinglePostComponent, HomeComponent, FooterComponent, HeaderComponent, NewsTemplateComponent, LoaderComponent, SingleLoaderComponent, SearchResultsComponent],
   imports: [
     CommonModule,
-    PostRoutingModule
+    PostRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PostModule { }

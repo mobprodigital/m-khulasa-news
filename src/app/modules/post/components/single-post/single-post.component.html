@@ -1,3 +1,20 @@
-<p>
-  single-post works!
-</p>
+<div [hidden]='!loader'> 
+  <app-single-loader></app-single-loader>
+</div> 
+
+<article *ngIf="post" class="single-post-container">
+  <h4 class="single-post-title"> {{post.title}}</h4>
+  <h6 class="post-date-or-author">
+    <span><img class="date-and-user-icon" src="assets/images/icons/calendar-icon.png" alt=""> {{post.createDate |
+      date:'longDate' | uppercase}}</span>
+    <span class="pl-3 "><img class="date-and-user-icon" src="assets/images/icons/person.png" alt=""> {{post.author}}
+    </span>
+  </h6>
+  <img class="w-100" [src]="post.featuredImage.original" [alt]="post.featuredImage.original">
+  <div class="single-post-content" [innerHTML]='post.content'></div>
+</article>
+<div [hidden]='!errorMsg'>
+  {{errorMsg}}
+
+</div>
+<app-news-template [categoryID]="42" [count]='3' [title]="'Related-posts'"></app-news-template>

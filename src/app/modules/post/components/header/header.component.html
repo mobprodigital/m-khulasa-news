@@ -1,16 +1,51 @@
-<header>
-  <div></div>
-  <nav>
-    <ul class="nav-menu">
-      <li class="nav-menu-item"><a class="nav-link"  [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active" routerLink="/">home</a></li>
-      <li class="nav-menu-item"><a class="nav-link"  [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active" [routerLink]="['/category', 1]">news</a></li>
-      <li class="nav-menu-item"><a class="nav-link"  [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active" [routerLink]="['/category', 2]">politics</a></li>
-      <li class="nav-menu-item"><a class="nav-link"  [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active" [routerLink]="['/category', 3]">business</a></li>
-      <li class="nav-menu-item"><a class="nav-link"  [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active" [routerLink]="['/category', 4]">sports</a></li>
-      <li class="nav-menu-item"><a class="nav-link"  [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active" [routerLink]="['/category', 5]">video</a></li>
-      <li class="nav-menu-item"><a class="nav-link"  [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active" [routerLink]="['/category', 6]">life style</a></li>
-      <li class="nav-menu-item"><a class="nav-link"  [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active" [routerLink]="['/category', 7]">entertainment</a></li>
-      <li class="nav-menu-item"><a class="nav-link"  [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active" [routerLink]="['/category', 8]">offbeat</a></li>
+<header class="header-fix">
+  <div class="header row">
+    <div class="col-2"><img class="menu-icon" src="assets/images/icons/menu.png" alt="" (click)="sideNav()"></div>
+    <div class="col-5"><img class="logo" src="assets/images/logo/logo.png" alt=""></div>
+    <div class="col-5 search-container">
+      <form (ngSubmit)="search()" #searchForm="ngForm">
+        <input [(ngModel)]="SearchTerm" #searchTerm="ngModel" name="searchTerm" required type="text" class="search-box"
+          placeholder="Search" />
+        <button class="btn-search " type="submit">
+          <img class="search-icon" src="assets/images/icons/search.png" alt="">
+        </button>
+        <button [disabled]="searchForm.invalid" class="btn-search " type="submit">
+          <img class="search-icon" src="assets/images/icons/search.png" alt="">
+        </button>
+
+        <div style="color:red;" *ngIf="searchTerm.invalid  &&  (searchTerm.touched || searchTerm.dirty)">
+          Enter search term
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <nav [ngStyle]="{'transform': translate}" class="sidenav">
+    <a class="closebtn" (click)="sideNav()">x</a>
+    <ul class="side-nav-menu">
+
+      <li *ngFor="let catList of categoryList" (click)="sideNav()" class=""><a class="side-nav-link"
+          [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active" [routerLink]="['/category', catList.id]">{{catList.name}}</a></li>
     </ul>
   </nav>
+  <div [hidden]="show" class="right-Side" (click)="sideNav()">
+
+  </div>
+
+  <nav>
+    <ul class="nav-menu">
+      <li class="nav-menu-item"><a class="nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active"
+          routerLink="/">{{lang=='hin'? 'होम':'Home'}}</a></li>
+      <li *ngFor="let catList of categoryList" class="nav-menu-item"><a class="nav-link" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="nav-link-active" [routerLink]="['/category', catList.id]">{{catList.name}}</a></li>
+    </ul>
+  </nav>
+  <div class="language-container" *ngIf="langBtn">
+    <div class="lang-inner-container">
+      choose your Language / 
+      <button class="btn-lang" type="button" (click)="setLanguage()">{{lang=='hin'? 'English':'हिंदी'}}</button>
+    </div>
+    <div class="close-lang" (click)="langBtn=!langBtn">X</div>
+  </div>
 </header>
