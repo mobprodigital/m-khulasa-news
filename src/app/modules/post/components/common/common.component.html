@@ -1,8 +1,9 @@
 <section class="portal">
 
   <app-header></app-header>
- 
-  <main class="main-container-margin-top">
+
+  <main [ngStyle]="{'min-height': height+'px'}" class="main-container-margin-top">
+
     <router-outlet></router-outlet>
   </main>
   <app-footer></app-footer>

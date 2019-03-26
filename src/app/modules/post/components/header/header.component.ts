@@ -40,16 +40,19 @@ export class HeaderComponent implements OnInit {
   public setLanguage() {
     if (localStorage.getItem('lang') == 'hin') {
       localStorage.setItem('lang', 'eng');
-      this.router.navigateByUrl('')
-      location.reload();
+      this.router.navigate(['/']);
+      setTimeout(() => {
+        location.reload();
+      }, 100);
     }
     else {
       localStorage.setItem('lang', 'hin');
-      this.router.navigateByUrl('')
-      location.reload();
+      this.router.navigate(['/']);
+      setTimeout(() => {
+        location.reload();
+      }, 100);
     }
   }
   ngOnInit() {
   }
-
 }

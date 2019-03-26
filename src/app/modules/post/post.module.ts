@@ -13,11 +13,12 @@ import { NewsTemplateComponent } from './templates/news-template/news-template.c
 import { LoaderComponent } from './templates/loader/loader.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SingleLoaderComponent } from './templates/single-loader/single-loader.component';
-import { SearchResultsComponent } from './components/search-results/search-results.component'
+import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { SinglePageComponent } from './components/single-page/single-page.component'
 
 
 @NgModule({
-  declarations: [CommonComponent, ArchivePostComponent, SinglePostComponent, HomeComponent, FooterComponent, HeaderComponent, NewsTemplateComponent, LoaderComponent, SingleLoaderComponent, SearchResultsComponent],
+  declarations: [CommonComponent, ArchivePostComponent, SinglePostComponent, HomeComponent, FooterComponent, HeaderComponent, NewsTemplateComponent, LoaderComponent, SingleLoaderComponent, SearchResultsComponent, SinglePageComponent],
   imports: [
     CommonModule,
     PostRoutingModule,

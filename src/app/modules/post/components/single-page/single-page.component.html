@@ -1,0 +1,11 @@
+<div [hidden]='!loader'>
+  <app-single-loader></app-single-loader>
+</div>
+<article *ngIf="page" class="single-post-container">
+  <h4 class="single-post-title"> {{page.title}}</h4>
+  <div class="single-post-content" [innerHTML]='page.content'></div>
+</article>
+
+<div [hidden]='!errorMsg'>
+  {{errorMsg}}
+</div>

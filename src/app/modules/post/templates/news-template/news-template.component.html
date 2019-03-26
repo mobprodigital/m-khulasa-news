@@ -5,14 +5,13 @@
       <h6 class="post-category-name">{{title ? title : categoryName}}</h6>
     </div>
 
-    <article class="post-container" *ngFor="let post of postList" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
+    <article class="post-container" *ngFor="let post of postList" (swipeleft)="onSwipeLeft()"
+      (swiperight)="onSwipeRight()" [routerLink]="['/', post.slug]">
       <div class="float-left">
-        <a [routerLink]="['/', post.slug]">
-          <img [src]="post.featuredImage.original" class=" post-image" alt="">
-        </a>
+        <img [src]="post.featuredImage.original" class=" post-image" alt="">
       </div>
       <div>
-        <h5 [routerLink]="['/', post.slug]" class="post-title">{{post.title}}</h5>
+        <h5 class="post-title">{{post.title}}</h5>
         <p class="post-content">{{post.content}}</p>
       </div>
     </article>

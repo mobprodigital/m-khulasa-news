@@ -5,6 +5,7 @@ import { ArchivePostComponent } from './components/archive-post/archive-post.com
 import { SinglePostComponent } from './components/single-post/single-post.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { SinglePageComponent } from './components/single-page/single-page.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'search/:searchTerm',
         component: SearchResultsComponent
+      },
+      {
+        path: 'page/:slug',
+        component: SinglePageComponent
       }
     ]
   }

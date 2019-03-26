@@ -9,41 +9,38 @@
         <button class="btn-search " type="submit">
           <img class="search-icon" src="assets/images/icons/search.png" alt="">
         </button>
-        <button [disabled]="searchForm.invalid" class="btn-search " type="submit">
+        <!-- <button [disabled]="searchForm.invalid" class="btn-search " type="submit">
           <img class="search-icon" src="assets/images/icons/search.png" alt="">
-        </button>
-
-        <div style="color:red;" *ngIf="searchTerm.invalid  &&  (searchTerm.touched || searchTerm.dirty)">
+        </button> -->
+        <!-- <div style="color:red;" *ngIf="searchTerm.invalid  &&  (searchTerm.touched || searchTerm.dirty)">
           Enter search term
-        </div>
+        </div> -->
       </form>
     </div>
   </div>
 
-
   <nav [ngStyle]="{'transform': translate}" class="sidenav">
     <a class="closebtn" (click)="sideNav()">x</a>
     <ul class="side-nav-menu">
-
       <li *ngFor="let catList of categoryList" (click)="sideNav()" class=""><a class="side-nav-link"
-          [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active" [routerLink]="['/category', catList.id]">{{catList.name}}</a></li>
+          [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
+          [routerLink]="['/category', catList.id]">{{catList.name}}</a></li>
     </ul>
   </nav>
   <div [hidden]="show" class="right-Side" (click)="sideNav()">
-
   </div>
-
   <nav>
     <ul class="nav-menu">
-      <li class="nav-menu-item"><a class="nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active"
-          routerLink="/">{{lang=='hin'? 'होम':'Home'}}</a></li>
-      <li *ngFor="let catList of categoryList" class="nav-menu-item"><a class="nav-link" [routerLinkActiveOptions]="{ exact: true }"
-          routerLinkActive="nav-link-active" [routerLink]="['/category', catList.id]">{{catList.name}}</a></li>
+      <li class="nav-menu-item"><a class="nav-link" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="nav-link-active" routerLink="/">{{lang=='hin'? 'होम':'Home'}}</a></li>
+      <li *ngFor="let catList of categoryList" class="nav-menu-item"><a class="nav-link"
+          [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active"
+          [routerLink]="['/category', catList.id]">{{catList.name}}</a></li>
     </ul>
   </nav>
   <div class="language-container" *ngIf="langBtn">
     <div class="lang-inner-container">
-      choose your Language / 
+      choose your Language /
       <button class="btn-lang" type="button" (click)="setLanguage()">{{lang=='hin'? 'English':'हिंदी'}}</button>
     </div>
     <div class="close-lang" (click)="langBtn=!langBtn">X</div>
