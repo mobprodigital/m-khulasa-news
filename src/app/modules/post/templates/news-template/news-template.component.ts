@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { PostService } from 'src/app/services/post/post.service';
 import { PostModel } from 'src/app/model/post.model';
 import { NewsCategoryModel } from 'src/app/model/newsCategory.model';
@@ -10,6 +10,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
   styleUrls: ['./news-template.component.scss']
 })
 export class NewsTemplateComponent implements OnInit {
+  //@HostListener('window:scroll', ['$event']) // for window scroll events
 
   @Input() categoryID: string;
   @Input() count: number;
@@ -25,13 +26,12 @@ export class NewsTemplateComponent implements OnInit {
   public index: number;
 
   constructor(private postService: PostService, private router: Router, private activatedRoute: ActivatedRoute) {
-
+    this.categoryName = '';
   }
   public getCategoryName() {
     this.categoryName = '';
-    this.postService.getNewsCategories(parseInt(this.categoryID))
-      .then(category => { this.categoryName = category.name; })
-      .catch(err => { })
+    let catlist: NewsCategoryModel[] = JSON.parse(localStorage.getItem('ks_menu_cat'));
+    this.categoryName = catlist.find(list => list.id == parseInt(this.categoryID)).name;
   }
   public getpostById() {
     this.postList = [];
@@ -39,13 +39,14 @@ export class NewsTemplateComponent implements OnInit {
     this.loader = true;
     this.count = typeof this.count === "undefined" ? 10 : this.count;
     this.postService.getPost(this.categoryID, this.count)
-      .then(data => { this.postList = data; this.loader = false; })
-      .catch(err => { this.errorMsg = err; this.loader = false; });
-    window.scroll({
-      top: 0,
-      // behavior: "smooth"
-    });
+      .then(data => { this.postList = data; this.loader = false; this.getCategoryName() })
+      .catch(err => { this.errorMsg = err; this.loader = false; this.getCategoryName() });
+    // window.scroll({
+    //   top: 0,
+    //   // behavior: "smooth"
+    // });
   }
+
   public loadMorePost() {
     this.loadMoerLoader = true;
     this.errorMsg = '';
@@ -85,7 +86,7 @@ export class NewsTemplateComponent implements OnInit {
       let catId = this.categoryIdList[this.index];
       this.router.navigate(['category', catId]);
     }
-    this.scrollTo();
+    this.postService.scrollTo();
   }
 
   onSwipeRight() {
@@ -103,28 +104,18 @@ export class NewsTemplateComponent implements OnInit {
       let catId = this.categoryIdList[this.index];
       this.router.navigate(['category', catId]);
     }
-    this.scrollTo();
+    this.postService.scrollTo();
   }
 
-  public scrollTo() {
-    const ulHTML = document.querySelector('#nav');
-    let activeTab: HTMLElement = ulHTML.querySelector('.nav-link-active');
-    const scrollCount = (activeTab.offsetLeft + (activeTab.clientWidth / 4)) - (ulHTML.clientWidth / 2.5);
 
-    ulHTML.scrollTo({
-      left: scrollCount
-    })
-
-  }
   ngOnInit() {
     //  this.getMenuCategory();
     this.getMenuCategoryIdList();
 
+
   }
   ngOnChanges() {
     this.getpostById();
-    this.getCategoryName();
-
 
   }
 }

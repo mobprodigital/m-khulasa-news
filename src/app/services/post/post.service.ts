@@ -29,15 +29,15 @@ export class PostService {
       //   // }
       // }
       // else {
-        this.httpService.get('', new HttpParams().set('action', 'get_menu'))
-          .then((data: any[]) => {
-            let menu = this.parseCategories(data);
-            this.setLocalData('menu_cat', menu);
-           // menuCategories = menu;
-            resolve(menu);
-          }).catch(err => {
-            reject(err);
-          })
+      this.httpService.get('', new HttpParams().set('action', 'get_menu'))
+        .then((data: any[]) => {
+          let menu = this.parseCategories(data);
+          this.setLocalData('menu_cat', menu);
+          // menuCategories = menu;
+          resolve(menu);
+        }).catch(err => {
+          reject(err);
+        })
       //}
     })
   }
@@ -166,6 +166,16 @@ export class PostService {
       })
     }
     return catArr;
+  }
+
+  public scrollTo() {
+    const ulHTML = document.querySelector('#nav');
+    let activeTab: HTMLElement = ulHTML.querySelector('.nav-link-active');
+    const scrollCount = (activeTab.offsetLeft + (activeTab.clientWidth / 4)) - (ulHTML.clientWidth / 2.5);
+
+    ulHTML.scrollTo({
+      left: scrollCount
+    })
   }
 
   private parseNews(news: any[]) {

@@ -22,33 +22,27 @@ export class SinglePostComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer, private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService) {
     this.routerSubscribe = this.router.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
-        this.getPostSlug()
+        this.getPostSlug();
+
       }
     })
   }
 
   public getPostSlug() {
-
     this.postSlug = this.activatedRoute.snapshot.paramMap.get('slug');
     if (this.postSlug) {
       this.loader = true;
       this.post = null;
-      this.ytVideo = false
+      this.ytVideo = false;
       this.getpost()
     }
   }
   public getpost() {
-
     this.errorMsg = '';
-    window.scroll({
-      top: 0,
-      // behavior: "smooth"
-    });
     this.postService.getPostByPostId(this.postSlug, PostTypeEnum.Post)
       .then(postData => {
         this.post = postData;
         this.loader = false;
-
         if (this.post.categoryList.some(c => c.id === 47)) {
           let Url = this.geturl(this.post.content);
           console.log(Url)
