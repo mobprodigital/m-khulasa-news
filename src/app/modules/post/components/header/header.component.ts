@@ -17,7 +17,13 @@ export class HeaderComponent implements OnInit {
   public lang: string;
 
   constructor(private postService: PostService, private router: Router) {
-    this.postService.getMenuCategories().then(catlist => { this.categoryList = catlist })
+    this.postService.getMenuCategories()
+      .then(catlist => {
+      this.categoryList = catlist;
+        // setTimeout(() => {
+        //   this.postService.scrollTo()
+        // }, 100);
+      })
     this.lang = localStorage.getItem('lang');
   }
   public search() {

@@ -6,12 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./common.component.scss']
 })
 export class CommonComponent implements OnInit {
-  public height: number;
-  constructor() {
 
-   let height= screen.height
-    this.height = height-200;
-  }
+  constructor() {}
 
   ngOnInit() {
   }

@@ -1,6 +1,4 @@
-.main-container-margin-top
-{
-    padding-top: 115px;
-   // background-color: #f2f2f2;
-   min-height: 200px;
+.main-container {
+  overflow: auto;
+  height: 100%;
 }
