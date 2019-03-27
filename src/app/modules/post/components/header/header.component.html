@@ -30,7 +30,7 @@
   <div [hidden]="show" class="right-Side" (click)="sideNav()">
   </div>
   <nav>
-    <ul class="nav-menu">
+    <ul class="nav-menu" id="nav">
       <li class="nav-menu-item"><a class="nav-link" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="nav-link-active" routerLink="/">{{lang=='hin'? 'होम':'Home'}}</a></li>
       <li *ngFor="let catList of categoryList" class="nav-menu-item"><a class="nav-link"

@@ -72,6 +72,7 @@ export class NewsTemplateComponent implements OnInit {
   onSwipeLeft() {
     let activeId = this.activatedRoute.snapshot.paramMap.get('id');
     let activatedIndex = this.categoryIdList.indexOf(parseInt(activeId));
+
     if (this.index == 0) {
       let catId = this.categoryIdList[this.index];
       this.router.navigate(['category', catId]);
@@ -84,13 +85,11 @@ export class NewsTemplateComponent implements OnInit {
       let catId = this.categoryIdList[this.index];
       this.router.navigate(['category', catId]);
     }
-    window.scrollTo({
-      left:-22,
-    })
+    this.scrollTo();
   }
+
   onSwipeRight() {
     let activeId = this.activatedRoute.snapshot.paramMap.get('id');
-
     let activatedIndex = this.categoryIdList.indexOf(parseInt(activeId));
     if (activatedIndex == 0) {
       this.index = 0;
@@ -99,23 +98,33 @@ export class NewsTemplateComponent implements OnInit {
     else if (activeId == null) {
       this.router.navigateByUrl('/');
     }
-
     else {
       this.index = activatedIndex - 1
       let catId = this.categoryIdList[this.index];
       this.router.navigate(['category', catId]);
     }
-    window.scrollTo({
-      left:22
+    this.scrollTo();
+  }
+
+  public scrollTo() {
+    const ulHTML = document.querySelector('#nav');
+    let activeTab: HTMLElement = ulHTML.querySelector('.nav-link-active');
+    const scrollCount = (activeTab.offsetLeft + (activeTab.clientWidth / 4)) - (ulHTML.clientWidth / 2.5);
+
+    ulHTML.scrollTo({
+      left: scrollCount
     })
+
   }
   ngOnInit() {
     //  this.getMenuCategory();
     this.getMenuCategoryIdList();
+
   }
   ngOnChanges() {
     this.getpostById();
-    this.getCategoryName()
-  }
+    this.getCategoryName();
 
+
+  }
 }
