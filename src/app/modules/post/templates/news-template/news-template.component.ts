@@ -26,26 +26,36 @@ export class NewsTemplateComponent implements OnInit {
   public index: number;
 
   constructor(private postService: PostService, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.categoryName = '';
+
   }
   public getCategoryName() {
-    this.categoryName = '';
+
     let catlist: NewsCategoryModel[] = JSON.parse(localStorage.getItem('ks_menu_cat'));
     this.categoryName = catlist.find(list => list.id == parseInt(this.categoryID)).name;
   }
   public getpostById() {
     this.postList = [];
     this.errorMsg = '';
+    this.categoryName = '';
     this.loader = true;
     this.count = typeof this.count === "undefined" ? 10 : this.count;
     this.postService.getPost(this.categoryID, this.count)
-      .then(data => { this.postList = data; this.loader = false; this.getCategoryName() })
-      .catch(err => { this.errorMsg = err; this.loader = false; this.getCategoryName() });
+      .then(data => {
+        this.postList = data;
+        this.loader = false;
+        this.getCategoryName()
+      })
+      .catch(err => {
+        this.errorMsg = err;
+        this.loader = false;
+        this.getCategoryName()
+      });
     // window.scroll({
     //   top: 0,
     //   // behavior: "smooth"
     // });
   }
+
 
   public loadMorePost() {
     this.loadMoerLoader = true;

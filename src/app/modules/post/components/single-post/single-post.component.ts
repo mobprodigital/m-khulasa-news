@@ -43,21 +43,29 @@ export class SinglePostComponent implements OnInit {
       .then(postData => {
         this.post = postData;
         this.loader = false;
+        //  this.getAllLink(this.post.content);
         if (this.post.categoryList.some(c => c.id === 47)) {
           let Url = this.geturl(this.post.content);
-          console.log(Url)
           if (Url) {
             this.trustedUrl(Url)
-            console.log(Url)
           }
           this.ytVideo = true;
         }
       })
       .catch(err => { this.errorMsg = err; this.loader = false })
   }
+
+  // public getAllLink(content: string) {
+  //   let tempDiv: HTMLDivElement = document.createElement('div');
+  //   tempDiv.innerHTML = content;
+  //   let linkList=tempDiv.getAttribute('href');
+  //   console.log(linkList)
+  // }
+
   private trustedUrl(url) {
     this.youTubeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
+
   private geturl(iframeString: string): string | null {
     let tempDiv: HTMLDivElement = document.createElement('div');
     tempDiv.innerHTML = iframeString;
@@ -68,7 +76,6 @@ export class SinglePostComponent implements OnInit {
     else {
       return null;
     }
-
   }
   ngOnInit() {
   }
@@ -76,5 +83,4 @@ export class SinglePostComponent implements OnInit {
   ngOnDestroy(): void {
     this.routerSubscribe.unsubscribe();
   }
-
 }
