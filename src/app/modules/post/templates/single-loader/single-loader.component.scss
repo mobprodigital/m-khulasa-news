@@ -1,63 +1,63 @@
 body {
-    background: #E9E9E9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: #E9E9E9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+
+  background: #fff;
+
+}
+
+.wrapper-cell {
+  margin-bottom: 20px;
+}
+
+// Animation
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0
   }
-  
-  .wrapper {
-  
-    background: #fff;
-  
+
+  100% {
+    background-position: 468px 0
   }
-  
-  .wrapper-cell {
-    margin-bottom: 20px;
-  }
-  
-  // Animation
-  @keyframes placeHolderShimmer {
-    0% {
-      background-position: -468px 0
-    }
-  
-    100% {
-      background-position: 468px 0
-    }
-  }
-  
-  .animated-background {
-    animation-duration: 1.25s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: infinite;
-    animation-name: placeHolderShimmer;
-    animation-timing-function: linear;
-    background: #F6F6F6;
-    background: linear-gradient(to right, #ffffff -5%, #f5f5f5 35%, #ffffff 29%);
-    background-size: 800px 104px;
-    height: 96px;
-    position: relative;
-  }
-  
-  // Page Elements
-  .image {
-  
-    width: 100%;
-    height: 200px;
-    //  background: #F6F6F6;
-    @extend .animated-background;
-  }
-  
-  .text {
-    width: 100%;
-    margin-top: 10px;
-  }
-  
-  .text-line {
-    height: 10px;
-    width: 100%;
-    
-    margin: 5px 0;
-    @extend .animated-background;
-  }
-  
+}
+
+.animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #F6F6F6;
+  background: linear-gradient(to right, #ffffff -5%, #d4d4d4 35%, #eae7e7 29%);
+  background-size: 800px 104px;
+  height: 96px;
+  position: relative;
+
+}
+
+// Page Elements
+.image {
+
+  width: 100%;
+  height: 200px;
+  //  background: #F6F6F6;
+  @extend .animated-background;
+}
+
+.text {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.text-line {
+  height: 10px;
+  width: 100%;
+
+  margin: 5px 0;
+  @extend .animated-background;
+}
