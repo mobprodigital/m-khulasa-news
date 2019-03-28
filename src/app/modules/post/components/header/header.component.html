@@ -1,7 +1,7 @@
 <header class="">
   <div class="header row">
     <div class="col-2"><img class="menu-icon" src="assets/images/icons/menu.png" alt="" (click)="sideNav()"></div>
-    <div class="col-5"><img class="logo" src="assets/images/logo/logo.png" alt=""></div>
+    <div class="col-5"><img routerLink="/" class="logo"  src="assets/images/logo/logo.png" alt=""></div>
     <div class="col-5 search-container">
       <form (ngSubmit)="search()" #searchForm="ngForm">
         <input [(ngModel)]="SearchTerm" #searchTerm="ngModel" name="searchTerm" required type="text" class="search-box"
@@ -22,10 +22,26 @@
   <nav [ngStyle]="{'transform': translate}" class="sidenav">
     <a class="closebtn" (click)="sideNav()">x</a>
     <ul class="side-nav-menu">
-      <li *ngFor="let catList of categoryList" (click)="sideNav()" class=""><a class="side-nav-link"
-          [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
-          [routerLink]="['/category', catList.id]">{{catList.name}}</a></li>
+      <li *ngFor="let catList of categoryList" (click)="sideNav()" class="">
+        <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
+          [routerLink]="['/category', catList.id]">
+          {{catList.name}}</a>
+      </li>
+      <li style="margin-top: 20px;"> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="side-nav-link-active" [routerLink]="['/page', 'about-us']">About Us</a></li>
+      <li> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
+          [routerLink]="['/page', 'contact-us']">Contact Us</a></li>
+      <li> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
+          [routerLink]="['/page', 'privacy-policy']">Privacy Policy</a></li>
+      <li> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
+          [routerLink]="['/page', 'disclaimer']">Disclaimer </a></li>
+      <li> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
+          [routerLink]="['/page', 'terms-and-condition']">Terms and Conditions </a></li>
+
+
+
     </ul>
+
   </nav>
   <div [hidden]="show" class="right-Side" (click)="sideNav()">
   </div>
