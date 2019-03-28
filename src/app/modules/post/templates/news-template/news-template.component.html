@@ -1,7 +1,7 @@
 <div class="scroll" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
-  <app-loader *ngIf="loader"></app-loader>
+  <app-loader ></app-loader>
 
-  <div class="scroll" *ngIf="categoryName" (scroll)="onScroll($event)" id="scroll">
+  <div class="scroll" *ngIf="categoryName" (scroll)="onScroll($event)">
     <div>
       <h6 class="post-category-name">{{title ? title : categoryName}}</h6>
     </div>

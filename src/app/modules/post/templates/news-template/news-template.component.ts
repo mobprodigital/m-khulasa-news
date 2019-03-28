@@ -15,7 +15,11 @@ export class NewsTemplateComponent implements OnInit {
   @Input() categoryID: string;
   @Input() count: number;
   @Input() title: string;
+  // @Input() loadMore: boolean = true;
 
+
+
+  private loadingPosts: boolean = false;
   public postList: PostModel[] = [];
   public errorMsg: string = '';
   public categoryName: string;
@@ -55,14 +59,19 @@ export class NewsTemplateComponent implements OnInit {
     //   // behavior: "smooth"
     // });
   }
-  onScroll() {
-    let ele = document.querySelector('#scroll');
-    let cHeight = ele.scrollHeight;
-    let topheight = ele.scrollTop;
-    if (topheight >= (cHeight - 600)) {
-      this.loadMorePost();
-    }
 
+
+  onScroll(ev: MouseEvent) {
+    let ele = <HTMLElement>ev.target;
+    let sHeight = ele.scrollHeight;
+    let topheight = ele.scrollTop;
+    if (!this.loadingPosts) {
+      if (topheight >= (sHeight - 700)) {
+        this.loadingPosts = true;
+        this.loadMorePost();
+      
+      }
+    }
   }
 
   public loadMorePost() {
@@ -72,10 +81,13 @@ export class NewsTemplateComponent implements OnInit {
     this.postService.getPost(this.categoryID, 10, this.postList.length + 1)
       .then(data => {
         this.postList.push(...data);
-        this.loadMoerLoader = false;
+     
       })
       .catch(err => {
         this.errorMsg = err;
+      })
+      .finally(() => {
+        this.loadingPosts = false;
         this.loadMoerLoader = false;
       })
   }
