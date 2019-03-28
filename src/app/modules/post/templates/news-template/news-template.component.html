@@ -1,6 +1,7 @@
-<div  (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
+<div class="scroll" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
   <app-loader *ngIf="loader"></app-loader>
-  <div *ngIf="categoryName">
+
+  <div class="scroll" *ngIf="categoryName" (scroll)="onScroll($event)" id="scroll">
     <div>
       <h6 class="post-category-name">{{title ? title : categoryName}}</h6>
     </div>
@@ -16,13 +17,10 @@
       </div>
     </article>
     <app-loader *ngIf="loadMoerLoader"></app-loader>
-
-    <div [hidden]='!loadMoreBtn'>
-      <button class="load-more" type="button" (click)='loadMorePost()'> Load More</button>
+    <div [hidden]='!errorMsg'>
+      {{errorMsg}}
     </div>
   </div>
 
-  <div [hidden]='!errorMsg'>
-    {{errorMsg}}
-  </div>
+
 </div>

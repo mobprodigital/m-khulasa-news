@@ -10,12 +10,12 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
   styleUrls: ['./news-template.component.scss']
 })
 export class NewsTemplateComponent implements OnInit {
-  //@HostListener('window:scroll', ['$event']) // for window scroll events
+  @HostListener('window:scroll', ['$event']) // for window scroll events
 
   @Input() categoryID: string;
   @Input() count: number;
   @Input() title: string;
-  @Input() loadMoreBtn: boolean = false;
+
   public postList: PostModel[] = [];
   public errorMsg: string = '';
   public categoryName: string;
@@ -55,7 +55,15 @@ export class NewsTemplateComponent implements OnInit {
     //   // behavior: "smooth"
     // });
   }
+  onScroll() {
+    let ele = document.querySelector('#scroll');
+    let cHeight = ele.scrollHeight;
+    let topheight = ele.scrollTop;
+    if (topheight >= (cHeight - 600)) {
+      this.loadMorePost();
+    }
 
+  }
 
   public loadMorePost() {
     this.loadMoerLoader = true;
