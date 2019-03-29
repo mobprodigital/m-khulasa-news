@@ -3,6 +3,7 @@ import { PostService } from 'src/app/services/post/post.service';
 import { PostModel } from 'src/app/model/post.model';
 import { NewsCategoryModel } from 'src/app/model/newsCategory.model';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-news-template',
@@ -13,7 +14,7 @@ export class NewsTemplateComponent implements OnInit {
   @HostListener('window:scroll', ['$event']) // for window scroll events
 
   @Input() categoryID: string;
-  @Input() count: number;
+  @Input() count: number = 10;
   @Input() title: string;
   // @Input() loadMore: boolean = true;
 
@@ -24,25 +25,28 @@ export class NewsTemplateComponent implements OnInit {
   public errorMsg: string = '';
   public categoryName: string;
   public loader: boolean = true;
-  public loadMoerLoader: boolean = false;
   public categoryList: NewsCategoryModel[] = [];
   public categoryIdList: number[] = [];
   public index: number;
 
-  constructor(private postService: PostService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private postService: PostService, private router: Router, private activatedRoute: ActivatedRoute, private localService: LocalStorageService) {
 
   }
-  public getCategoryName() {
+  public async getCategoryName() {
+    // let catlist: NewsCategoryModel[] = JSON.parse(localStorage.getItem('ks_menu_cat'));
+    let catlist: NewsCategoryModel[] = await this.postService.getMenuCategories();
+    if (catlist && catlist.length > 0) {
+      this.categoryName = catlist.find(list => list.id == parseInt(this.categoryID)).name;
+    }
 
-    let catlist: NewsCategoryModel[] = JSON.parse(localStorage.getItem('ks_menu_cat'));
-    this.categoryName = catlist.find(list => list.id == parseInt(this.categoryID)).name;
+
   }
   public getpostById() {
     this.postList = [];
     this.errorMsg = '';
     this.categoryName = '';
     this.loader = true;
-    this.count = typeof this.count === "undefined" ? 10 : this.count;
+
     this.postService.getPost(this.categoryID, this.count)
       .then(data => {
         this.postList = data;
@@ -69,35 +73,26 @@ export class NewsTemplateComponent implements OnInit {
       if (topheight >= (sHeight - 700)) {
         this.loadingPosts = true;
         this.loadMorePost();
-      
+
       }
     }
   }
 
   public loadMorePost() {
-    this.loadMoerLoader = true;
     this.errorMsg = '';
-
     this.postService.getPost(this.categoryID, 10, this.postList.length + 1)
       .then(data => {
         this.postList.push(...data);
-     
       })
       .catch(err => {
         this.errorMsg = err;
       })
       .finally(() => {
         this.loadingPosts = false;
-        this.loadMoerLoader = false;
       })
   }
-  // public getMenuCategory() {
-  //   // this.categoryList = JSON.parse(localStorage.getItem('ks_menu_cat'));
-  //   // this.getMenuCategoryIdList();
-  //   this.postService.getMenuCategories().then(data => { this.categoryList = data; this.getMenuCategoryIdList() }).catch()
-  // }
-  public getMenuCategoryIdList() {
-    this.categoryList = JSON.parse(localStorage.getItem('ks_menu_cat'));
+  public async getMenuCategoryIdList() {
+    this.categoryList = await this.postService.getMenuCategories();
     this.categoryIdList = this.categoryList.map(c => c.id);
   }
   onSwipeLeft() {
