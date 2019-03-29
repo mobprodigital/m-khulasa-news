@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +7,9 @@ import { HttpClient, HttpParams} from '@angular/common/http';
 export class HttpService {
   private baseURL: string;
   constructor(private httpClint: HttpClient) {
-    this.baseURL = localStorage.getItem('lang') === 'hin' ? 'http://hindi.khulasa-news.com/wp-admin/admin-ajax.php' : 'http://khulasa-news.com/wp-admin/admin-ajax.php';
+    this.baseURL = localStorage.getItem('ks_lang') === 'hin' ? 'http://hindi.khulasa-news.com/wp-admin/admin-ajax.php' : 'http://khulasa-news.com/wp-admin/admin-ajax.php';
+    console.log(this.baseURL);
   }
-
   public get(apiPath: string, params?: HttpParams) {
     return new Promise((resolve, reject) => {
       this.httpClint.get(this.baseURL + apiPath, { params: params }).subscribe((resp: any) => {
