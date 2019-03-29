@@ -4,6 +4,9 @@ import { NewsCategoryModel } from 'src/app/model/newsCategory.model';
 import { PostModel } from 'src/app/model/post.model';
 import { HttpParams } from '@angular/common/http';
 import { PostTypeEnum } from 'src/app/enum/post-type.enum';
+import { LocalStorageService } from '../local-storage/local-storage.service';
+import { AppLangEnum } from 'src/app/enum/app-lang.enum';
+import { AppLangServiceService } from '../app-lang-service/app-lang-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,34 +14,34 @@ import { PostTypeEnum } from 'src/app/enum/post-type.enum';
 
 export class PostService {
 
-  constructor(private httpService: HttpService) {
+  constructor(
+    private httpService: HttpService,
+    private localStorageService: LocalStorageService,
+    private appLangService: AppLangServiceService
+  ) {
 
   }
 
 
   public getMenuCategories(): Promise<NewsCategoryModel[]> {
     return new Promise((resolve, reject) => {
+      const selectedLang: AppLangEnum = this.appLangService.selectedAppLang;
+      let localMenuItems: NewsCategoryModel[] | null;
+      const localMenuKey: string = selectedLang === AppLangEnum.Hindi ? 'menu_cat_hin' : 'menu_cat_eng';
+      localMenuItems = this.localStorageService.getData(localMenuKey, true);
 
-      // let menuCategories: NewsCategoryModel[] = [];
-      // if (localStorage.getItem('ks_menu_cat')) {
-      //   let cats = JSON.parse(this.getLocalData('menu_cat'));
-      //   resolve(cats);
-      //   // if (cats) {
-      //   //   let localCats = this.parseCategories(cats);
-      //   //   resolve(localCats);
-      //   // }
-      // }
-      // else {
-      this.httpService.get('', new HttpParams().set('action', 'get_menu'))
-        .then((data: any[]) => {
-          let menu = this.parseCategories(data);
-          this.setLocalData('menu_cat', menu);
-          // menuCategories = menu;
-          resolve(menu);
-        }).catch(err => {
-          reject(err);
-        })
-      //}
+      if (localMenuItems !== null) {
+        resolve(localMenuItems);
+      } else {
+        this.httpService.get('', new HttpParams().set('action', 'get_menu'))
+          .then((data: any[]) => {
+            let menu = this.parseCategories(data);
+            this.localStorageService.setData(localMenuKey, menu);
+            resolve(menu);
+          }).catch(err => {
+            reject(err);
+          })
+      }
     })
   }
   /**
