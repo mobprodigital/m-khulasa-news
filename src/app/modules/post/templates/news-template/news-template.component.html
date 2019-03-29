@@ -1,7 +1,6 @@
-<div class="scroll" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
-  <app-loader [count]="count"  *ngIf="loader"></app-loader>
-
-  <div class="scroll" (scroll)="onScroll($event)">
+<div class="scroll" (scroll)="onScroll($event)" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
+  <app-loader [count]="count" *ngIf="loader"></app-loader>
+  <div>
     <div *ngIf="categoryName">
       <h6 class="post-category-name">{{title ? title : categoryName}}</h6>
     </div>
@@ -22,5 +21,5 @@
       {{errorMsg}}
     </div>
   </div>
- 
+
 </div>
