@@ -196,10 +196,10 @@ export class PostService {
         _newsls.slug = n.slug;
         _newsls.categoryList = this.parseCategories(n.categoryList);
         // _newsls.categories=n.category;
-        _newsls.featuredImage.small = n.thumbnail || '/aakash_dev/m.khulasa-news/assets/images/news/default.jpg';
-        _newsls.featuredImage.original = n.thumbnail || '/aakash_dev/m.khulasa-news/assets/images/news/default.jpg';
-        _newsls.featuredImage.medium = n.thumbnail || '/aakash_dev/m.khulasa-news/assets/images/news/default.jpg';
-        _newsls.featuredImage.large = n.thumbnail || '/aakash_dev/m.khulasa-news/assets/images/news/default.jpg';
+        _newsls.featuredImage.small = n.thumbnail || 'assets/images/news/default.jpg';
+        _newsls.featuredImage.original = n.thumbnail || 'assets/images/news/default.jpg';
+        _newsls.featuredImage.medium = n.thumbnail || 'assets/images/news/default.jpg';
+        _newsls.featuredImage.large = n.thumbnail || 'assets/images/news/default.jpg';
         return _newsls;
       })
     }

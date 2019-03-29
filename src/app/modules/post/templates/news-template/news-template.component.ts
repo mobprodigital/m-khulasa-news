@@ -20,7 +20,7 @@ export class NewsTemplateComponent implements OnInit {
 
 
 
-  private loadingPosts: boolean = false;
+  public loadingPosts: boolean = false;
   public postList: PostModel[] = [];
   public errorMsg: string = '';
   public categoryName: string;
