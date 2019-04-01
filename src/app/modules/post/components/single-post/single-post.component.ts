@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PostService } from 'src/app/services/post/post.service';
@@ -12,6 +12,8 @@ import { DomSanitizer, SafeResourceUrl, } from '@angular/platform-browser';
   styleUrls: ['./single-post.component.scss']
 })
 export class SinglePostComponent implements OnInit {
+  @ViewChild('singlepostcontainer') maincontainer: ElementRef;
+
   private routerSubscribe: Subscription;
   public postSlug: string;
   public post: PostModel;
@@ -19,11 +21,11 @@ export class SinglePostComponent implements OnInit {
   public loader: boolean = true;
   public ytVideo: boolean = false;
   public youTubeUrl: SafeResourceUrl;
+
   constructor(private sanitizer: DomSanitizer, private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService) {
     this.routerSubscribe = this.router.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
         this.getPostSlug();
-
       }
     })
   }
@@ -34,16 +36,15 @@ export class SinglePostComponent implements OnInit {
       this.loader = true;
       this.post = null;
       this.ytVideo = false;
+      this.errorMsg = '';
       this.getpost()
     }
   }
   public getpost() {
-    this.errorMsg = '';
+    
     this.postService.getPostByPostId(this.postSlug, PostTypeEnum.Post)
       .then(postData => {
         this.post = postData;
-        this.loader = false;
-        //  this.getAllLink(this.post.content);
         if (this.post.categoryList.some(c => c.id === 47)) {
           let Url = this.geturl(this.post.content);
           if (Url) {
@@ -52,15 +53,13 @@ export class SinglePostComponent implements OnInit {
           this.ytVideo = true;
         }
       })
-      .catch(err => { this.errorMsg = err; this.loader = false })
+      .catch(err => { this.errorMsg = err; })
+      .finally(() => {
+        this.scrollToTop();
+        this.loader = false
+      })
   }
 
-  // public getAllLink(content: string) {
-  //   let tempDiv: HTMLDivElement = document.createElement('div');
-  //   tempDiv.innerHTML = content;
-  //   let linkList=tempDiv.getAttribute('href');
-  //   console.log(linkList)
-  // }
 
   private trustedUrl(url) {
     this.youTubeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -75,6 +74,16 @@ export class SinglePostComponent implements OnInit {
     }
     else {
       return null;
+    }
+  }
+
+  private scrollToTop() {
+    let main: HTMLDivElement = this.maincontainer.nativeElement;
+    if (main) {
+      main.scroll({
+        top: 0,
+        behavior: "smooth"
+      });
     }
   }
   ngOnInit() {
