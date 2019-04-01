@@ -1,7 +1,7 @@
 <header class="">
   <div class="header row">
     <div class="col-2"><img class="menu-icon" src="assets/images/icons/menu.png" alt="" (click)="sideNav()"></div>
-    <div class="col-5"><img routerLink="/" class="logo"  src="assets/images/logo/logo.png" alt=""></div>
+    <div class="col-5"><img routerLink="/" class="logo" src="assets/images/logo/logo.png" alt=""></div>
     <div class="col-5 search-container">
       <form (ngSubmit)="search()" #searchForm="ngForm">
         <input [(ngModel)]="SearchTerm" #searchTerm="ngModel" name="searchTerm" required type="text" class="search-box"
@@ -27,21 +27,19 @@
           [routerLink]="['/category', catList.id]">
           {{catList.name}}</a>
       </li>
-      <li style="margin-top: 20px;"> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }"
-          routerLinkActive="side-nav-link-active" [routerLink]="['/page', 'about-us']">About Us</a></li>
-      <li> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
-          [routerLink]="['/page', 'contact-us']">Contact Us</a></li>
-      <li> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
-          [routerLink]="['/page', 'privacy-policy']">Privacy Policy</a></li>
-      <li> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
-          [routerLink]="['/page', 'disclaimer']">Disclaimer </a></li>
-      <li> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
-          [routerLink]="['/page', 'terms-and-condition']">Terms and Conditions </a></li>
-
-
-
+      <li style="margin-top: 20px;" (click)="sideNav()"> <a class="side-nav-link"
+          [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
+          [routerLink]="['/page', 'about-us']">About Us</a></li>
+      <li (click)="sideNav()"> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="side-nav-link-active" [routerLink]="['/page', 'contact-us']">Contact Us</a></li>
+      <li (click)="sideNav()"> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="side-nav-link-active" [routerLink]="['/page', 'privacy-policy']">Privacy Policy</a></li>
+      <li (click)="sideNav()"> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="side-nav-link-active" [routerLink]="['/page', 'disclaimer']">Disclaimer </a></li>
+      <li (click)="sideNav()"> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="side-nav-link-active" [routerLink]="['/page', 'terms-and-condition']">Terms and Conditions
+        </a></li>
     </ul>
-
   </nav>
   <div [hidden]="show" class="right-Side" (click)="sideNav()">
   </div>
@@ -54,11 +52,13 @@
           [routerLink]="['/category', catList.id]">{{catList.name}}</a></li>
     </ul>
   </nav>
-  <div class="language-container" *ngIf="langBtn">
-    <div class="lang-inner-container">
-      choose your Language /
-      <button class="btn-lang" type="button" (click)="setLanguage()">{{lang}}</button>
+  <div [hidden]="!langBtn">
+    <div class="language-container">
+      <div class="lang-inner-container">
+        Choose your Language /
+        <button class="btn-lang" type="button" (click)="setLanguage()">{{lang}}</button>
+      </div>
+      <div class="close-lang" (click)="langBtn=!langBtn">X</div>
     </div>
-    <div class="close-lang" (click)="langBtn=!langBtn">X</div>
   </div>
 </header>

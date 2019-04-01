@@ -4,7 +4,6 @@ import { NewsCategoryModel } from 'src/app/model/newsCategory.model';
 import { Router } from '@angular/router';
 import { AppLangServiceService } from 'src/app/services/app-lang-service/app-lang-service.service';
 import { AppLangEnum } from 'src/app/enum/app-lang.enum';
-import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -30,8 +29,6 @@ export class HeaderComponent implements OnInit {
       })
     this.liHome = this.appLangService.selectedAppLang === AppLangEnum.Hindi ? 'होम' : 'home';
     this.lang = this.appLangService.selectedAppLang === AppLangEnum.Hindi ? 'English' : 'हिंदी';
-
-
   }
   public search() {
     if (this.SearchTerm && this.SearchTerm.trim()) {
