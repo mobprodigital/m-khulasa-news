@@ -1,12 +1,11 @@
-<div class="scroll" (scroll)="onScroll($event)" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
+<div #newstemplatecontainer class="scroll" (scroll)="onScroll($event)" (swipeleft)="onSwipeLeft()" (swiperight)="onSwipeRight()">
   <app-loader [count]="count" *ngIf="loader"></app-loader>
   <div>
     <div *ngIf="categoryName">
       <h6 class="post-category-name">{{title ? title : categoryName}}</h6>
     </div>
     <div *ngIf="postList && postList.length > 0">
-      <article class="post-container" *ngFor="let post of postList" (swipeleft)="onSwipeLeft()"
-        (swiperight)="onSwipeRight()" [routerLink]="['/', post.slug]">
+      <article class="post-container" *ngFor="let post of postList" [routerLink]="['/', post.slug]">
         <div class="float-left">
           <img [src]="post.featuredImage.original" class=" post-image" alt="">
         </div>
