@@ -10,7 +10,7 @@ export class AppLangServiceService {
   constructor(
     private localStgService: LocalStorageService
   ) {
-    console.log(this.localStgService.getData('lang'))
+  
   }
 
 
