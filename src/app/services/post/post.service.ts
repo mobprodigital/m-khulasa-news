@@ -19,7 +19,6 @@ export class PostService {
     private localStorageService: LocalStorageService,
     private appLangService: AppLangServiceService
   ) {
-
   }
 
 
@@ -33,7 +32,8 @@ export class PostService {
       if (localMenuItems !== null) {
         resolve(localMenuItems);
       } else {
-        this.httpService.get('', new HttpParams().set('action', 'get_menu'))
+        this.httpService.get('', new HttpParams()
+          .set('action', 'get_menu'))
           .then((data: any[]) => {
             let menu = this.parseCategories(data);
             this.localStorageService.setData(localMenuKey, menu);
@@ -63,8 +63,13 @@ export class PostService {
         .set("from", from.toString());
 
       this.httpService.get('', params).then((news: any[]) => {
-        let newslist = this.parseNews(news);
-        resolve(newslist);
+        if (news) {
+          let newslist = this.parseNews(news);
+          resolve(newslist);
+        }
+        else {
+          reject('data not found');
+        }
       }).catch(err => {
         reject(err);
       })
@@ -115,7 +120,7 @@ export class PostService {
   public getPostByPostId(args: string | number, postType: PostTypeEnum = PostTypeEnum.Post): Promise<PostModel> {
     return new Promise((resolve, reject) => {
       let argsType = typeof args;
-      let slugOrId = ''
+
       let params = new HttpParams().set('action', 'get_single_post_by_id');
       if (argsType === 'number') {
         params = params.set('postId', args.toString());
@@ -128,9 +133,15 @@ export class PostService {
       }
       this.httpService.get('', params)
         .then((news: any) => {
-          let n = this.parseNews([news]);
-          resolve(n[0]);
-        }).catch(err => {
+          if (news) {
+            let n = this.parseNews([news]);
+            resolve(n[0]);
+          }
+          else {
+            reject('no data found')
+          }
+        })
+        .catch(err => {
           reject(err);
         })
     });
@@ -150,8 +161,14 @@ export class PostService {
 
       this.httpService.get('', params)
         .then((news: any[]) => {
-          let newslist = this.parseNews(news);
-          resolve(newslist);
+          if (news) {
+            let newslist = this.parseNews(news);
+            resolve(newslist);
+          }
+          else {
+            reject('no data found')
+          }
+
         })
         .catch(err => {
           reject(err);
@@ -174,13 +191,13 @@ export class PostService {
   public scrollTo() {
     const ulHTML = document.querySelector('#nav');
     let activeTab: HTMLElement = ulHTML.querySelector('.nav-link-active');
-    const scrollCount = (activeTab.offsetLeft + (activeTab.clientWidth / 4)) - (ulHTML.clientWidth / 2.5);
+    const scrollCount = (activeTab.offsetLeft + (activeTab.clientWidth / 2)) - (ulHTML.clientWidth / 2);
 
     ulHTML.scrollTo({
-      left: scrollCount
+      left: scrollCount,
+      behavior: "smooth"
     })
   }
-
   private parseNews(news: any[]) {
     let newslist: PostModel[] = [];
     if (news && news.length > 0) {
@@ -204,11 +221,5 @@ export class PostService {
       })
     }
     return newslist;
-  }
-  private async setLocalData(key: string, data: any) {
-    localStorage.setItem('ks_' + key, JSON.stringify(data))
-  }
-  private getLocalData(key: string): any {
-    return localStorage.getItem('ks_' + key);
   }
 }
