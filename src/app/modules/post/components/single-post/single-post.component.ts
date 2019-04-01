@@ -26,6 +26,7 @@ export class SinglePostComponent implements OnInit {
     this.routerSubscribe = this.router.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
         this.getPostSlug();
+        this.scrollToTop();
       }
     })
   }
@@ -41,7 +42,7 @@ export class SinglePostComponent implements OnInit {
     }
   }
   public getpost() {
-    
+
     this.postService.getPostByPostId(this.postSlug, PostTypeEnum.Post)
       .then(postData => {
         this.post = postData;
@@ -55,7 +56,7 @@ export class SinglePostComponent implements OnInit {
       })
       .catch(err => { this.errorMsg = err; })
       .finally(() => {
-        this.scrollToTop();
+
         this.loader = false
       })
   }
@@ -82,7 +83,7 @@ export class SinglePostComponent implements OnInit {
     if (main) {
       main.scroll({
         top: 0,
-        behavior: "smooth"
+        //  behavior: "smooth"
       });
     }
   }
