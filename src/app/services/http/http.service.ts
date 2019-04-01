@@ -8,7 +8,7 @@ export class HttpService {
   private baseURL: string;
   constructor(private httpClint: HttpClient) {
     this.baseURL = localStorage.getItem('ks_lang') === 'hin' ? 'http://hindi.khulasa-news.com/wp-admin/admin-ajax.php' : 'http://khulasa-news.com/wp-admin/admin-ajax.php';
-    console.log(this.baseURL);
+
   }
   public get(apiPath: string, params?: HttpParams) {
     return new Promise((resolve, reject) => {
