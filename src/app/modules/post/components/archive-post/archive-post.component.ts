@@ -8,10 +8,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./archive-post.component.scss']
 })
 export class ArchivePostComponent implements OnInit {
-
   public categoryId: string;
   private routerSubscribe: Subscription;
-
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.routerSubscribe = this.router.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
