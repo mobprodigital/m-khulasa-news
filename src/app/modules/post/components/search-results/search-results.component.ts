@@ -25,10 +25,16 @@ export class SearchResultsComponent implements OnInit {
   public getSearchResule() {
     window.scroll({
       top: 0
-    })
+    });
+    this.loader = true;
+    this.postList = [];
+    this.errorMsg = '';
     this.postService.getSearchResults(this.searchTerm)
-      .then(data => { this.postList = data; this.loader = false })
-      .catch(err => { this.errorMsg = err; this.loader = false })
+      .then(data => { this.postList = data; })
+      .catch(err => { this.errorMsg = err; })
+      .finally(() => {
+        this.loader = false;
+      })
   }
   ngOnInit() {
   }

@@ -1,9 +1,5 @@
 <app-loader *ngIf="loader"></app-loader>
-<div>
-  <div>
-    <h6 class="post-category-name"></h6>
-  </div>
-
+<div *ngIf="postList && postList.length > 0">
   <article class="post-container" *ngFor="let post of postList">
     <div class="float-left">
       <a [routerLink]="['/', post.slug]">
@@ -11,12 +7,15 @@
       </a>
     </div>
     <div>
-      <h5 [routerLink]="['/', post.slug]"s class="post-title">{{post.title}}</h5>
+      <h5 [routerLink]="['/', post.slug]" s class="post-title">{{post.title}}</h5>
       <p class="post-content">{{post.content}}</p>
     </div>
   </article>
 </div>
 
 <div [hidden]='!errorMsg'>
-{{errorMsg}}
+  {{errorMsg}}
 </div>
+
+
+
