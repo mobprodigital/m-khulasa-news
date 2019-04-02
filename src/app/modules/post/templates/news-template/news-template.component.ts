@@ -14,7 +14,6 @@ export class NewsTemplateComponent implements OnInit {
   @ViewChild('newstemplatecontainer') maincontainer: ElementRef;
   @Input() count: number = 10;
   @Input() title: string;
-  @Input() navScroll: boolean = true;
   @Input() set categoryID(value: string) {
     this._categoryId = value;
     this.scrollToTop();
@@ -37,15 +36,19 @@ export class NewsTemplateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
   ) {
 
+
+
   }
   public async getCategoryName() {
     let catlist: NewsCategoryModel[] = await this.postService.getMenuCategories();
     if (catlist && catlist.length > 0) {
       this.categoryName = catlist.find(list => list.id == parseInt(this._categoryId)).name;
     }
-    if (this.navScroll) {
+    let url: string = this.router.url;
+    if (url.split('/')[1] == 'category') {
       this.postService.scrollTo();
     }
+
   }
 
   /**
