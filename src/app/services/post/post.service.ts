@@ -192,7 +192,6 @@ export class PostService {
     const ulHTML = document.querySelector('#nav');
     let activeTab: HTMLElement = ulHTML.querySelector('.nav-link-active');
     const scrollCount = (activeTab.offsetLeft + (activeTab.clientWidth / 2)) - (ulHTML.clientWidth / 2);
-
     ulHTML.scrollTo({
       left: scrollCount,
       behavior: "smooth"
