@@ -5,6 +5,7 @@ import { PostService } from 'src/app/services/post/post.service';
 import { PostTypeEnum } from 'src/app/enum/post-type.enum';
 import { PostModel } from 'src/app/model/post.model';
 import { DomSanitizer, SafeResourceUrl, } from '@angular/platform-browser';
+import { NewsCategoryModel } from 'src/app/model/newsCategory.model';
 
 @Component({
   selector: 'app-single-post',
@@ -17,6 +18,7 @@ export class SinglePostComponent implements OnInit {
   private routerSubscribe: Subscription;
   public postSlug: string;
   public post: PostModel;
+
   public errorMsg: string = "";
   public loader: boolean = true;
   public ytVideo: boolean = false;
@@ -38,6 +40,7 @@ export class SinglePostComponent implements OnInit {
       this.post = null;
       this.ytVideo = false;
       this.errorMsg = '';
+
       this.getpost()
     }
   }
@@ -46,6 +49,9 @@ export class SinglePostComponent implements OnInit {
     this.postService.getPostByPostId(this.postSlug, PostTypeEnum.Post)
       .then(postData => {
         this.post = postData;
+
+
+
         if (this.post.categoryList.some(c => c.id === 47)) {
           let Url = this.geturl(this.post.content);
           if (Url) {

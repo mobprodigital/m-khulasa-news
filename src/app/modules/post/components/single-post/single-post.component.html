@@ -13,7 +13,8 @@
     </h6>
     <img *ngIf="!ytVideo" class="w-100" [src]="post.featuredImage.original" [alt]="post.featuredImage.original">
     <div class="single-post-content" [innerHTML]='post.content'></div>
-    <iframe class="ytVideo" *ngIf="ytVideo" [src]="youTubeUrl" frameborder="0"></iframe>
+    <iframe class="ytVideo" *ngIf="ytVideo" [src]="youTubeUrl" frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </article>
 
   <div [hidden]='!errorMsg'>
@@ -21,7 +22,8 @@
   </div>
 
   <div class="single-post">
-    <app-news-template [categoryID]="42" [count]='3' [title]="'Related-posts'" [navScroll]="false"></app-news-template>
-  </div>
+    <app-news-template [categoryID]="ytVideo ? '47' : '42'" [count]='3' [title]="'Related-posts'">
+    </app-news-template>
 
+  </div>
 </div>
