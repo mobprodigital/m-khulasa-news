@@ -1,4 +1,4 @@
-<app-loader *ngIf="loader"></app-loader>
+<app-loader *ngIf="loader" [count]="10" ></app-loader>
 <div *ngIf="postList && postList.length > 0">
   <article class="post-container" *ngFor="let post of postList">
     <div class="float-left">
