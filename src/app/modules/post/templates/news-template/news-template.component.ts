@@ -101,7 +101,6 @@ export class NewsTemplateComponent implements OnInit {
   onSwipeLeft() {
     let activeId = this.activatedRoute.snapshot.paramMap.get('id');
     let activatedIndex = this.categoryIdList.indexOf(parseInt(activeId));
-
     if (this.index == 0) {
       let catId = this.categoryIdList[this.index];
       this.router.navigate(['category', catId]);
