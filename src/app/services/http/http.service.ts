@@ -7,7 +7,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class HttpService {
   private baseURL: string;
   constructor(private httpClint: HttpClient) {
-    this.baseURL = localStorage.getItem('ks_lang') === 'hin' ? 'http://hindi.khulasa-news.com/wp-admin/admin-ajax.php' : 'http://khulasa-news.com/wp-admin/admin-ajax.php';
+    this.baseURL = localStorage.getItem('ks_lang') === 'hin'
+      ? 'https://hindi.khulasa-news.com/wp-admin/admin-ajax.php' : 'https://khulasa-news.com/wp-admin/admin-ajax.php';
 
   }
   public get(apiPath: string, params?: HttpParams) {

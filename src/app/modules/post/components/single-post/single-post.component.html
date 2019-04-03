@@ -5,14 +5,17 @@
 
   <article *ngIf="post" class="single-post-container">
     <h4 class="single-post-title"> {{post.title}}</h4>
-    <h6 class="post-date-or-author">
+    <div class="post-date-or-author">
       <span><img class="date-and-user-icon" src="assets/images/icons/calendar-icon.png" alt=""> {{post.createDate |
       date:'longDate' | uppercase}}</span>
       <span class="pl-3 "><img class="date-and-user-icon" src="assets/images/icons/person.png" alt=""> {{post.author}}
       </span>
-    </h6>
+      <button *ngIf="canShare" type="button"  (click)="sharePost()" class="share-btn">
+        <img src="assets/images/icons/share-solid.svg" alt="share-btn"> Share
+      </button>
+    </div>
     <img *ngIf="!ytVideo" class="w-100" [src]="post.featuredImage.original" [alt]="post.featuredImage.original">
-    <div class="single-post-content" [innerHTML]='post.content'></div>
+    <div class="single-post-content" #postContent [innerHTML]='post.content'></div>
     <iframe class="ytVideo" *ngIf="ytVideo" [src]="youTubeUrl" frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </article>

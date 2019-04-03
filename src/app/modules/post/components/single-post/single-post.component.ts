@@ -5,7 +5,7 @@ import { PostService } from 'src/app/services/post/post.service';
 import { PostTypeEnum } from 'src/app/enum/post-type.enum';
 import { PostModel } from 'src/app/model/post.model';
 import { DomSanitizer, SafeResourceUrl, } from '@angular/platform-browser';
-import { NewsCategoryModel } from 'src/app/model/newsCategory.model';
+
 
 @Component({
   selector: 'app-single-post',
@@ -18,11 +18,12 @@ export class SinglePostComponent implements OnInit {
   private routerSubscribe: Subscription;
   public postSlug: string;
   public post: PostModel;
-
+  public canShare: boolean = 'share' in navigator;
   public errorMsg: string = "";
   public loader: boolean = true;
   public ytVideo: boolean = false;
   public youTubeUrl: SafeResourceUrl;
+  @ViewChild('postContent') postContent: ElementRef;
 
   constructor(private sanitizer: DomSanitizer, private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService) {
     this.routerSubscribe = this.router.events.subscribe(ev => {
@@ -98,5 +99,20 @@ export class SinglePostComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.routerSubscribe.unsubscribe();
+  }
+
+  sharePost() {
+    if (this.canShare) {
+
+      const content: string = this.postContent.nativeElement.innerText;
+
+      window.navigator['share']({
+        title: this.post.title,
+        text: content.substr(0, 100),
+        url: window.location.href
+      }).catch(err => {
+        console.log('Share post error : ', err);
+      });
+    }
   }
 }

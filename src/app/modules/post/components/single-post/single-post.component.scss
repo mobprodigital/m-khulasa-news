@@ -4,9 +4,16 @@
   color: #9c9c9c;
   font-style: normal;
   font-weight: lighter;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
 
+  .share-btn {
+    float: right;
+    img {
+      width: 15px;
+      vertical-align: middle;
+    }
+  }
 }
 
 .date-and-user-icon {
@@ -20,14 +27,13 @@
 
 .single-post-container {
   padding: 0px 10px;
-
 }
 
 .single-post-title {
   font-size: 20px;
   margin: 10px 0px;
   text-transform: uppercase;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   color: #3d3d3d;
   font-weight: 550;
 }
