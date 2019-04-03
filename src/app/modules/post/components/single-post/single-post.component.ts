@@ -5,6 +5,8 @@ import { PostService } from 'src/app/services/post/post.service';
 import { PostTypeEnum } from 'src/app/enum/post-type.enum';
 import { PostModel } from 'src/app/model/post.model';
 import { DomSanitizer, SafeResourceUrl, } from '@angular/platform-browser';
+import { AppLangServiceService } from 'src/app/services/app-lang-service/app-lang-service.service';
+import { AppLangEnum } from 'src/app/enum/app-lang.enum';
 
 
 @Component({
@@ -25,7 +27,13 @@ export class SinglePostComponent implements OnInit {
   public youTubeUrl: SafeResourceUrl;
   @ViewChild('postContent') postContent: ElementRef;
 
-  constructor(private sanitizer: DomSanitizer, private router: Router, private activatedRoute: ActivatedRoute, private postService: PostService) {
+  constructor(
+    private sanitizer: DomSanitizer,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private postService: PostService,
+    private appLangService: AppLangServiceService
+  ) {
     this.routerSubscribe = this.router.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
         this.getPostSlug();
@@ -36,13 +44,18 @@ export class SinglePostComponent implements OnInit {
 
   public getPostSlug() {
     this.postSlug = this.activatedRoute.snapshot.paramMap.get('slug');
+    const lang = this.activatedRoute.snapshot.paramMap.get('lang');
+    if (lang && (this.appLangService.selectedAppLang !== lang)) {
+      this.appLangService.selectedAppLang = lang === AppLangEnum.English ? AppLangEnum.English : AppLangEnum.Hindi;
+      window.location.reload();
+    }
     if (this.postSlug) {
       this.loader = true;
       this.post = null;
       this.ytVideo = false;
       this.errorMsg = '';
 
-      this.getpost()
+      this.getpost();
     }
   }
   public getpost() {
@@ -107,7 +120,7 @@ export class SinglePostComponent implements OnInit {
       window.navigator['share']({
         title: this.post.title,
         text: !!content ? content.substr(0, 100) : 'Khulasa news',
-        url: window.location.href
+        url: window.location.href + '/' + this.appLangService.selectedAppLang
       }).catch(err => {
         console.log('Share post error : ', err);
       });

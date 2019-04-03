@@ -13,16 +13,8 @@ const routes: Routes = [
     component: CommonComponent,
     children: [
       {
-        path: '',
-        component: HomeComponent
-      },
-      {
         path: 'category/:id',
         component: ArchivePostComponent
-      },
-      {
-        path: ':slug',
-        component: SinglePostComponent
       },
       {
         path: 'search/:searchTerm',
@@ -31,7 +23,19 @@ const routes: Routes = [
       {
         path: 'page/:slug',
         component: SinglePageComponent
-      }
+      },
+      {
+        path: ':slug',
+        component: SinglePostComponent
+      },
+      {
+        path: ':slug/:lang',
+        component: SinglePostComponent
+      },
+      {
+        path: '',
+        component: HomeComponent
+      },
     ]
   }
 ];

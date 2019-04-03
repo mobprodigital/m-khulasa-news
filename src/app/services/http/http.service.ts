@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { AppLangServiceService } from '../app-lang-service/app-lang-service.service';
+import { AppLangEnum } from 'src/app/enum/app-lang.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
   private baseURL: string;
-  constructor(private httpClint: HttpClient) {
-    this.baseURL = localStorage.getItem('ks_lang') === 'hin'
+  constructor(
+    private httpClint: HttpClient,
+    private appLangSvc: AppLangServiceService
+  ) {
+    this.baseURL = appLangSvc.selectedAppLang === AppLangEnum.Hindi
       ? 'https://hindi.khulasa-news.com/wp-admin/admin-ajax.php' : 'https://khulasa-news.com/wp-admin/admin-ajax.php';
 
   }
