@@ -6,6 +6,7 @@ import { SinglePostComponent } from './components/single-post/single-post.compon
 import { HomeComponent } from './components/home/home.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { SinglePageComponent } from './components/single-page/single-page.component';
+import { NotFoundComponent } from '../shared/components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent
+      },
+      {
+        path: '**',
+        component: NotFoundComponent
       },
     ]
   }
