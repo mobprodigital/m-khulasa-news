@@ -103,12 +103,10 @@ export class SinglePostComponent implements OnInit {
 
   sharePost() {
     if (this.canShare) {
-
       const content: string = this.postContent.nativeElement.innerText;
-
       window.navigator['share']({
         title: this.post.title,
-        text: content.substr(0, 100),
+        text: !!content ? content.substr(0, 100) : 'Khulasa news',
         url: window.location.href
       }).catch(err => {
         console.log('Share post error : ', err);
