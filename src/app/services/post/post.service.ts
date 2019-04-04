@@ -7,8 +7,7 @@ import { PostTypeEnum } from 'src/app/enum/post-type.enum';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { AppLangEnum } from 'src/app/enum/app-lang.enum';
 import { AppLangServiceService } from '../app-lang-service/app-lang-service.service';
-import { reject } from 'q';
-import { resolve } from 'url';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +21,6 @@ export class PostService {
     private appLangService: AppLangServiceService
   ) {
   }
-
-
   public getMenuCategories(): Promise<NewsCategoryModel[]> {
     return new Promise((resolve, reject) => {
       const selectedLang: AppLangEnum = this.appLangService.selectedAppLang;
@@ -46,11 +43,12 @@ export class PostService {
       }
     })
   }
-  public getRelatedPostByPostId(postId: string): Promise<PostModel[]> {
+  public getRelatedPostByPostId(postId: string, thumbnailSize: string = 'xsthumb'): Promise<PostModel[]> {
     return new Promise((resolve, reject) => {
       let params = new HttpParams()
         .set('action', 'get_related_posts')
-        .set("post_id", postId);
+        .set("post_id", postId)
+        .set("thumbnailSize", thumbnailSize);
       this.httpService.get('', params)
         .then((data: any[]) => {
           if (data) {
@@ -76,17 +74,16 @@ export class PostService {
    * @param count count use for number of post
    * @param from (default = 1) offset number from where want to get the news
    */
-  public getPost(categoryId: string, count?: number, from?: number): Promise<PostModel[]> {
+  public getPost(categoryId: string, count: number = 10, from: number = 1, thumbnailSize: string = 'xsthumb'): Promise<PostModel[]> {
     return new Promise((resolve, reject) => {
 
-      count = typeof count === "undefined" ? 10 : count;
-      from = typeof from === "undefined" ? 1 : from;
 
       let params = new HttpParams()
         .set("action", "get_post_archive")
         .set("categoryId", categoryId.toString())
         .set("count", count.toString())
-        .set("from", from.toString());
+        .set("from", from.toString())
+        .set("thumbnailSize", thumbnailSize);
 
       this.httpService.get('', params).then((news: any[]) => {
         if (news) {

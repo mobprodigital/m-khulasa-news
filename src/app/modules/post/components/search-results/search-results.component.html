@@ -1,4 +1,4 @@
-<app-loader *ngIf="loader" [count]="10" ></app-loader>
+<app-loader *ngIf="loader" [count]="10"></app-loader>
 <div *ngIf="postList && postList.length > 0">
   <article class="post-container" *ngFor="let post of postList">
     <div class="float-left">
@@ -13,9 +13,9 @@
   </article>
 </div>
 
-<div [hidden]='!errorMsg'>
-  {{errorMsg}}
+<div class="error-msg-box" [hidden]='!errorMsg'>
+  <h6 class="error-msg"> {{errorMsg}}</h6>
+  <div class="btn-box">
+    <button class="btn-retry" (click)="getSearchResule()">Retry</button>
+  </div>
 </div>
-
-
-

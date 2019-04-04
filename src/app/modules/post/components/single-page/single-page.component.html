@@ -6,6 +6,9 @@
   <div class="single-post-content" [innerHTML]='page.content'></div>
 </article>
 
-<div [hidden]='!errorMsg'>
-  {{errorMsg}}
+<div class="error-msg-box" [hidden]='!errorMsg'>
+  <h6 class="error-msg">{{errorMsg}}</h6>
+  <div class="btn-box">
+    <button class="btn-retry" (click)="getpost()">Retry</button>
+  </div>
 </div>

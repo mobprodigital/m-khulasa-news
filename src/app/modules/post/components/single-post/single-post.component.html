@@ -20,13 +20,16 @@
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </article>
 
-  <div [hidden]='!errorMsg'>
-    {{errorMsg}}
+  <div class="error-msg-box" [hidden]='!errorMsg'>
+    <h6 class="error-msg"> {{errorMsg}}</h6>
+    <div class="btn-box">
+      <button class="btn-retry" (click)="getpost()">Retry</button>
+    </div>
   </div>
 
   <div>
     <h3 class="related-post">Related-Posts</h3>
-    <app-loader [hidden]="!relatedPostLoader" [count]="3" ></app-loader>
+    <app-loader [hidden]="!relatedPostLoader" [count]="3"></app-loader>
     <div *ngIf="relatedPostList && relatedPostList.length > 0">
       <article class="post-container" *ngFor="let relatedPost of relatedPostList"
         [routerLink]="['/', relatedPost.slug]">
@@ -39,8 +42,8 @@
         </div>
       </article>
     </div>
-    <div *ngIf="relatedPostError">
-      {{relatedPostError}}
+    <div class="error-msg-box" [hidden]="!relatedPostError">
+      <h6 class="error-msg"> {{relatedPostError}}</h6>
     </div>
   </div>
 </div>

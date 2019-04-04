@@ -65,3 +65,6 @@ body {
   margin: 4px 0;
   @extend .animated-background;
 }
+.text :first-of-type {
+ margin-top:0px; 
+}
