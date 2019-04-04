@@ -6,6 +6,7 @@ import { SinglePostComponent } from './components/single-post/single-post.compon
 import { HomeComponent } from './components/home/home.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { SinglePageComponent } from './components/single-page/single-page.component';
+import { NotFoundComponent } from '../shared/components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -13,16 +14,8 @@ const routes: Routes = [
     component: CommonComponent,
     children: [
       {
-        path: '',
-        component: HomeComponent
-      },
-      {
         path: 'category/:id',
         component: ArchivePostComponent
-      },
-      {
-        path: ':slug',
-        component: SinglePostComponent
       },
       {
         path: 'search/:searchTerm',
@@ -31,7 +24,23 @@ const routes: Routes = [
       {
         path: 'page/:slug',
         component: SinglePageComponent
-      }
+      },
+      {
+        path: ':slug',
+        component: SinglePostComponent
+      },
+      {
+        path: ':slug/:lang',
+        component: SinglePostComponent
+      },
+      {
+        path: '',
+        component: HomeComponent
+      },
+      {
+        path: '**',
+        component: NotFoundComponent
+      },
     ]
   }
 ];

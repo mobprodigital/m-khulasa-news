@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import 'hammerjs';
 import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
+import { SharedModule } from './modules/shared/shared.module';
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     'pinch': { enable: false },
@@ -18,6 +19,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   ],
   imports: [
     BrowserModule,
+    SharedModule,
     AppRoutingModule,
     HttpClientModule,
   ],
