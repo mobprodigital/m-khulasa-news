@@ -87,7 +87,11 @@ export class SinglePostComponent implements OnInit {
           this.getRelatedPost();
         }
       })
-      .catch(err => { this.errorMsg = err; })
+      .catch(err => {
+        this.errorMsg = err;
+        this.relatedPostLoader = false;
+        this.relatedPostError = 'something went worng'
+      })
       .finally(() => {
 
         this.loader = false
