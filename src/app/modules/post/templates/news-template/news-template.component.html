@@ -18,8 +18,11 @@
       </article>
     </div>
     <app-loader [count]="count" *ngIf="loadingPosts"></app-loader>
-    <div [hidden]='!errorMsg'>
-      {{errorMsg}}
+    <div class="error-msg-box" [hidden]='!errorMsg'>
+      <h6 class="error-msg"> {{errorMsg}}</h6>
+      <div class="btn-box">
+        <button class="btn-retry" (click)="getpostById()">Retry</button>
+      </div>
     </div>
   </div>
   <a class="read-more" [routerLink]="['/category', _categoryId]">Load more...</a>

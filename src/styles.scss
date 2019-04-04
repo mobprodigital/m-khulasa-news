@@ -67,6 +67,30 @@ body {
   max-height: auto;
 }
 
+.error-msg {
+  margin: 10px 0;
+  font-size: 14px;
+  font-family: Oswald, sans-serif;
+  font-weight: lighter;
+}
+
+.error-msg-box {
+  padding: 0px 10px;
+}
+.btn-box
+{
+  margin: 10px 0px;
+}
+.btn-retry {
+  background: #1f56d6;
+  border: solid 2px #1547bf;
+  color: #fff;
+  border-radius: 4px;
+  padding: 0px 15px;
+  font-size: 14px;
+  font-family: Oswald, sans-serif;
+}
+
 .portal {
   font-family: 'Open Sans', sans-serif;
   display: flex;
