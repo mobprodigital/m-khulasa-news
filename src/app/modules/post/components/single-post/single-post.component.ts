@@ -26,7 +26,8 @@ export class SinglePostComponent implements OnInit {
   public ytVideo: boolean = false;
   public youTubeUrl: SafeResourceUrl;
   public relatedPostList: PostModel[] = [];
-  public relatedPostError: string = ''
+  public relatedPostError: string = '';
+  public relatedPostLoader: boolean = true;
   @ViewChild('postContent') postContent: ElementRef;
 
   constructor(
@@ -61,11 +62,13 @@ export class SinglePostComponent implements OnInit {
     }
   }
   public getRelatedPost() {
+    this.relatedPostLoader = true;
     this.relatedPostList = [];
     this.relatedPostError = '';
     this.postService.getRelatedPostByPostId(this.post.id.toString())
       .then(relatedpost => { this.relatedPostList = relatedpost })
-      .catch(err => this.relatedPostError = err);
+      .catch(err => this.relatedPostError = err)
+      .finally(() => { this.relatedPostLoader = false });
   }
 
   public getpost() {

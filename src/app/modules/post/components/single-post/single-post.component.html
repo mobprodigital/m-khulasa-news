@@ -26,8 +26,8 @@
 
   <div>
     <h3 class="related-post">Related-Posts</h3>
+    <app-loader [hidden]="!relatedPostLoader" [count]="3" ></app-loader>
     <div *ngIf="relatedPostList && relatedPostList.length > 0">
-
       <article class="post-container" *ngFor="let relatedPost of relatedPostList"
         [routerLink]="['/', relatedPost.slug]">
         <div class="float-left">
