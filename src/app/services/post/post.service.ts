@@ -7,6 +7,8 @@ import { PostTypeEnum } from 'src/app/enum/post-type.enum';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { AppLangEnum } from 'src/app/enum/app-lang.enum';
 import { AppLangServiceService } from '../app-lang-service/app-lang-service.service';
+import { reject } from 'q';
+import { resolve } from 'url';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +46,30 @@ export class PostService {
       }
     })
   }
+  public getRelatedPostByPostId(postId: string): Promise<PostModel[]> {
+    return new Promise((resolve, reject) => {
+      let params = new HttpParams()
+        .set('action', 'get_related_posts')
+        .set("post_id", postId);
+      this.httpService.get('', params)
+        .then((data: any[]) => {
+          if (data) {
+            let relatedPostList = this.parseNews(data);
+            resolve(relatedPostList);
+          }
+          else {
+            reject('no data found');
+          }
+        }).catch(err => {
+          reject(err);
+        })
+    })
+  }
+
+
+
+
+
   /**
    * get post by id count and from
    * @param categoryId get post by category id

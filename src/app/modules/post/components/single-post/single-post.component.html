@@ -10,7 +10,7 @@
       date:'longDate' | uppercase}}</span>
       <span class="pl-3 "><img class="date-and-user-icon" src="assets/images/icons/person.png" alt=""> {{post.author}}
       </span>
-      <button *ngIf="canShare" type="button"  (click)="sharePost()" class="share-btn">
+      <button *ngIf="canShare" type="button" (click)="sharePost()" class="share-btn">
         <img src="assets/images/icons/share-solid.svg" alt="share-btn"> Share
       </button>
     </div>
@@ -24,9 +24,23 @@
     {{errorMsg}}
   </div>
 
-  <div class="single-post">
-    <app-news-template [categoryID]="ytVideo ? '47' : '42'" [count]='3' [title]="'Related-posts'">
-    </app-news-template>
+  <div>
+    <h5>Related-Posts</h5>
+    <div *ngIf="relatedPostList && relatedPostList.length > 0">
 
+      <article class="post-container" *ngFor="let relatedPost of relatedPostList"
+        [routerLink]="['/', relatedPost.slug]">
+        <div class="float-left">
+          <img [src]="relatedPost.featuredImage.original" class="post-image" alt="">
+        </div>
+        <div>
+          <h5 class="post-title">{{relatedPost.title}}</h5>
+          <p class="post-content">{{relatedPost.content}}</p>
+        </div>
+      </article>
+    </div>
+    <div *ngIf="relatedPostError">
+      {{relatedPostError}}
+    </div>
   </div>
 </div>
