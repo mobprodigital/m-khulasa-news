@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import 'hammerjs';
 import { HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 import { SharedModule } from './modules/shared/shared.module';
