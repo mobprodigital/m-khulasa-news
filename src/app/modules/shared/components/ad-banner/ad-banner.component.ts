@@ -8,7 +8,6 @@ import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 export class AdBannerComponent implements OnInit, AfterViewInit {
 
 
-  @Input() clientId: string;
   @Input() slotId: string;
 
   constructor() { }
