@@ -21,7 +21,7 @@ export class AdBannerComponent implements OnInit, AfterViewInit {
       try {
         (window['adsbygoogle'] = window['adsbygoogle'] || []).push({});
       } catch (e) {
-        console.log(e);
+        
       }
     }, 3000);
 
