@@ -20,7 +20,7 @@ export class SinglePostComponent implements OnInit {
   private routerSubscribe: Subscription;
   public postSlug: string;
   public post: PostModel;
-  public canShare: boolean = 'share' in navigator;
+  
   public errorMsg: string = "";
   public loader: boolean = true;
   public ytVideo: boolean = false;
@@ -142,16 +142,5 @@ export class SinglePostComponent implements OnInit {
     this.routerSubscribe.unsubscribe();
   }
 
-  sharePost() {
-    if (this.canShare) {
-      const content: string = this.postContent.nativeElement.innerText;
-      window.navigator['share']({
-        title: this.post.title,
-        text: !!content ? content.substr(0, 100) : 'Khulasa news',
-        url: window.location.href + '/' + this.appLangService.selectedAppLang
-      }).catch(err => {
-        console.log('Share post error : ', err);
-      });
-    }
-  }
+
 }

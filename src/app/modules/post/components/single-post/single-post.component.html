@@ -10,9 +10,10 @@
       date:'longDate' | uppercase}}</span>
       <span class="pl-3 "><img class="date-and-user-icon" src="assets/images/icons/person.png" alt=""> {{post.author}}
       </span>
-      <button *ngIf="canShare" type="button" (click)="sharePost()" class="share-btn">
-        <img src="assets/images/icons/share-solid.svg" alt="share-btn"> Share
-      </button>
+      
+      
+        <app-share-to-app [post]="post"></app-share-to-app>
+     
     </div>
     <img *ngIf="!ytVideo" class="w-100" [src]="post.featuredImage.original" [alt]="post.featuredImage.original">
     

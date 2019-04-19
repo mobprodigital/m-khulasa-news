@@ -6,14 +6,13 @@
   font-weight: lighter;
   font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
+  display: flex;
+  justify-content: flex-start;
 
-  .share-btn {
-    float: right;
-    img {
-      width: 15px;
-      vertical-align: middle;
-    }
-  }
+  
+}
+app-share-to-app{
+  flex-grow: 1;
 }
 
 .date-and-user-icon {
@@ -55,7 +54,6 @@
   margin-right: 10px;
 }
 
-
 .post-title {
   margin: 0px;
   overflow: hidden;
@@ -63,7 +61,7 @@
   white-space: nowrap;
   font-size: 18px;
   text-transform: uppercase;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-weight: 550;
 }
 
@@ -72,7 +70,7 @@
   overflow: hidden;
   height: 39px;
   margin: 5px 0px 0px 0px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: lighter;
 }
 .related-post {
@@ -80,5 +78,5 @@
   margin: 10px 0px;
   font-size: 20px;
   font-weight: 550;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
 }
