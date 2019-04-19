@@ -16,7 +16,7 @@
     </div>
     <img *ngIf="!ytVideo" class="w-100" [src]="post.featuredImage.original" [alt]="post.featuredImage.original">
     
-    <div class="single-post-content" #postContent [innerHTML]='post.content'></div>
+    <div  class="single-post-content" #postContent [innerHTML]='post.content'></div>
     <iframe class="ytVideo" *ngIf="ytVideo" [src]="youTubeUrl" frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </article>
