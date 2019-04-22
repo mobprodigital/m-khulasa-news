@@ -1,11 +1,11 @@
-<div class="home-page">
-  <app-news-template [categoryID]="42" [count]='5'></app-news-template>
+<div class="home-page" *ngIf="catIdList && catIdList.length > 0">
+  <app-news-template [categoryID]="catIdList[0]" [count]='5'></app-news-template>
   <app-ad-banner [slotId]="'2303163047'"></app-ad-banner>
-  <app-news-template [categoryID]="43" [count]='5'></app-news-template>
+  <app-news-template [categoryID]="catIdList[1]" [count]='5'></app-news-template>
   <app-ad-banner [slotId]="'8868447680'"></app-ad-banner>
-  <app-news-template [categoryID]="48" [count]='5'></app-news-template>
+  <app-news-template [categoryID]="catIdList[2]" [count]='5'></app-news-template>
   <app-ad-banner [slotId]="'2163562243'"></app-ad-banner>
-  <app-news-template [categoryID]="41" [count]='5'></app-news-template>
+  <app-news-template [categoryID]="catIdList[3]" [count]='5'></app-news-template>
   <app-ad-banner [slotId]="'2185782979'"></app-ad-banner>
 
 </div>
