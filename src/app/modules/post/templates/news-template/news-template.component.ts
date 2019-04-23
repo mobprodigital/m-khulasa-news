@@ -4,6 +4,7 @@ import { PostModel } from 'src/app/model/post.model';
 import { NewsCategoryModel } from 'src/app/model/newsCategory.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-news-template',
   templateUrl: './news-template.component.html',
@@ -14,11 +15,7 @@ export class NewsTemplateComponent implements OnInit {
   @ViewChild('newstemplatecontainer') maincontainer: ElementRef;
   @Input() count: number = 10;
   @Input() title: string;
-  @Input() set categoryID(value: string) {
-    this._categoryId = value;
-    this.scrollToTop();
-    this.getpostById();
-  }
+
 
   public loadingPosts: boolean = false;
   public postList: PostModel[] = [];
@@ -28,27 +25,29 @@ export class NewsTemplateComponent implements OnInit {
   public categoryList: NewsCategoryModel[] = [];
   public categoryIdList: number[] = [];
   public index: number;
-  public _categoryId: string;
+  public _categoryId: number = null;
+
+
+
+  @Input() set categoryID(value: string) {
+    this._categoryId = parseInt(value, 10);
+    this.scrollToTop();
+    this.getpostById();
+  }
 
   constructor(
     private postService: PostService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute
   ) {
-
-
 
   }
   public async getCategoryName() {
     let catlist: NewsCategoryModel[] = await this.postService.getMenuCategories();
     if (catlist && catlist.length > 0) {
-      this.categoryName = catlist.find(list => list.id == parseInt(this._categoryId)).name;
+      const _catName = catlist.find(list => list.id === this._categoryId).name;
+      this.categoryName = _catName;
     }
-    let url: string = this.router.url;
-    if (url.split('/')[1] == 'category') {
-      this.postService.scrollTo();
-    }
-
   }
 
   /**
@@ -147,7 +146,9 @@ export class NewsTemplateComponent implements OnInit {
   }
   ngOnInit() {
     this.getMenuCategoryIdList();
-
   }
+
+
+
 
 }

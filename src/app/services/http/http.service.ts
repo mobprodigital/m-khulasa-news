@@ -12,8 +12,13 @@ export class HttpService {
     private httpClint: HttpClient,
     private appLangSvc: AppLangServiceService
   ) {
-    this.baseURL = appLangSvc.selectedAppLang === AppLangEnum.Hindi
-      ? 'https://hindi.khulasa-news.com/wp-admin/admin-ajax.php' : 'https://khulasa-news.com/wp-admin/admin-ajax.php';
+    this.setBaseUrl();
+
+    this.appLangSvc.langChangedEmitter.subscribe(
+      () => {
+        this.setBaseUrl();
+      }
+    );
 
   }
   public get(apiPath: string, params?: HttpParams) {
@@ -36,4 +41,10 @@ export class HttpService {
       return Promise.reject(response.message);
     }
   }
+
+  private setBaseUrl() {
+    this.baseURL = this.appLangSvc.selectedAppLang === AppLangEnum.Hindi
+      ? 'https://hindi.khulasa-news.com/wp-admin/admin-ajax.php' : 'https://khulasa-news.com/wp-admin/admin-ajax.php';
+  }
+
 }

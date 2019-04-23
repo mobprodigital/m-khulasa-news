@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { AppLangEnum } from 'src/app/enum/app-lang.enum';
 
@@ -7,14 +7,18 @@ import { AppLangEnum } from 'src/app/enum/app-lang.enum';
 })
 export class AppLangServiceService {
 
+  @Output()
+  public langChangedEmitter: EventEmitter<AppLangEnum> = new EventEmitter();
+
   constructor(
     private localStgService: LocalStorageService
   ) {
-  
+
   }
 
 
-  private _selectedAppLang: AppLangEnum = this.localStgService.getData('lang') === AppLangEnum.Hindi ? AppLangEnum.Hindi : AppLangEnum.English;
+  private _selectedAppLang: AppLangEnum =
+    this.localStgService.getData('lang') === AppLangEnum.Hindi ? AppLangEnum.Hindi : AppLangEnum.English;
 
   public get selectedAppLang(): AppLangEnum {
     return this._selectedAppLang;
@@ -22,7 +26,7 @@ export class AppLangServiceService {
   public set selectedAppLang(v: AppLangEnum) {
     this._selectedAppLang = v;
     this.localStgService.setData('lang', v, false);
+    this.langChangedEmitter.emit(v);
   }
-
 
 }

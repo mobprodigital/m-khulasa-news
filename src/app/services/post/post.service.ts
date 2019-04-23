@@ -74,7 +74,7 @@ export class PostService {
    * @param count count use for number of post
    * @param from (default = 1) offset number from where want to get the news
    */
-  public getPost(categoryId: string, count: number = 10, from: number = 1, thumbnailSize: string = 'xsthumb'): Promise<PostModel[]> {
+  public getPost(categoryId: number, count: number = 10, from: number = 1, thumbnailSize: string = 'xsthumb'): Promise<PostModel[]> {
     return new Promise((resolve, reject) => {
 
 
@@ -211,15 +211,7 @@ export class PostService {
     return catArr;
   }
 
-  public scrollTo() {
-    const ulHTML = document.querySelector('#nav');
-    let activeTab: HTMLElement = ulHTML.querySelector('.nav-link-active');
-    const scrollCount = (activeTab.offsetLeft + (activeTab.clientWidth / 2)) - (ulHTML.clientWidth / 2);
-    ulHTML.scrollTo({
-      left: scrollCount,
-      behavior: "smooth"
-    })
-  }
+  
   private parseNews(news: any[]) {
     let newslist: PostModel[] = [];
     if (news && news.length > 0) {
