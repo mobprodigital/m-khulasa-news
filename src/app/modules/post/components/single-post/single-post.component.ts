@@ -94,7 +94,17 @@ export class SinglePostComponent implements OnInit {
       })
       .finally(() => {
 
-        this.loader = false
+        this.loader = false;
+        // setTimeout(() => {
+        //   let contant: HTMLElement = this.postContent.nativeElement;
+        //   let aTagList = contant.querySelectorAll('a')
+        //   let href = (aTagList[1].getAttribute('href'))
+        //   let slug = href.split('/')[3]
+        //   console.log(slug)
+
+
+        // }, 2000);
+
       })
   }
 
@@ -125,6 +135,7 @@ export class SinglePostComponent implements OnInit {
     }
   }
   ngOnInit() {
+
   }
 
   ngOnDestroy(): void {
