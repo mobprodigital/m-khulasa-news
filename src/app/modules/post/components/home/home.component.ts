@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.catIdList = [42, 43, 48, 41];
     this.langChangeSubscription = this.langSvc.langChangedEmitter.subscribe(
       (lang: AppLangEnum) => {
-        console.log('lang changed', lang);
         this.catIdList = [];
         setTimeout(() => {
           this.catIdList = [42, 43, 48, 41];

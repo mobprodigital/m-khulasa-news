@@ -18,7 +18,7 @@ export class AppLangServiceService {
 
 
   private _selectedAppLang: AppLangEnum =
-    this.localStgService.getData('lang') === AppLangEnum.Hindi ? AppLangEnum.Hindi : AppLangEnum.English;
+    this.localStgService.getData('lang') === AppLangEnum.English ? AppLangEnum.English : AppLangEnum.Hindi;
 
   public get selectedAppLang(): AppLangEnum {
     return this._selectedAppLang;
