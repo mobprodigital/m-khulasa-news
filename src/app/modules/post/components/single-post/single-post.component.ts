@@ -20,7 +20,7 @@ export class SinglePostComponent implements OnInit {
   private routerSubscribe: Subscription;
   public postSlug: string;
   public post: PostModel;
-  
+
   public errorMsg: string = "";
   public loader: boolean = true;
   public ytVideo: boolean = false;
@@ -84,7 +84,9 @@ export class SinglePostComponent implements OnInit {
             }
             this.ytVideo = true;
           }
+          this.contantLinkOpenSameURL();
           this.getRelatedPost();
+
         }
       })
       .catch(err => {
@@ -93,21 +95,9 @@ export class SinglePostComponent implements OnInit {
         this.relatedPostError = 'something went worng'
       })
       .finally(() => {
-
         this.loader = false;
-        // setTimeout(() => {
-        //   let contant: HTMLElement = this.postContent.nativeElement;
-        //   let aTagList = contant.querySelectorAll('a')
-        //   let href = (aTagList[1].getAttribute('href'))
-        //   let slug = href.split('/')[3]
-        //   console.log(slug)
-
-
-        // }, 2000);
-
       })
   }
-
 
   private trustedUrl(url) {
     this.youTubeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -123,6 +113,24 @@ export class SinglePostComponent implements OnInit {
     else {
       return null;
     }
+  }
+
+  public contantLinkOpenSameURL() {
+    setTimeout(() => {
+      let contant: HTMLElement = this.postContent.nativeElement;
+      let aTagList = contant.querySelectorAll('a');
+      if (aTagList && aTagList.length > 0) {
+        for (let i = 0; i < aTagList.length; i++) {
+          let href = (aTagList[i].getAttribute('href'));
+          let slug = href.split('/')[3];
+          aTagList[i].addEventListener("click", (event) => {
+            event.preventDefault();
+            this.router.navigateByUrl('/' + slug);
+          });
+        }
+      }
+
+    }, 2000);
   }
 
   private scrollToTop() {
