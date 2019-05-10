@@ -5,14 +5,14 @@
 
 <app-loader *ngIf="loader" [count]="10"></app-loader>
 <div *ngIf="postList && postList.length > 0">
-  <article class="post-container" *ngFor="let post of postList">
+  <article class="post-container" *ngFor="let post of postList"  [routerLink]="['/', post.slug]">
     <div class="float-left">
-      <a [routerLink]="['/', post.slug]">
+      <a>
         <img [src]="post.featuredImage.original" class=" post-image" alt="">
       </a>
     </div>
     <div>
-      <h5 [routerLink]="['/', post.slug]" s class="post-title">{{post.title}}</h5>
+      <h5 class="post-title">{{post.title}}</h5>
       <p class="post-content">{{post.content}}</p>
     </div>
   </article>
