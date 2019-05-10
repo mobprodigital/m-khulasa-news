@@ -151,7 +151,7 @@ export class SinglePostComponent implements OnInit {
           }
         }
       }
-    }, 2000);
+    }, 500);
   }
 
   private scrollToTop() {
