@@ -139,7 +139,7 @@ export class PostService {
    * @param postId post Id 
    */
   public getPostByPostId(postId: number): Promise<PostModel>;
-  public getPostByPostId(postIdSlug: string, postType?: PostTypeEnum): Promise<PostModel>;
+  public getPostByPostId(postSlug: string, postType?: PostTypeEnum): Promise<PostModel>;
   public getPostByPostId(args: string | number, postType: PostTypeEnum = PostTypeEnum.Post): Promise<PostModel> {
     return new Promise((resolve, reject) => {
       let argsType = typeof args;

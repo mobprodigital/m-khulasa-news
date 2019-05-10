@@ -7,6 +7,7 @@ import { PostModel } from 'src/app/model/post.model';
 import { DomSanitizer, SafeResourceUrl, } from '@angular/platform-browser';
 import { AppLangServiceService } from 'src/app/services/app-lang-service/app-lang-service.service';
 import { AppLangEnum } from 'src/app/enum/app-lang.enum';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class SinglePostComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private postService: PostService,
-    private appLangService: AppLangServiceService
+    private appLangService: AppLangServiceService,
+    private localStorage: LocalStorageService
   ) {
     this.routerSubscribe = this.router.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
@@ -61,18 +63,8 @@ export class SinglePostComponent implements OnInit {
       this.getpost();
     }
   }
-  public getRelatedPost() {
-    this.relatedPostLoader = true;
-    this.relatedPostList = [];
-    this.relatedPostError = '';
-    this.postService.getRelatedPostByPostId(this.post.id.toString())
-      .then(relatedpost => { this.relatedPostList = relatedpost })
-      .catch(err => this.relatedPostError = err)
-      .finally(() => { this.relatedPostLoader = false });
-  }
 
   public getpost() {
-
     this.postService.getPostByPostId(this.postSlug, PostTypeEnum.Post)
       .then(postData => {
         if (postData) {
@@ -92,15 +84,27 @@ export class SinglePostComponent implements OnInit {
       .catch(err => {
         this.errorMsg = err;
         this.relatedPostLoader = false;
-        this.relatedPostError = 'something went worng'
+        this.relatedPostList = [];
+        this.relatedPostError = 'no data fonud'
       })
       .finally(() => {
         this.loader = false;
       })
   }
 
+
   private trustedUrl(url) {
     this.youTubeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  public getRelatedPost() {
+    this.relatedPostLoader = true;
+    this.relatedPostList = [];
+    this.relatedPostError = '';
+    this.postService.getRelatedPostByPostId(this.post.id.toString())
+      .then(relatedpost => { this.relatedPostList = relatedpost })
+      .catch(err => this.relatedPostError = err)
+      .finally(() => { this.relatedPostLoader = false });
   }
 
   private geturl(iframeString: string): string | null {
@@ -122,14 +126,29 @@ export class SinglePostComponent implements OnInit {
       if (aTagList && aTagList.length > 0) {
         for (let i = 0; i < aTagList.length; i++) {
           let href = (aTagList[i].getAttribute('href'));
-          let slug = href.split('/')[3];
-          aTagList[i].addEventListener("click", (event) => {
-            event.preventDefault();
-            this.router.navigateByUrl('/' + slug);
-          });
+          if (href.includes("khulasa-news.com")) {
+            let slug = href.split('/')[3];
+            aTagList[i].addEventListener("click", (event) => {
+              event.preventDefault();
+              this.router.navigateByUrl('/' + slug);
+            });
+          }
+          if (href.includes("?s=")) {
+            let slug = href.split('=')[1];
+            aTagList[i].addEventListener("click", (event) => {
+              event.preventDefault();
+              this.router.navigate(['search', slug]);
+            });
+          }
+          if (href.includes("category")) {
+            let slug = href.split('/')[4];
+            aTagList[i].addEventListener("click", (event) => {
+              event.preventDefault();
+              this.router.navigate(['category', slug]);
+            });
+          }
         }
       }
-
     }, 2000);
   }
 
