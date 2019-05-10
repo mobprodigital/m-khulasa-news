@@ -127,25 +127,27 @@ export class SinglePostComponent implements OnInit {
         for (let i = 0; i < aTagList.length; i++) {
           let href = (aTagList[i].getAttribute('href'));
           if (href.includes("khulasa-news.com")) {
-            let slug = href.split('/')[3];
-            aTagList[i].addEventListener("click", (event) => {
-              event.preventDefault();
-              this.router.navigateByUrl('/' + slug);
-            });
-          }
-          if (href.includes("?s=")) {
-            let slug = href.split('=')[1];
-            aTagList[i].addEventListener("click", (event) => {
-              event.preventDefault();
-              this.router.navigate(['search', slug]);
-            });
-          }
-          if (href.includes("category")) {
-            let slug = href.split('/')[4];
-            aTagList[i].addEventListener("click", (event) => {
-              event.preventDefault();
-              this.router.navigate(['category', slug]);
-            });
+            if (href.includes("category")) {
+              let slug = href.split('/')[4];
+              aTagList[i].addEventListener("click", (event) => {
+                event.preventDefault();
+                this.router.navigate(['category', slug]);
+              });
+            }
+            else if (href.includes("?s=")) {
+              let slug = href.split('=')[1];
+              aTagList[i].addEventListener("click", (event) => {
+                event.preventDefault();
+                this.router.navigate(['search', slug]);
+              });
+            }
+            else {
+              let slug = href.split('/')[3];
+              aTagList[i].addEventListener("click", (event) => {
+                event.preventDefault();
+                this.router.navigateByUrl('/' + slug);
+              });
+            }
           }
         }
       }
