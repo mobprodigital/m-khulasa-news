@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
     this.appLangService.langChangedEmitter.subscribe(
       () => {
         this.getMenuCategories();
-        this.router.navigateByUrl('/');
+        // this.router.navigateByUrl('/');
       }
     );
 
@@ -73,6 +73,8 @@ export class HeaderComponent implements OnInit {
   public setLanguage() {
     this.appLangService.selectedAppLang =
       this.appLangService.selectedAppLang === AppLangEnum.English ? AppLangEnum.Hindi : AppLangEnum.English;
+
+    this.router.navigateByUrl('/');
   }
   ngOnInit() {
   }
