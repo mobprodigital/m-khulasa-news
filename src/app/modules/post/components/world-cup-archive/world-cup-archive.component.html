@@ -1,0 +1,30 @@
+<div>
+  <app-loader [count]="count" *ngIf="loader"></app-loader>
+  <div>
+    <div>
+      <h6 class="post-category-name">World Cup News</h6>
+    </div>
+    <div *ngIf="worldCupPostList && worldCupPostList.length > 0">
+      <article class="post-container" *ngFor="let post of worldCupPostList;let _index = index"
+        [routerLink]="['/world_cup', post.slug]">
+        <section>
+          <div class="float-left">
+            <img [src]="post.featuredImage.original" class=" post-image" alt="">
+          </div>
+          <div>
+            <h5 class="post-title">{{post.title}}</h5>
+            <p class="post-content">{{post.content}}</p>
+          </div>
+        </section>
+        <app-ad-banner *ngIf="(_index + 1) % 4 === 0" [slotId]="'2303163047'"></app-ad-banner>
+      </article>
+    </div>
+    <app-loader [count]="count" *ngIf="loadingPosts"></app-loader>
+    <div class="error-msg-box" [hidden]='!errorMsg'>
+      <h6 class="error-msg"> {{errorMsg}}</h6>
+      <div class="btn-box">
+        <button class="btn-retry" (click)="getWorldCuppost()">Retry</button>
+      </div>
+    </div>
+  </div>
+</div>
