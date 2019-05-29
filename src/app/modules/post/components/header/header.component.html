@@ -51,8 +51,21 @@
           [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="nav-link-active"
           [routerLink]="['/category', catList.id]">{{catList.name}}</a></li>
     </ul>
+
+    <ul>
+      <li> <a class="" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive=""
+          [routerLink]="['/page', '']">live-scores
+        </a></li>
+      <li> <a class="" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive=""
+          [routerLink]="['/page', 'world-cup-fixures']">Fixtures
+        </a></li>
+      <li> <a class="" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive=""
+          [routerLink]="['/wc', 'archive']">World Cup News
+        </a></li>
+
+    </ul>
   </nav>
-  <div [hidden]="!langBtn">
+  <!-- <div [hidden]="!langBtn">
     <div class="language-container">
       <div class="lang-inner-container">
         Choose your Language /
@@ -60,5 +73,5 @@
       </div>
       <div class="close-lang" (click)="langBtn=!langBtn">X</div>
     </div>
-  </div>
+  </div> -->
 </header>
