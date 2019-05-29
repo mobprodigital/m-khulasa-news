@@ -28,9 +28,14 @@ export class PostService {
       const localMenuKey: string = selectedLang === AppLangEnum.Hindi ? 'menu_cat_hin' : 'menu_cat_eng';
       localMenuItems = this.localStorageService.getData(localMenuKey, true);
 
-      if (localMenuItems !== null) {
+
+      // if (localMenuItems !== null) {
+      //   resolve(localMenuItems);
+      // }
+      if (false) {
         resolve(localMenuItems);
-      } else {
+      }
+      else {
         this.httpService.get('', new HttpParams()
           .set('action', 'get_menu'))
           .then((data: any[]) => {
@@ -100,6 +105,31 @@ export class PostService {
     })
   }
 
+  public getWorldCupPost(count: number = 10, from: number = 1, postType: PostTypeEnum): Promise<PostModel[]> {
+    return new Promise((resolve, reject) => {
+
+
+      let params = new HttpParams()
+        .set("action", "get_post_archive")
+        .set("count", count.toString())
+        .set("from", from.toString())
+        .set("thumbnailSize", 'xsthumb')
+        .set("post_type",postType );
+
+      this.httpService.get('', params).then((news: any[]) => {
+        if (news) {
+          let newslist = this.parseNews(news);
+          resolve(newslist);
+        }
+        else {
+          reject('data not found');
+        }
+      }).catch(err => {
+        reject(err);
+      })
+
+    })
+  }
   /**
     * get all news categories
     */
@@ -211,7 +241,7 @@ export class PostService {
     return catArr;
   }
 
-  
+
   private parseNews(news: any[]) {
     let newslist: PostModel[] = [];
     if (news && news.length > 0) {
