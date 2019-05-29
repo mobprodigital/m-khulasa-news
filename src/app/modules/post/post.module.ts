@@ -16,10 +16,12 @@ import { SingleLoaderComponent } from './templates/single-loader/single-loader.c
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { SinglePageComponent } from './components/single-page/single-page.component'
 import { SharedModule } from '../shared/shared.module';
+import { WorldCupArchiveComponent } from './components/world-cup-archive/world-cup-archive.component';
+import { SingleWorldCupPostComponent } from './components/single-world-cup-post/single-world-cup-post.component';
 
 
 @NgModule({
-  declarations: [CommonComponent, ArchivePostComponent, SinglePostComponent, HomeComponent, FooterComponent, HeaderComponent, NewsTemplateComponent, LoaderComponent, SingleLoaderComponent, SearchResultsComponent, SinglePageComponent],
+  declarations: [CommonComponent, ArchivePostComponent, SinglePostComponent, HomeComponent, FooterComponent, HeaderComponent, NewsTemplateComponent, LoaderComponent, SingleLoaderComponent, SearchResultsComponent, SinglePageComponent, WorldCupArchiveComponent, SingleWorldCupPostComponent],
   imports: [
     CommonModule,
     SharedModule,
