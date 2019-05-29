@@ -7,6 +7,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { SinglePageComponent } from './components/single-page/single-page.component';
 import { NotFoundComponent } from '../shared/components/not-found/not-found.component';
+import { WorldCupArchiveComponent } from './components/world-cup-archive/world-cup-archive.component';
+import { SingleWorldCupPostComponent } from './components/single-world-cup-post/single-world-cup-post.component';
 
 const routes: Routes = [
   {
@@ -24,6 +26,14 @@ const routes: Routes = [
       {
         path: 'page/:slug',
         component: SinglePageComponent
+      },
+      {
+        path: 'world_cup/:slug',
+        component:SingleWorldCupPostComponent
+      },
+      {
+        path: 'wc/:slug',
+        component: WorldCupArchiveComponent
       },
       {
         path: ':slug',
