@@ -52,7 +52,6 @@ export class SinglePostComponent implements OnInit {
     const lang = this.activatedRoute.snapshot.paramMap.get('lang');
     if (lang && (this.appLangService.selectedAppLang !== lang)) {
       this.appLangService.selectedAppLang = lang === AppLangEnum.English ? AppLangEnum.English : AppLangEnum.Hindi;
-      
     }
     if (this.postSlug) {
       this.loader = true;

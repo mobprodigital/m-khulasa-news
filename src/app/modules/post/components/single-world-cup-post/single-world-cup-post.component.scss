@@ -1,0 +1,83 @@
+.post-date-or-author {
+    font-size: 11px;
+    margin: 10px 0px;
+    color: #9c9c9c;
+    font-style: normal;
+    font-weight: lighter;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: flex-start;
+  
+    
+  }
+  app-share-to-app{
+    flex-grow: 1;
+  }
+  
+  .date-and-user-icon {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .pl-3 {
+    padding-left: 10px;
+  }
+  
+  .single-post-container {
+    padding: 0px 10px;
+  }
+  
+  .single-post-title {
+    font-size: 20px;
+    margin: 10px 0px;
+    text-transform: uppercase;
+    font-family: "Oswald", sans-serif;
+    color: #3d3d3d;
+    font-weight: 550;
+  }
+  
+  .ytVideo {
+    width: 100%;
+    height: 200px;
+  }
+  .post-container {
+    overflow: auto;
+    padding: 0px 10px;
+    margin: 16px 0px;
+  }
+  
+  .post-image {
+    width: 115px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .post-title {
+    margin: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: "Oswald", sans-serif;
+    font-weight: 550;
+  }
+  
+  .post-content {
+    font-size: 14px;
+    overflow: hidden;
+    height: 39px;
+    margin: 5px 0px 0px 0px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: lighter;
+  }
+  .related-post {
+    padding: 0px 10px;
+    margin: 10px 0px;
+    font-size: 20px;
+    font-weight: 550;
+    font-family: "Oswald", sans-serif;
+  }
+  

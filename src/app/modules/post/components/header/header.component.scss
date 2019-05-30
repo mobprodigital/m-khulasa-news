@@ -164,3 +164,31 @@
   padding: 1px 10px;
   border-radius: 6px;
 }
+
+
+.world-cup-menu {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  flex-wrap: nowrap;
+  margin: 0px;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  overflow: auto;
+}
+
+.world-cup-menu-item {
+  flex-grow: 1;
+  white-space: nowrap;
+  background-color: #b13915;
+}
+
+.world-cup-link {
+  padding: 15px 10px;
+  text-decoration: none;
+  color: #f1efef;
+  text-align: center;
+  display: block;
+  font-size: 14px;
+  
+}

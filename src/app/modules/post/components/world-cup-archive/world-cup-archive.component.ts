@@ -20,9 +20,9 @@ export class WorldCupArchiveComponent implements OnInit {
     this.worldCupPostList = [];
     this.errorMsg = '';
     this.loader = true;
-    this.postService.getWorldCupPost(10, 1, PostTypeEnum.world_cup)
+    this.postService.getWorldCupPost(10, 1, PostTypeEnum.worldCup)
       .then(data => { this.worldCupPostList = data, this.loader = false })
-      .catch(err => { this.errorMsg = err })
+      .catch(err => { this.errorMsg = err,this.loader = false })
   }
 
   ngOnInit() {

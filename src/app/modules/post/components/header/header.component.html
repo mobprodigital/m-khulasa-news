@@ -27,7 +27,9 @@
           [routerLink]="['/category', catList.id]">
           {{catList.name}}</a>
       </li>
-      <li style="margin-top: 20px;" (click)="sideNav()"> <a class="side-nav-link"
+      <li (click)="sideNav()">
+          <div class="side-nav-link" style="color: #d3e012;margin-top: 20px;" type="button" (click)="setLanguage()">Choose your Language / {{lang}}</div> </li>
+      <li style="" (click)="sideNav()"> <a class="side-nav-link"
           [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
           [routerLink]="['/page', 'about-us']">About Us</a></li>
       <li (click)="sideNav()"> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }"
@@ -52,15 +54,15 @@
           [routerLink]="['/category', catList.id]">{{catList.name}}</a></li>
     </ul>
 
-    <ul>
-      <li> <a class="" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive=""
-          [routerLink]="['/page', '']">live-scores
+    <ul class="world-cup-menu">
+      <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="" [routerLink]="['/page', 'cricket-score']">live-scores
         </a></li>
-      <li> <a class="" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive=""
-          [routerLink]="['/page', 'world-cup-fixures']">Fixtures
+      <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="" [routerLink]="['/page', 'world-cup-fixures']">Fixtures
         </a></li>
-      <li> <a class="" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive=""
-          [routerLink]="['/wc', 'archive']">World Cup News
+      <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="" [routerLink]="['/world-cup']">World Cup News
         </a></li>
 
     </ul>

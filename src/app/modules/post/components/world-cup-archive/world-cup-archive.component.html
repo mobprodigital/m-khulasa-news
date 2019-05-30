@@ -6,7 +6,7 @@
     </div>
     <div *ngIf="worldCupPostList && worldCupPostList.length > 0">
       <article class="post-container" *ngFor="let post of worldCupPostList;let _index = index"
-        [routerLink]="['/world_cup', post.slug]">
+        [routerLink]="['/world-cup', post.slug]">
         <section>
           <div class="float-left">
             <img [src]="post.featuredImage.original" class=" post-image" alt="">
@@ -19,7 +19,7 @@
         <app-ad-banner *ngIf="(_index + 1) % 4 === 0" [slotId]="'2303163047'"></app-ad-banner>
       </article>
     </div>
-    <app-loader [count]="count" *ngIf="loadingPosts"></app-loader>
+    <app-loader [count]="count" *ngIf="loader"></app-loader>
     <div class="error-msg-box" [hidden]='!errorMsg'>
       <h6 class="error-msg"> {{errorMsg}}</h6>
       <div class="btn-box">

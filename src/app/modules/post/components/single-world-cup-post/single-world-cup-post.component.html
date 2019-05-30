@@ -1,3 +1,55 @@
-<p>
-  single-world-cup-post works!
-</p>
+<div>
+  <div [hidden]='!loader'>
+    <app-single-loader></app-single-loader>
+  </div>
+
+  <article *ngIf="post" class="single-post-container">
+    <h4 class="single-post-title"> {{post.title}}</h4>
+    <div class="post-date-or-author">
+      <span><img class="date-and-user-icon" src="assets/images/icons/calendar-icon.png" alt=""> {{post.createDate |
+        date:'longDate' | uppercase}}</span>
+      <span class="pl-3 "><img class="date-and-user-icon" src="assets/images/icons/person.png" alt=""> {{post.author}}
+      </span>
+
+
+      <app-share-to-app [post]="post"></app-share-to-app>
+
+    </div>
+    <img *ngIf="!ytVideo" class="w-100" [src]="post.featuredImage.original" [alt]="post.featuredImage.original">
+
+    <div class="single-post-content" #postContent [innerHTML]='post.content'></div>
+    <iframe class="ytVideo" *ngIf="ytVideo" [src]="youTubeUrl" frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </article>
+
+  <div class="error-msg-box" [hidden]='!errorMsg'>
+    <h6 class="error-msg"> {{errorMsg}}</h6>
+    <div class="btn-box">
+      <button class="btn-retry" (click)="getPostBySlug()">Retry</button>
+    </div>
+  </div>
+
+  <app-ad-banner [slotId]="'2303163047'"></app-ad-banner>
+
+
+  <!-- <div>
+    <h3 class="related-post">Related-Posts</h3>
+    <app-loader [hidden]="!relatedPostLoader" [count]="3"></app-loader>
+    <div *ngIf="relatedPostList && relatedPostList.length > 0">
+      <article class="post-container" *ngFor="let relatedPost of relatedPostList"
+        [routerLink]="['/', relatedPost.slug]">
+        <div class="float-left">
+          <img [src]="relatedPost.featuredImage.original" class="post-image" alt="">
+        </div>
+        <div>
+          <h5 class="post-title">{{relatedPost.title}}</h5>
+          <p class="post-content">{{relatedPost.content}}</p>
+        </div>
+      </article>
+    </div>
+    <div class="error-msg-box" [hidden]="!relatedPostError">
+      <h6 class="error-msg"> {{relatedPostError}}</h6>
+    </div>
+  </div> -->
+  <app-ad-banner [slotId]="'2185782979'"></app-ad-banner>
+</div>

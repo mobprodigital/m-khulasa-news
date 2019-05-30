@@ -28,11 +28,11 @@ const routes: Routes = [
         component: SinglePageComponent
       },
       {
-        path: 'world_cup/:slug',
+        path: 'world-cup/:slug',
         component:SingleWorldCupPostComponent
       },
       {
-        path: 'wc/:slug',
+        path: 'world-cup',
         component: WorldCupArchiveComponent
       },
       {

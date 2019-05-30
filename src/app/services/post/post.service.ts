@@ -29,12 +29,12 @@ export class PostService {
       localMenuItems = this.localStorageService.getData(localMenuKey, true);
 
 
-      // if (localMenuItems !== null) {
-      //   resolve(localMenuItems);
-      // }
-      if (false) {
+      if (localMenuItems !== null) {
         resolve(localMenuItems);
       }
+      // if (false) {
+      //   resolve(localMenuItems);
+      // }
       else {
         this.httpService.get('', new HttpParams()
           .set('action', 'get_menu'))

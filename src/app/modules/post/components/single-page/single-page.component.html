@@ -1,9 +1,10 @@
 <div [hidden]='!loader'>
   <app-single-loader></app-single-loader>
 </div>
-<article *ngIf="page" class="single-post-container">
-  <h4 class="single-post-title"> {{page.title}}</h4>
-  <div class="single-post-content" [innerHTML]='page.content'></div>
+<article *ngIf="page" class="single-page-container">
+  <h4 class="single-page-title"> {{page.title}}</h4>
+
+  <div class="single-page-content" [innerHTML]='page.content'></div>
 </article>
 
 <div class="error-msg-box" [hidden]='!errorMsg'>
