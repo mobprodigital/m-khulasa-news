@@ -45,8 +45,10 @@ export class NewsTemplateComponent implements OnInit {
   public async getCategoryName() {
     let catlist: NewsCategoryModel[] = await this.postService.getMenuCategories();
     if (catlist && catlist.length > 0) {
-      const _catName = catlist.find(list => list.id === this._categoryId).name;
-      this.categoryName = _catName;
+      const _catNameFound = catlist.find(list => list.id === this._categoryId);
+      if (_catNameFound) {
+        this.categoryName = _catNameFound.name;
+      }
     }
   }
 

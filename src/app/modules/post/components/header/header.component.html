@@ -29,7 +29,7 @@
       </li>
       <li (click)="sideNav()">
           <div class="side-nav-link" style="color: #d3e012;margin-top: 20px;" type="button" (click)="setLanguage()">Choose your Language / {{lang}}</div> </li>
-      <li style="" (click)="sideNav()"> <a class="side-nav-link"
+      <li (click)="sideNav()"> <a class="side-nav-link"
           [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
           [routerLink]="['/page', 'about-us']">About Us</a></li>
       <li (click)="sideNav()"> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }"
