@@ -19,6 +19,8 @@ export class HeaderComponent implements OnInit {
   public liHome: string;
   public lang: string;
 
+  public wcCatId: number = 32448;
+
   @ViewChild('nav') nav: ElementRef;
 
   constructor(private postService: PostService,
@@ -27,9 +29,11 @@ export class HeaderComponent implements OnInit {
   ) {
     this.getMenuCategories();
     this.appLangService.langChangedEmitter.subscribe(
-      () => {
+      (lang: AppLangEnum) => {
         this.getMenuCategories();
         // this.router.navigateByUrl('/');
+
+        this.wcCatId = lang === AppLangEnum.English ? 32448 : 34860;
       }
     );
 
