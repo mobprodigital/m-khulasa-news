@@ -9,6 +9,7 @@ import { SinglePageComponent } from './components/single-page/single-page.compon
 import { NotFoundComponent } from '../shared/components/not-found/not-found.component';
 import { WorldCupArchiveComponent } from './components/world-cup-archive/world-cup-archive.component';
 import { SingleWorldCupPostComponent } from './components/single-world-cup-post/single-world-cup-post.component';
+import { PointTableComponent } from './components/point-table/point-table.component';
 
 const routes: Routes = [
   {
@@ -29,11 +30,15 @@ const routes: Routes = [
       },
       {
         path: 'world-cup/:slug',
-        component:SingleWorldCupPostComponent
+        component: SingleWorldCupPostComponent
       },
       {
         path: 'world-cup',
         component: WorldCupArchiveComponent
+      },
+      {
+        path: 'point-table',
+        component: PointTableComponent
       },
       {
         path: ':slug',
@@ -43,6 +48,7 @@ const routes: Routes = [
         path: ':slug/:lang',
         component: SinglePostComponent
       },
+
       {
         path: '',
         component: HomeComponent

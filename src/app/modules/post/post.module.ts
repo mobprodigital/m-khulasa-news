@@ -18,10 +18,11 @@ import { SinglePageComponent } from './components/single-page/single-page.compon
 import { SharedModule } from '../shared/shared.module';
 import { WorldCupArchiveComponent } from './components/world-cup-archive/world-cup-archive.component';
 import { SingleWorldCupPostComponent } from './components/single-world-cup-post/single-world-cup-post.component';
+import { PointTableComponent } from './components/point-table/point-table.component';
 
 
 @NgModule({
-  declarations: [CommonComponent, ArchivePostComponent, SinglePostComponent, HomeComponent, FooterComponent, HeaderComponent, NewsTemplateComponent, LoaderComponent, SingleLoaderComponent, SearchResultsComponent, SinglePageComponent, WorldCupArchiveComponent, SingleWorldCupPostComponent],
+  declarations: [CommonComponent, ArchivePostComponent, SinglePostComponent, HomeComponent, FooterComponent, HeaderComponent, NewsTemplateComponent, LoaderComponent, SingleLoaderComponent, SearchResultsComponent, SinglePageComponent, WorldCupArchiveComponent, SingleWorldCupPostComponent, PointTableComponent],
   imports: [
     CommonModule,
     SharedModule,
