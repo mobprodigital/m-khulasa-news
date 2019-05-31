@@ -175,20 +175,25 @@
   font-family: 'Oswald', sans-serif;
   text-transform: uppercase;
   overflow: auto;
+  box-shadow: 2px 2px 6px 3px #666565
 }
 
 .world-cup-menu-item {
   flex-grow: 1;
   white-space: nowrap;
   background-color: #b13915;
+ 
 }
 
 .world-cup-link {
-  padding: 15px 10px;
+  padding: 7px 10px;
   text-decoration: none;
   color: #f1efef;
   text-align: center;
   display: block;
   font-size: 14px;
   
+}
+.world-cup-link-active{
+  border-bottom: solid 3px #ffffff;
 }
