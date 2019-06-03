@@ -60,13 +60,13 @@
           routerLinkActive="world-cup-link-active" [routerLink]="['/page', 'cricket-score']">live-scores
         </a></li> -->
       <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
-          routerLinkActive="world-cup-link-active" [routerLink]="['/page', 'world-cup-fixures']">Fixtures
+          routerLinkActive="world-cup-link-active" [routerLink]="['/page', 'world-cup-fixures']">{{worldCupFixtures}}
         </a></li>
       <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
-          routerLinkActive="world-cup-link-active" [routerLink]="['/category', wcCatId]">World Cup News
+          routerLinkActive="world-cup-link-active" [routerLink]="['/category', wcCatId]">{{worldCupNews}}
         </a></li>
       <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
-          routerLinkActive="world-cup-link-active" [routerLink]="['/point-table']">Point Table
+          routerLinkActive="world-cup-link-active" [routerLink]="['/point-table']">{{worldCupPointTable}}
         </a></li>
 
     </ul>

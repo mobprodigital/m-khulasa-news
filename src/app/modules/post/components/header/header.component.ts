@@ -23,6 +23,11 @@ export class HeaderComponent implements OnInit {
   public wcCatId: number = 32448;
   public liveScore: string;
 
+  public worldCupFixtures;
+  public worldCupNews;
+  public worldCupPointTable;
+
+
   @ViewChild('nav') nav: ElementRef;
 
 
@@ -61,6 +66,10 @@ export class HeaderComponent implements OnInit {
       });
     this.liHome = this.appLangService.selectedAppLang === AppLangEnum.Hindi ? 'होम' : 'home';
     this.lang = this.appLangService.selectedAppLang === AppLangEnum.Hindi ? 'English' : 'हिंदी';
+    this.worldCupFixtures = this.appLangService.selectedAppLang === AppLangEnum.Hindi ? 'फिक्सट्यूर्स' : 'Fixtures';
+    this.worldCupNews = this.appLangService.selectedAppLang === AppLangEnum.Hindi ? 'वर्ल्ड कप की खबरे' : 'World Cup News';
+    this.worldCupPointTable = this.appLangService.selectedAppLang === AppLangEnum.Hindi ? 'पॉइंट्स टेबल' : 'Point Table';
+
   }
 
   public search() {
