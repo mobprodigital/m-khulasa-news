@@ -125,16 +125,18 @@ body {
 
   .tablepress-table-description {
     color: white;
-    background-color: #3d3d3d;
+    background-color: #a51717;
     display: block;
-    padding: 10px;
+    padding: 4px;
     text-transform: uppercase;
     font-weight: 600;
+    font-size: 12px;
+    text-align: center;
   }
 
   .tablepress {
     width: 100%;
-    border-spacing: 1px;
+    border-spacing: 0px;
 
     thead {
       color: #3d3d3d;
@@ -142,16 +144,21 @@ body {
       text-align: left;
 
       th {
-        padding: 5px;
+        padding: 3px 10px;
       }
     }
 
     tbody {
       td {
-        border-bottom: solid 1px #e3e3e3;
-        font-size: 14px;
-        padding: 5px;
 
+        font-size: 12px;
+        padding: 3px 10px;
+        text-align: center;
+      }
+
+      tr {
+        background-color: #9a3333;
+        color: #fff;
       }
     }
 
@@ -164,5 +171,11 @@ body {
       }
     }
 
+
+
+  }
+
+  br {
+    display: none;
   }
 }

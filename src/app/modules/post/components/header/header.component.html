@@ -28,10 +28,11 @@
           {{catList.name}}</a>
       </li>
       <li (click)="sideNav()">
-          <div class="side-nav-link" style="color: #d3e012;margin-top: 20px;" type="button" (click)="setLanguage()">Choose your Language / {{lang}}</div> </li>
-      <li (click)="sideNav()"> <a class="side-nav-link"
-          [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="side-nav-link-active"
-          [routerLink]="['/page', 'about-us']">About Us</a></li>
+        <div class="side-nav-link" style="color: #d3e012;margin-top: 20px;" type="button" (click)="setLanguage()">Choose
+          your Language / {{lang}}</div>
+      </li>
+      <li (click)="sideNav()"> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="side-nav-link-active" [routerLink]="['/page', 'about-us']">About Us</a></li>
       <li (click)="sideNav()"> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="side-nav-link-active" [routerLink]="['/page', 'contact-us']">Contact Us</a></li>
       <li (click)="sideNav()"> <a class="side-nav-link" [routerLinkActiveOptions]="{ exact: true }"
@@ -55,9 +56,9 @@
     </ul>
 
     <ul class="world-cup-menu">
-      <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
+      <!-- <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="world-cup-link-active" [routerLink]="['/page', 'cricket-score']">live-scores
-        </a></li>
+        </a></li> -->
       <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="world-cup-link-active" [routerLink]="['/page', 'world-cup-fixures']">Fixtures
         </a></li>
@@ -69,6 +70,7 @@
         </a></li>
 
     </ul>
+
   </nav>
   <!-- <div [hidden]="!langBtn">
     <div class="language-container">
@@ -79,4 +81,7 @@
       <div class="close-lang" (click)="langBtn=!langBtn">X</div>
     </div>
   </div> -->
+  <div class="live-score" [innerHTML]='liveScore'>
+
+  </div>
 </header>

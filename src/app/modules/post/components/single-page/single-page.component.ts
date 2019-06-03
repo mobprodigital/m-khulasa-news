@@ -38,28 +38,28 @@ export class SinglePageComponent implements OnInit {
 
     if (this.pageSlug === 'cricket-score') {
 
-      let csUrl = this.langservice.selectedAppLang === AppLangEnum.Hindi ? 'https://hindi.khulasa-news.com/cricket-score/' : 'https://khulasa-news.com/cricket-score/'
+      // let csUrl = this.langservice.selectedAppLang === AppLangEnum.Hindi ? 'https://hindi.khulasa-news.com/cricket-score/' : 'https://khulasa-news.com/cricket-score/'
 
-      this.httpClient.get(csUrl, {
-        responseType: 'text'
-      }).subscribe(
-        success => {
-          const table = success.split('<!--table-split-->')[1];
-          this.loader = false
+      // this.httpClient.get(csUrl, {
+      //   responseType: 'text'
+      // }).subscribe(
+      //   success => {
+      //     const table = success.split('<!--table-split-->')[1];
+      //     this.loader = false
 
-          let p = new PostModel()
-          p.content = table;
-          this.page = p;
+      //     let p = new PostModel()
+      //     p.content = table;
+      //     this.page = p;
 
-        },
-        err => {
-          console.log(err);
-        },
-        () => {
-          console.log('completed');
+      //   },
+      //   err => {
+      //     console.log(err);
+      //   },
+      //   () => {
+      //     console.log('completed');
 
-        }
-      )
+      //   }
+      // )
     }
     else {
       if (this.pageSlug) {

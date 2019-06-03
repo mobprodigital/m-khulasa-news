@@ -4,6 +4,7 @@ import { NewsCategoryModel } from 'src/app/model/newsCategory.model';
 import { Router, NavigationEnd } from '@angular/router';
 import { AppLangServiceService } from 'src/app/services/app-lang-service/app-lang-service.service';
 import { AppLangEnum } from 'src/app/enum/app-lang.enum';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-header',
@@ -20,11 +21,15 @@ export class HeaderComponent implements OnInit {
   public lang: string;
 
   public wcCatId: number = 32448;
+  public liveScore: string;
 
   @ViewChild('nav') nav: ElementRef;
 
+
   constructor(private postService: PostService,
     private router: Router,
+    private httpClient: HttpClient,
+    private langservice: AppLangServiceService,
     private appLangService: AppLangServiceService,
   ) {
     this.getMenuCategories();
@@ -32,7 +37,7 @@ export class HeaderComponent implements OnInit {
       (lang: AppLangEnum) => {
         this.getMenuCategories();
         // this.router.navigateByUrl('/');
-
+        this.getScoreCard();
         this.wcCatId = lang === AppLangEnum.English ? 32448 : 34860;
       }
     );
@@ -81,7 +86,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
   ngOnInit() {
+    this.getScoreCard();
   }
+
 
   public scrollTo() {
     const ulHTML: HTMLUListElement = this.nav.nativeElement;
@@ -97,6 +104,27 @@ export class HeaderComponent implements OnInit {
       left: scrollCount,
       behavior: "smooth"
     });
+  }
+
+
+  public getScoreCard() {
+    let csUrl = this.langservice.selectedAppLang === AppLangEnum.Hindi ? 'https://hindi.khulasa-news.com/quick-score/' : 'https://khulasa-news.com/quick-score/'
+
+    this.httpClient.get(csUrl, {
+      responseType: 'text'
+    }).subscribe(
+      success => {
+        const table = success.split('<!--table-split-->')[1];
+        this.liveScore = table;
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        console.log('completed');
+
+      }
+    )
   }
 
 }

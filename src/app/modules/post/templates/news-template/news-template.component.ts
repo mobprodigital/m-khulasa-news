@@ -26,13 +26,14 @@ export class NewsTemplateComponent implements OnInit {
   public categoryIdList: number[] = [];
   public index: number;
   public _categoryId: number = null;
-
+  public hasMorePosts: boolean = true;
 
 
   @Input() set categoryID(value: string) {
     this._categoryId = parseInt(value, 10);
     this.scrollToTop();
     this.getpostById();
+    this.hasMorePosts = true;
   }
 
   constructor(
@@ -74,6 +75,9 @@ export class NewsTemplateComponent implements OnInit {
 
 
   onScroll(ev: MouseEvent) {
+    if (!this.hasMorePosts) {
+      return;
+    }
     let ele = <HTMLElement>ev.target;
     let sHeight = ele.scrollHeight;
     let topheight = ele.scrollTop;
@@ -85,11 +89,18 @@ export class NewsTemplateComponent implements OnInit {
     }
   }
 
+
+
   public loadMorePost() {
     this.errorMsg = '';
     this.postService.getPost(this._categoryId, 10, this.postList.length + 1)
       .then(data => {
-        this.postList.push(...data);
+        if (data && data.length > 0) {
+          this.hasMorePosts = true;
+          this.postList.push(...data);
+        } else {
+          this.hasMorePosts = false;
+        }
       })
       .catch(err => {
         this.errorMsg = err;
