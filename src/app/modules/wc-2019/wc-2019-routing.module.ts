@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { liveScoreModel } from './model/live_score.model';
 import { ScoreComponent } from './components/score/score.component';
+import { FixturesListComponent } from './components/fixtures-list/fixtures-list.component';
 
 const routes: Routes = [
   {
-    path: '2019',
+    path : '',
+    component : FixturesListComponent
+  },
+  {
+    path: 'full-scorecard/:fixid',
     component: ScoreComponent
   }
 ];

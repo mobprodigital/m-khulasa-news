@@ -29,12 +29,8 @@ const routes: Routes = [
         component: SinglePageComponent
       },
       {
-        path: 'world-cup/:slug',
-        component: SingleWorldCupPostComponent
-      },
-      {
         path: 'world-cup',
-        component: WorldCupArchiveComponent
+        loadChildren: 'src/app/modules/wc-2019/wc-2019.module#Wc2019Module'
       },
       {
         path: 'point-table',
