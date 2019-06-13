@@ -8,7 +8,7 @@
                 <img src="{{fix.localteam.image_path}}"></span>
               <span class="t-name"> {{fix.localteam.code}}</span>
             </div>
-            <ng-container *ngIf="fix.runs && fix.runs.length > 0;then noRunL">
+            <ng-container *ngIf="fix.runs && fix.runs.length > 0;else noRunL">
               <div>{{fix?.runs[0]?.score}}/{{fix?.runs[0]?.wickets}} ({{fix?.runs[0]?.overs}})</div>
             </ng-container>
             <ng-template #noRunL>
@@ -17,7 +17,7 @@
           </section>
           <!--!--lc-team local---->
           <section class="lc-team">
-            <ng-container *ngIf="fix.runs && fix.runs.length > 0;then noRunV">
+            <ng-container *ngIf="fix.runs && fix.runs.length > 0;else noRunV">
               <div>{{fix?.runs[1]?.score}}/{{fix?.runs[1]?.wickets}} ({{fix?.runs[1]?.overs}})</div>
             </ng-container>
             <ng-template #noRunV>
