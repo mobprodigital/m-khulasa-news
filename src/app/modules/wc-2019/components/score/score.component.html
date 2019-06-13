@@ -1,5 +1,5 @@
 <div class="p-lr" *ngIf="liveScore">
-  <div *ngFor="let ls of liveScore">
+  <div style="margin-top: 10px;" *ngFor="let ls of liveScore">
     <h1 class="match-title">{{ls.round}} | <span [hidden]="ls.tossWinTeamId==0">( Toss Won by {{ls.tossWinTeamName}} and
         elected {{ls.elected}} )</span> </h1>
     <div class="team-detail-container">
