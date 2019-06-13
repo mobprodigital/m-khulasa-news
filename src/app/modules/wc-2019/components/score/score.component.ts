@@ -7,6 +7,7 @@ import { battingModel } from '../../model/batting.model';
 import { bowlingModel } from '../../model/bowling.model';
 import { runModel } from '../../model/runs.model';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-score',
@@ -21,6 +22,8 @@ export class ScoreComponent implements OnInit {
   public scoreCard: string = 'localTeam';
   public fixId: string;
   private timer: any;
+  private routerSubscribe: Subscription;
+
   public localTeamStatus: string;
   public visitarTeamStatus: string;
   public matchStaus: string[] = [
@@ -45,9 +48,11 @@ export class ScoreComponent implements OnInit {
     'Int.',
   ];
   constructor(private httpService: Wc2019Service, private activatedRouter: ActivatedRoute, private route: Router) {
-    route.events.subscribe(ev => {
+    this.routerSubscribe = route.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
         this.fixId = activatedRouter.snapshot.paramMap.get('fixid');
+        this.getLiveScore();
+        this.timer = setInterval(() => { this.getLiveScore(); }, 10000);
       }
     })
   }
@@ -150,7 +155,7 @@ export class ScoreComponent implements OnInit {
         _batting.teamId = bt.team_id
         _batting.playerId = bt.player_id;
         _batting.playerName = bt.playerName;
-        _batting.playerImagePath = bt.playerImage;
+        _batting.playerImagePath = bt.playerImage || 'assets/images/news/default.jpg';
         _batting.ball = bt.ball;
         _batting.score = bt.score;
         _batting.sRate = bt.rate;
@@ -176,7 +181,7 @@ export class ScoreComponent implements OnInit {
         _bowling.wide = bw.wide;
         _bowling.noBall = bw.noball;
         _bowling.playarName = bw.playerName;
-        _bowling.playerImage = bw.playerImage;
+        _bowling.playerImage = bw.playerImage || 'assets/images/news/default.jpg';
         return _bowling;
       })
     }
@@ -201,8 +206,11 @@ export class ScoreComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getLiveScore();
-    this.timer = setInterval(() => { this.getLiveScore(); }, 10000)
+
+
+  }
+  ngOnDestroy(): void {
+    this.routerSubscribe.unsubscribe();
   }
 }
 
