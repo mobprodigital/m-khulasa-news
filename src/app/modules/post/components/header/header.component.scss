@@ -186,6 +186,7 @@
   display: block;
   font-size: 14px;
 }
+
 .world-cup-link-active {
   border-bottom: solid 3px #ffffff;
 }
@@ -195,15 +196,18 @@
 section.lf-wrap {
   display: flex;
   flex-wrap: nowrap;
+
   .lf-single {
     flex-grow: 1;
+
     a.lf-link {
       text-decoration: none;
-      color: #000;
-      background-color: #fee4c1;
+      color: #fff;
+      background-color: #9a3333;
       box-shadow: 0px 0px 3px 0px #a7a7a7 inset;
       display: block;
       padding: 7px 10px;
+
       header.lf-header {
         font-size: 13px;
       }
