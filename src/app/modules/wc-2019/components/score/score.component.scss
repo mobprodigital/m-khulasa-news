@@ -8,6 +8,7 @@ td {
 table {
   width: 100%;
   overflow: auto;
+  margin-bottom: 10px;
 
   thead {
     background-color: #e3e3e3;
@@ -60,6 +61,7 @@ table {
 
 .match-note {
   text-align: center;
+  margin: 0px 0px 10px 0px;
 }
 
 .team-detail-container {
@@ -72,13 +74,17 @@ table {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  margin: 15px 0px;
+  margin: 10px 0px 0px 0px;
 }
 
 .visitar-team,
 .local-team {
   text-align: center;
   display: flex;
+}
+
+.team-name {
+  margin: 5px 0px;
 }
 
 .score-card-button-container {
@@ -113,4 +119,8 @@ table {
 .score {
   font-size: 10px;
   font-weight: 600;
+
+  span {
+    display: block;
+  }
 }

@@ -6,6 +6,7 @@ import { HttpParams } from '@angular/common/http';
 import { battingModel } from '../../model/batting.model';
 import { bowlingModel } from '../../model/bowling.model';
 import { runModel } from '../../model/runs.model';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-score',
@@ -18,54 +19,42 @@ export class ScoreComponent implements OnInit {
   public fixturesList: fixtureModel[] = [];
   public liveScore: liveScoreModel[];
   public scoreCard: string = 'localTeam';
-  public matchStaus: string[] = [
-    // 'NS',
-    // 'Aban',
-    // 'Cancl',
-    // 'Postp',
-    // 'Finished',
-    'Delayed',
-    'Dinner',
-    'Lunch',
-    'Innings Break',
-    '1st Innings',
-    '2nd Innings',
-    '3rd Innings',
-    '4th Innings',
-    // 'Stump Day 1',
-    // 'Stump Day 2',
-    // 'Stump Day 3',
-    // 'Stump Day 4',
-    'Tea Break',
-    'Int.',
-  ];
-  constructor(private httpService: Wc2019Service) { }
-
-  public getAllFixtures() {
-    let params = new HttpParams().set("league_id", '18').set('season_id', '23')
-    this.httpService.getAllFixtures(params)
-      .then((data: any[]) => {
-        this.fixturesList = this.parseFixtures(data);
-        if (this.fixturesList && this.fixturesList.length > 0) {
-          this.getLiveScore();
-          setInterval(() => {
-            this.getLiveScore();
-          }, 10000)
-        }
-      })
-      .catch(err => { console.log(err) })
+  public fixId: string;
+ 
+  constructor(private httpService: Wc2019Service, private activatedRouter: ActivatedRoute, private route: Router) {
+    route.events.subscribe(ev => {
+      if (ev instanceof NavigationEnd) {
+        this.fixId = activatedRouter.snapshot.paramMap.get('fixid');
+      }
+    })
   }
-  public getLiveScore() {
-    console.log('live score')
-    let date = new Date()
-    let liveMatch: fixtureModel[] = this.fixturesList.filter(f => (parseInt(f.live) == 1) && (this.matchStaus.indexOf(f.status) > -1) && (f.date <= date));
-    let liveMatchFixtureId = liveMatch.map(lm => lm.id);
 
-    if (liveMatchFixtureId && liveMatchFixtureId.length > 0) {
-      let params = new HttpParams().set("league_id", '18').set('season_id', '23').set('fixtureId', liveMatchFixtureId.toString());
+  // public getAllFixtures() {
+  //   let params = new HttpParams().set("league_id", '18').set('season_id', '23')
+  //   this.httpService.getAllFixtures(params)
+  //     .then((data: any[]) => {
+  //       this.fixturesList = this.parseFixtures(data);
+  //       if (this.fixturesList && this.fixturesList.length > 0) {
+  //         this.getLiveScore();
+  //         setInterval(() => {
+  //           this.getLiveScore();
+  //         }, 10000)
+  //       }
+  //     })
+  //     .catch(err => { console.log(err) })
+  // }
+
+  public getLiveScore() {
+    // let date = new Date()
+    // let liveMatch: fixtureModel[] = this.fixturesList.filter(f => (parseInt(f.live) == 1) && (this.matchStaus.indexOf(f.status) > -1) && (f.date <= date));
+    // let liveMatchFixtureId = liveMatch.map(lm => lm.id);
+
+    if (this.fixId) {
+      let params = new HttpParams().set("league_id", '18').set('season_id', '23').set('fixtureId', this.fixId.toString());
       this.httpService.getLiveScore(params)
         .then((data: any[]) => {
-          this.liveScore = this.parseLiveScore(data)
+          this.liveScore = this.parseLiveScore(data);
+
         })
         .catch(err => { console.log(err) });
     }
@@ -98,6 +87,7 @@ export class ScoreComponent implements OnInit {
         _liveScore.note = f.note;
         _liveScore.tossWinTeamId = f.toss_won_team_id;
         _liveScore.elected = f.elected;
+        _liveScore.status = f.status;
         _liveScore.localTeam = JSON.parse(f.localteam);
         _liveScore.visitarTeam = JSON.parse(f.visitorteam);
         _liveScore.batting = this.parseBatting(f.batting);
@@ -114,8 +104,6 @@ export class ScoreComponent implements OnInit {
     }
     return lScore;
   }
-
-
 
   public parseBatting(batting: any[]) {
     let Batting: battingModel[] = [];
@@ -174,13 +162,10 @@ export class ScoreComponent implements OnInit {
     return runs
   }
 
-
-
   ngOnInit() {
-    this.getAllFixtures();
-
+    this.getLiveScore();
+    setInterval(() => { this.getLiveScore(); }, 10000)
   }
-
 }
 
 
