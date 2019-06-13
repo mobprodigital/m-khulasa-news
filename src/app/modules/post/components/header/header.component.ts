@@ -124,9 +124,7 @@ export class HeaderComponent implements OnInit {
   public getLiveFixes() {
     this.wcCupService.getLiveFixtures().then(liveFix => {
       this.liveFixtures = liveFix;
-      console.log(this.liveFixtures);
     }).catch(err => {
-      console.log(err);
     });
   }
 

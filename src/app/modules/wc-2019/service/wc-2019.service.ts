@@ -7,7 +7,7 @@ import { FixtureModel, BattingModel, TeamModel, RunsModel } from '../model/fixtu
 })
 export class Wc2019Service {
 
-  private baseurl = 'http://cricapi.khulasa-news.com/cricketApi/';
+  private baseurl = 'https://cricapi.khulasa-news.com/cricketApi/';
 
   constructor(private httpClient: HttpClient) {
 
@@ -15,7 +15,7 @@ export class Wc2019Service {
 
   public getAllFixtures(params: HttpParams) {
     return new Promise((resolve, reject) => {
-      this.httpClient.get('http://cricapi.khulasa-news.com/cricketApi/getAllfixtures.php', { params: params }).
+      this.httpClient.get('https://cricapi.khulasa-news.com/cricketApi/getAllfixtures.php', { params: params }).
         subscribe((res: any) => {
           this.handleResponse(res)
             .then(data => { resolve(data) })
@@ -28,7 +28,7 @@ export class Wc2019Service {
   }
   public getLiveScore(params: HttpParams) {
     return new Promise((resolve, reject) => {
-      this.httpClient.get('http://cricapi.khulasa-news.com/cricketApi/getLiveScores.php', { params: params })
+      this.httpClient.get('https://cricapi.khulasa-news.com/cricketApi/getLiveScores.php', { params: params })
         .subscribe((res: any) => {
           this.handleResponse(res)
             .then(data => { resolve(data) })
