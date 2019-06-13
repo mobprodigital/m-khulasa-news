@@ -114,7 +114,9 @@ export class Wc2019Service {
           // 'Stump Day 4',
           'Tea Break',
           'Int',
-          'Int.'
+          'Int.',
+          'postp',
+          'postp.',
         ];
         const abanStatusArr = [
           'ns',
@@ -123,14 +125,13 @@ export class Wc2019Service {
           'aban.',
           'cancl',
           'cancl.',
-          'postp',
-          'postp.',
+
         ];
         const currentdDate: Date = new Date();
+        currentdDate.setHours(24, 0, 0, 0);
         const liveFixes = fixs.filter(f => {
           return (f.starting_at <= currentdDate) &&
-            (liveStatusArr.some(s => s.toLowerCase() === f.status.toLowerCase())) &&
-            (f.live);
+            (liveStatusArr.some(s => s.toLowerCase() === f.status.toLowerCase()));
         });
         if (liveFixes && liveFixes.length > 0) {
           resolve(liveFixes);

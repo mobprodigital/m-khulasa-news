@@ -6,9 +6,8 @@
   overflow: auto;
   margin: 0px;
   //box-shadow: 0 2px 15px #888;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   text-transform: uppercase;
-
 }
 
 .nav-menu-item {
@@ -25,7 +24,6 @@
   display: block;
   font-size: 18px;
   margin-right: 10px;
-
 }
 
 .logo {
@@ -34,14 +32,12 @@
 }
 
 .nav-link-active {
-  border-bottom: solid 1px red
+  border-bottom: solid 1px red;
 }
 
 .header {
   padding: 10px 10px 0px 10px;
 }
-
-
 
 .menu-icon {
   width: 26px;
@@ -72,13 +68,12 @@
   background-color: #2d2b2b75;
   overflow-x: hidden;
   transition: all 0.5s;
-
 }
 
 .side-nav-menu {
   list-style: none;
   padding: 0;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   text-transform: uppercase;
 }
 
@@ -93,7 +88,7 @@
 
 .side-nav-link-active {
   border-bottom: solid 2px #fff;
-  max-width: 80%
+  max-width: 80%;
 }
 
 .search-box {
@@ -165,24 +160,22 @@
   border-radius: 6px;
 }
 
-
 .world-cup-menu {
   list-style: none;
   display: flex;
   padding: 0;
   flex-wrap: nowrap;
   margin: 0px;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   text-transform: uppercase;
   overflow: auto;
-  box-shadow: 2px 2px 6px 3px #666565
+  box-shadow: 2px 2px 6px 3px #666565;
 }
 
 .world-cup-menu-item {
   flex-grow: 1;
   white-space: nowrap;
   background-color: #b13915;
- 
 }
 
 .world-cup-link {
@@ -192,8 +185,35 @@
   text-align: center;
   display: block;
   font-size: 14px;
-  
 }
-.world-cup-link-active{
+.world-cup-link-active {
   border-bottom: solid 3px #ffffff;
+}
+
+// WC CSS
+
+section.lf-wrap {
+  display: flex;
+  flex-wrap: nowrap;
+  .lf-single {
+    flex-grow: 1;
+    a.lf-link {
+      text-decoration: none;
+      color: #000;
+      background-color: #fee4c1;
+      box-shadow: 0px 0px 3px 0px #a7a7a7 inset;
+      display: block;
+      padding: 7px 10px;
+      header.lf-header {
+        font-size: 13px;
+      }
+
+      .lf-sc-single {
+        font-size: 13px;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+      }
+    }
+  }
 }

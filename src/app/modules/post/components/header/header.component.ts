@@ -5,6 +5,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { AppLangServiceService } from 'src/app/services/app-lang-service/app-lang-service.service';
 import { AppLangEnum } from 'src/app/enum/app-lang.enum';
 import { HttpClient } from '@angular/common/http';
+import { FixtureModel } from 'src/app/modules/wc-2019/model/fixture.model';
+import { Wc2019Service } from 'src/app/modules/wc-2019/service/wc-2019.service';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +29,8 @@ export class HeaderComponent implements OnInit {
   public worldCupNews;
   public worldCupPointTable;
 
+  public liveFixtures: FixtureModel[] = [];
+
 
   @ViewChild('nav') nav: ElementRef;
 
@@ -34,7 +38,7 @@ export class HeaderComponent implements OnInit {
   constructor(private postService: PostService,
     private router: Router,
     private httpClient: HttpClient,
-    private langservice: AppLangServiceService,
+    private wcCupService: Wc2019Service,
     private appLangService: AppLangServiceService,
   ) {
     this.getMenuCategories();
@@ -42,10 +46,11 @@ export class HeaderComponent implements OnInit {
       (lang: AppLangEnum) => {
         this.getMenuCategories();
         // this.router.navigateByUrl('/');
-        this.getScoreCard();
         this.wcCatId = lang === AppLangEnum.English ? 32448 : 34860;
       }
     );
+
+    this.getLiveFixes();
 
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -95,7 +100,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
   ngOnInit() {
-    this.getScoreCard();
+    // this.getScoreCard();
   }
 
 
@@ -116,24 +121,13 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  public getScoreCard() {
-    let csUrl = this.langservice.selectedAppLang === AppLangEnum.Hindi ? 'https://hindi.khulasa-news.com/quick-score/' : 'https://khulasa-news.com/quick-score/'
-
-    this.httpClient.get(csUrl, {
-      responseType: 'text'
-    }).subscribe(
-      success => {
-        const table = success.split('<!--table-split-->')[1];
-        this.liveScore = table;
-      },
-      err => {
-        console.log(err);
-      },
-      () => {
-        console.log('completed');
-
-      }
-    )
+  public getLiveFixes() {
+    this.wcCupService.getLiveFixtures().then(liveFix => {
+      this.liveFixtures = liveFix;
+      console.log(this.liveFixtures);
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
 }
