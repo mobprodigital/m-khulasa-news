@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HttpService } from './http.service';
+import { Wc2019Service } from './wc-2019.service';
 
-describe('HttpService', () => {
+describe('Wc2019Service', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: HttpService = TestBed.get(HttpService);
+    const service: Wc2019Service = TestBed.get(Wc2019Service);
     expect(service).toBeTruthy();
   });
 });

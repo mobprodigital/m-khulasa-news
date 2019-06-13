@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { fixtureModel } from '../../model/fixture.model';
 import { liveScoreModel } from '../../model/live_score.model';
-import { HttpService } from '../../service/http.service';
+import { Wc2019Service } from '../../service/wc-2019.service';
 import { HttpParams } from '@angular/common/http';
 import { battingModel } from '../../model/batting.model';
 import { bowlingModel } from '../../model/bowling.model';
@@ -17,7 +17,7 @@ export class ScoreComponent implements OnInit {
 
   public fixturesList: fixtureModel[] = [];
   public liveScore: liveScoreModel[];
-  public scoreCard: string = 'localTeam'
+  public scoreCard: string = 'localTeam';
   public matchStaus: string[] = [
     // 'NS',
     // 'Aban',
@@ -39,7 +39,7 @@ export class ScoreComponent implements OnInit {
     'Tea Break',
     'Int.',
   ];
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: Wc2019Service) { }
 
   public getAllFixtures() {
     let params = new HttpParams().set("league_id", '18').set('season_id', '23')

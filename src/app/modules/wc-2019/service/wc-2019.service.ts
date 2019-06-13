@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { resolve, reject } from 'q';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService {
+export class Wc2019Service {
 
   constructor(private httpClient: HttpClient) {
 
@@ -32,11 +30,11 @@ export class HttpService {
           this.handleResponse(res)
             .then(data => { resolve(data) })
             .catch(err => { reject(err) });
-        })
-      err => {
-        reject('something went worng');
-      }
-      () => { }
+        }),
+        err => {
+          reject('something went worng');
+        },
+        () => { }
     })
   }
 
@@ -44,11 +42,9 @@ export class HttpService {
     return new Promise((resolve, reject) => {
       if (response.status) {
         resolve(response.data);
-      }
-      else {
+      } else {
         reject(response.message);
       }
-
-    })
+    });
   }
 }
