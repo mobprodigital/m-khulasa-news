@@ -90,6 +90,60 @@ export class Wc2019Service {
     });
   }
 
+  public getLiveFixtures(): Promise<FixtureModel[]> {
+    return new Promise((resolve, reject) => {
+      this.getFixtures().then(fixs => {
+
+        const liveStatusArr: string[] = [
+          // 'NS',
+          // 'Aban',
+          // 'Cancl',
+          // 'Postp',
+          // 'Finished',
+          'Delayed',
+          'Dinner',
+          'Lunch',
+          'Innings Break',
+          '1st Innings',
+          '2nd Innings',
+          '3rd Innings',
+          '4th Innings',
+          // 'Stump Day 1',
+          // 'Stump Day 2',
+          // 'Stump Day 3',
+          // 'Stump Day 4',
+          'Tea Break',
+          'Int',
+          'Int.'
+        ];
+        const abanStatusArr = [
+          'ns',
+          'ns.',
+          'aban',
+          'aban.',
+          'cancl',
+          'cancl.',
+          'postp',
+          'postp.',
+        ];
+        const currentdDate: Date = new Date();
+        const liveFixes = fixs.filter(f => {
+          return (f.starting_at <= currentdDate) &&
+            (liveStatusArr.some(s => s.toLowerCase() === f.status.toLowerCase())) &&
+            (f.live);
+        });
+        if (liveFixes && liveFixes.length > 0) {
+          resolve(liveFixes);
+        } else {
+          reject('No live matches');
+        }
+      }).catch(err => {
+        reject('No live matches');
+
+      });
+    });
+  }
+
 
   private parseFixture(data: any[]): FixtureModel[] {
     let fixArr: FixtureModel[] = [];
