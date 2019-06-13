@@ -1,18 +1,19 @@
 table,
 th,
 td {
-  border: 1px solid #a9a9a9;
+  border-bottom: 1px solid #a9a9a9;
+  border-top: solid 1px #a9a9a9;
   border-collapse: collapse;
 }
 
 table {
   width: 100%;
   overflow: auto;
-  margin-bottom: 10px;
+  margin: 15px 0px;
 
   thead {
-    background-color: #e3e3e3;
-    color: black;
+    //background-color: #e3e3e3;
+    color: #888888;
     text-align: left;
 
     tr,
@@ -22,8 +23,20 @@ table {
     }
   }
 
+  tbody tr td:nth-child(1) {
+    display: flex;
+    align-items: center;
+    border-bottom: none;
+
+    span:nth-child(2) {
+      margin-left: 10px;
+    }
+  }
+
   tbody {
     tr {
+
+
       td {
         padding: 5px;
         font-size: 10px;
@@ -62,6 +75,8 @@ table {
 .match-note {
   text-align: center;
   margin: 0px 0px 10px 0px;
+  font-size: 14px;
+  color: #505050;
 }
 
 .team-detail-container {
@@ -92,8 +107,8 @@ table {
 
   button {
     width: 100%;
-    height: 30px;
-    font-size: 14px;
+    height: 25px;
+    font-size: 12px;
     border: none;
   }
 }
@@ -102,18 +117,6 @@ table {
 
   background-color: #fc8d3b;
   color: #fff;
-}
-
-.title {
-  margin: 20px 0px 0px 0px;
-  background: #e3e3e3;
-  display: inline-block;
-  padding: 5px;
-  font-size: 12px;
-  text-transform: capitalize;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  border: solid 1px #a9a9a9;
 }
 
 .score {
