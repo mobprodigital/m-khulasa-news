@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Wc2019Service } from '../../service/wc-2019.service';
 
 @Component({
   selector: 'app-fixtures-list',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FixturesListComponent implements OnInit {
 
-  constructor() { }
+  public fixList: any[] = [];
+
+  constructor(private wcService: Wc2019Service) {
+    wcService.getFixtures().then(fixData => {
+      this.fixList = fixData;
+    });
+  }
 
   ngOnInit() {
   }

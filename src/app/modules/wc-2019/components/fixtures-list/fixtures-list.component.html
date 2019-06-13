@@ -1,0 +1,35 @@
+<div *ngIf="fixList && fixList.length > 0">
+    <section *ngFor="let fix of fixList" class="lc-card-wrap">
+        <div class="lc-score-wrap"><a class="lc-score-link" [routerLink]="['full-scorecard', fix.id]">
+                <div class="lc-note"> <span>{{fix.round}} | {{fix.note}}</span></div>
+                <section class="fix-t-wrap">
+                    <section class="lc-team">
+                        <div class="lc-tm-info"> <span class="flag-wrap">
+                                <img src="{{fix.localteam.image_path}}"></span>
+                            <span class="t-name"> {{fix.localteam.code}}</span>
+                        </div>
+                        <ng-container *ngIf="fix.runs && fix.runs.length > 0">
+                            <div>{{fix?.runs[0]?.score}}/{{fix?.runs[0]?.wickets}} ({{fix?.runs[0]?.overs}})</div>
+                        </ng-container>
+                    </section>
+                    <!--!--lc-team local---->
+                    <section class="lc-team">
+                        <ng-container *ngIf="fix.runs && fix.runs.length > 0">
+                            <div>{{fix?.runs[1]?.score}}/{{fix?.runs[1]?.wickets}} ({{fix?.runs[1]?.overs}})</div>
+                        </ng-container>
+                        <div class="lc-tm-info">
+                            
+                            <span class="flag-wrap">
+                                <img src="{{fix.visitorteam.image_path}}">
+                            </span>
+                            <span class="tname"> {{fix.visitorteam.code}}</span>
+                        </div>
+                    </section>
+                    <!--lc-team visiter-->
+                </section>
+                <!--fix-t-wrap-->
+                <time class="fix-date">{{fix.starting_at | date}}</time>
+                <!--fix-date-->
+            </a></div>
+    </section>
+</div>
