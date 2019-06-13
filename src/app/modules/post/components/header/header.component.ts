@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   public worldCupPointTable;
 
   public liveFixtures: FixtureModel[] = [];
-
+  private liveFixTimer: any;
 
   @ViewChild('nav') nav: ElementRef;
 
@@ -51,6 +51,10 @@ export class HeaderComponent implements OnInit {
     );
 
     this.getLiveFixes();
+
+    setTimeout(() => {
+      this.getLiveFixes();
+    }, 50000);
 
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
