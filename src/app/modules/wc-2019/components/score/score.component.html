@@ -1,6 +1,6 @@
 <div class="p-lr" *ngIf="liveScore">
   <div *ngFor="let ls of liveScore">
-    <h1 class="match-title">{{ls.round}} <span [hidden]="ls.tossWinTeamId==0">( Toss Won by {{ls.tossWinTeamName}} and
+    <h1 class="match-title">{{ls.round}} | <span [hidden]="ls.tossWinTeamId==0">( Toss Won by {{ls.tossWinTeamName}} and
         elected {{ls.elected}} )</span> </h1>
     <div class="team-detail-container">
       <div class="local-team">
@@ -8,21 +8,25 @@
           <img src="{{ls.localTeam.image_path}}" alt="local team flag">
           <h5 class="team-name">{{ls.localTeam.name}}</h5>
         </div>
+        <h4 *ngIf="localTeamStatus" class="score">{{localTeamStatus}}</h4>
         <div *ngFor="let run of ls.runs">
           <h4 class="score" *ngIf="ls.localTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <span> ({{run.over}}
               Ovs)</span>
           </h4>
+
         </div>
       </div>
       <div class="visitar-team">
-        <div *ngFor="let run of ls.runs">
-          <div>
 
-            <h4 class="score" *ngIf="ls.visitarTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <span> ({{run.over}}
-                Ovs)</span>
-            </h4>
-          </div>
+        <div *ngFor="let run of ls.runs">
+          <h4 class="score" *ngIf="ls.visitarTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <span> ({{run.over}}
+              Ovs)</span>
+          </h4>
+
+
+
         </div>
+        <h4 class="score">{{visitarTeamStatus}}</h4>
         <div>
           <img src="{{ls.visitarTeam.image_path}}" alt="visitar team flag">
           <h5 class="team-name">{{ls.visitarTeam.name}}</h5>

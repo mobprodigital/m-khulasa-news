@@ -67,7 +67,7 @@ table {
   text-align: center;
 
   span {
-    font-size: 10px;
+    font-size: 9px;
     text-transform: capitalize;
   }
 }
@@ -81,13 +81,15 @@ table {
 
 .team-detail-container {
   img {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     margin: 0px 7px;
+    border: solid 2px #1055b7;
+    border-radius: 2pc;
   }
 
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   font-size: 12px;
   margin: 10px 0px 0px 0px;
 }
