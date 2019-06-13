@@ -4,13 +4,18 @@ import { NotFoundComponent } from './modules/shared/components/not-found/not-fou
 
 const routes: Routes = [
   {
+    path: 'wc',
+    loadChildren: "src/app/modules/wc-2019/wc-2019.module#Wc2019Module"
+  }, {
     path: '',
     loadChildren: 'src/app/modules/post/post.module#PostModule'
   },
+
   {
     path: '**',
     component: NotFoundComponent
   }
+
 ];
 
 @NgModule({

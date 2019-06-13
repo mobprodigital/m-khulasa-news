@@ -10,14 +10,17 @@
       date:'longDate' | uppercase}}</span>
       <span class="pl-3 "><img class="date-and-user-icon" src="assets/images/icons/person.png" alt=""> {{post.author}}
       </span>
-      
-      
-        <app-share-to-app [post]="post"></app-share-to-app>
-     
+
+
+      <app-share-to-app [post]="post"></app-share-to-app>
+
     </div>
+    <a href="https://jack.vnative.net/5cfa830eb6920d2ef4007ec8" target="_blank">
+      <img style="margin-bottom: 5px ; " class="w-100" src="assets/images/banner/telugubanner.jpg" alt="" srcset="">
+    </a>
     <img *ngIf="!ytVideo" class="w-100" [src]="post.featuredImage.original" [alt]="post.featuredImage.original">
-    
-    <div  class="single-post-content" #postContent [innerHTML]='post.content'></div>
+
+    <div class="single-post-content" #postContent [innerHTML]='post.content'></div>
     <iframe class="ytVideo" *ngIf="ytVideo" [src]="youTubeUrl" frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </article>
@@ -29,8 +32,8 @@
     </div>
   </div>
 
-  <app-ad-banner  [slotId]="'2303163047'"></app-ad-banner>
-  
+  <app-ad-banner [slotId]="'2303163047'"></app-ad-banner>
+
 
   <div>
     <h3 class="related-post">Related-Posts</h3>

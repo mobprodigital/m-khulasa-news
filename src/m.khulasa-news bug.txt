@@ -1,0 +1,4 @@
+localhost://4200/khulasa-news/pagmSKMhbU this is bug ;
+need replace category id from slug;
+http://localhost:4200/the-countrys-first-woman-martyr-only-gave-birth-at-the-age-of-27 in hindi url
+

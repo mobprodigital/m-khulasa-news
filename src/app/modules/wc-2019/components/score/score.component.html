@@ -1,0 +1,155 @@
+<div *ngIf="liveScore">
+  <div *ngFor="let ls of liveScore">
+    <h1 class="match-title">{{ls.round}} <span [hidden]="ls.tossWinTeamId==0">( Toss Won by {{ls.tossWinTeamName}} and
+        elected {{ls.elected}} )</span> </h1>
+    <div class="team-detail-container">
+      <div class="local-team">
+        <div>
+          <img src="{{ls.localTeam.image_path}}" alt="local team flag">
+          <h5>{{ls.localTeam.name}}</h5>
+        </div>
+
+        <div *ngFor="let run of ls.runs">
+          <h4 class="score" *ngIf="ls.localTeam.id!=run.teamId">Yet to bat</h4>
+          <h4 class="score" *ngIf="ls.localTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <br> ({{run.over}} Ovs)
+          </h4>
+        </div>
+
+
+      </div>
+      <div class="visitar-team">
+        <div *ngFor="let run of ls.runs">
+          <div>
+            <h4 class="score" *ngIf="ls.visitarTeam.id!=run.teamId">Yet to bat</h4>
+            <h4 class="score" *ngIf="ls.visitarTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <br> ({{run.over}}
+              Ovs)
+            </h4>
+          </div>
+        </div>
+        <div>
+          <img src="{{ls.visitarTeam.image_path}}" alt="visitar team flag">
+          <h5>{{ls.visitarTeam.name}}</h5>
+        </div>
+      </div>
+    </div>
+    <h4 class="match-note"> {{ls.note}} </h4>
+
+
+
+    <div class="score-card-button-container">
+
+      <button type="button" [ngClass]="{'score-card-button':scoreCard=='localTeam'}"
+        (click)="scoreCard='localTeam'">{{ls.localTeam.name}}</button>
+      <button type="button" [ngClass]="{'score-card-button':scoreCard=='visitarTeam'}"
+        (click)="scoreCard='visitarTeam'">{{ls.visitarTeam.name}}</button>
+    </div>
+    <div [ngSwitch]="scoreCard">
+      <div *ngSwitchCase="'localTeam'">
+        <h4 class="title">batting</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>R</th>
+              <th>B</th>
+              <th>4s</th>
+              <th>6s</th>
+              <th>S/R</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bt of ls.batting" [hidden]="bt.teamId!=ls.localTeamId">
+              <td><img src="{{bt.playerImagePath}}" alt=""> <span>{{bt.playerName}}</span></td>
+              <td>{{bt.score}}</td>
+              <td>{{bt.ball}}</td>
+              <td>{{bt.four}}</td>
+              <td>{{bt.six}}</td>
+              <td>{{bt.sRate}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4 class="title">bowing</h4>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Player </th>
+              <th>O</th>
+              <th>W/B</th>
+              <th>N/B</th>
+              <th>M/O</th>
+              <th>R</th>
+              <th>W</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bw of ls.bowling" [hidden]="bw.teamId!=ls.visitarTeamId">
+              <td><img src="{{bw.playerImage}}" alt=""> <span>{{bw.playarName}}</span></td>
+              <td>{{bw.overs}}</td>
+              <td>{{bw.wide}}</td>
+              <td>{{bw.noBall}}</td>
+              <td>{{bw.medians}}</td>
+              <td>{{bw.runs}}</td>
+              <td>{{bw.wickets}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngSwitchCase="'visitarTeam'">
+
+        <h4 class="title">batting</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>R</th>
+              <th>B</th>
+              <th>4s</th>
+              <th>6s</th>
+              <th>S/R</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bt of ls.batting" [hidden]="bt.teamId!=ls.visitarTeamId">
+              <td><img src="{{bt.playerImagePath}}" alt=""> <span>{{bt.playerName}}</span></td>
+              <td>{{bt.score}}</td>
+              <td>{{bt.ball}}</td>
+              <td>{{bt.four}}</td>
+              <td>{{bt.six}}</td>
+              <td>{{bt.sRate}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4 class="title">bowing</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Player </th>
+              <th>O</th>
+              <th>W/B</th>
+              <th>N/B</th>
+              <th>M/O</th>
+              <th>R</th>
+              <th>W</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bw of ls.bowling" [hidden]="bw.teamId!=ls.localTeamId">
+              <td><img src="{{bw.playerImage}}" alt=""> <span>{{bw.playarName}}</span></td>
+              <td>{{bw.overs}}</td>
+              <td>{{bw.wide}}</td>
+              <td>{{bw.noBall}}</td>
+              <td>{{bw.medians}}</td>
+              <td>{{bw.runs}}</td>
+              <td>{{bw.wickets}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- <button (click)="getAllFixtures()">Get All Fixtures</button> -->
