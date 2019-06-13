@@ -20,7 +20,30 @@ export class ScoreComponent implements OnInit {
   public liveScore: liveScoreModel[];
   public scoreCard: string = 'localTeam';
   public fixId: string;
- 
+  private timer: any;
+  public localTeamStatus: string;
+  public visitarTeamStatus: string;
+  public matchStaus: string[] = [
+    // 'NS',
+    // 'Aban',
+    // 'Cancl',
+    // 'Postp',
+    // 'Finished',
+    'Delayed',
+    'Dinner',
+    'Lunch',
+    'Innings Break',
+    '1st Innings',
+    '2nd Innings',
+    '3rd Innings',
+    '4th Innings',
+    // 'Stump Day 1',
+    // 'Stump Day 2',
+    // 'Stump Day 3',
+    // 'Stump Day 4',
+    'Tea Break',
+    'Int.',
+  ];
   constructor(private httpService: Wc2019Service, private activatedRouter: ActivatedRoute, private route: Router) {
     route.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
@@ -54,7 +77,21 @@ export class ScoreComponent implements OnInit {
       this.httpService.getLiveScore(params)
         .then((data: any[]) => {
           this.liveScore = this.parseLiveScore(data);
+          if (this.liveScore[0].status === "Finished" || this.liveScore[0].status === "NS" || this.liveScore[0].status === "Aban" || this.liveScore[0].status === 'Cancl') {
+            if (this.timer) {
+              window.clearTimeout(this.timer)
+            }
+          }
+          if (this.liveScore[0].runs.length == 0) {
+            this.localTeamStatus = "Yet to bat";
+            this.visitarTeamStatus = "Yet to bat";
+          }
+          else if (this.liveScore[0].runs.length == 1) {
+            this.visitarTeamStatus = "Yet to bat";
+          }
+          {
 
+          }
         })
         .catch(err => { console.log(err) });
     }
@@ -159,12 +196,13 @@ export class ScoreComponent implements OnInit {
         return _runs
       })
     }
-    return runs
+    return runs;
+
   }
 
   ngOnInit() {
     this.getLiveScore();
-    setInterval(() => { this.getLiveScore(); }, 10000)
+    this.timer = setInterval(() => { this.getLiveScore(); }, 10000)
   }
 }
 
