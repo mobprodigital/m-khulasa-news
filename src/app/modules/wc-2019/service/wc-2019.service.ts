@@ -9,6 +9,7 @@ export class Wc2019Service {
 
   private baseurl = 'https://cricapi.khulasa-news.com/cricketApi/';
 
+
   constructor(private httpClient: HttpClient) {
 
   }
@@ -95,11 +96,6 @@ export class Wc2019Service {
       this.getFixtures().then(fixs => {
 
         const liveStatusArr: string[] = [
-          // 'NS',
-          // 'Aban',
-          // 'Cancl',
-          // 'Postp',
-          // 'Finished',
           'Delayed',
           'Dinner',
           'Lunch',
@@ -108,10 +104,8 @@ export class Wc2019Service {
           '2nd Innings',
           '3rd Innings',
           '4th Innings',
-          // 'Stump Day 1',
-          // 'Stump Day 2',
-          // 'Stump Day 3',
-          // 'Stump Day 4',
+          'ns',
+          'ns.',
           'Tea Break',
           'Int',
           'Int.',
@@ -119,8 +113,7 @@ export class Wc2019Service {
           'postp.',
         ];
         const abanStatusArr = [
-          'ns',
-          'ns.',
+
           'aban',
           'aban.',
           'cancl',

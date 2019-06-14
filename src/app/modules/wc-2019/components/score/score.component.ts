@@ -138,9 +138,10 @@ export class ScoreComponent implements OnInit {
         if (_liveScore.localTeam.id == _liveScore.tossWinTeamId) {
           _liveScore.tossWinTeamName = _liveScore.localTeam.name;
         }
-        else {
+        else if (_liveScore.visitarTeam.id == _liveScore.tossWinTeamId) {
           _liveScore.tossWinTeamName = _liveScore.visitarTeam.name;
         }
+        
         return _liveScore;
       })
     }
