@@ -1,7 +1,7 @@
 <div style="margin-top: 10px;" class="p-lr" *ngIf="fixList && fixList.length > 0">
   <section *ngFor="let fix of fixList" class="lc-card-wrap">
     <div class="lc-score-wrap"><a class="lc-score-link" [routerLink]="['full-scorecard', fix.id]">
-        <div class="lc-note"> <span>{{fix.round}} | {{(fix.note.length ? fix.note : (fix.status === 'NS' ? 'Match Not Started' : 'Not started'))}}</span></div>
+        <div class="lc-note"> <span>{{fix.round}} | {{(fix.note.length ? fix.note : (fix.status === 'NS' ? 'Match Not Started' : ''))}}</span></div>
         <section class="fix-t-wrap">
           <section class="lc-team">
             <div class="lc-tm-info"> <span class="flag-wrap">
@@ -9,7 +9,7 @@
               <span class="t-name"> {{fix.localteam.code}}</span>
             </div>
             <ng-container *ngIf="fix.runs && fix.runs.length > 0;else noRunL">
-              <div>{{fix?.runs[0]?.score}}/{{fix?.runs[0]?.wickets}} ({{fix?.runs[0]?.overs}})</div>
+              <div>{{getTeamRun(fix.localteam_id, fix.id)}}</div>
             </ng-container>
             <ng-template #noRunL>
               <div>&nbsp;</div>
@@ -18,7 +18,7 @@
           <!--!--lc-team local---->
           <section class="lc-team">
             <ng-container *ngIf="fix.runs && fix.runs.length > 0;else noRunV">
-              <div>{{fix?.runs[1]?.score}}/{{fix?.runs[1]?.wickets}} ({{fix?.runs[1]?.overs}})</div>
+              <div>{{getTeamRun(fix.visitorteam_id, fix.id)}}</div>
             </ng-container>
             <ng-template #noRunV>
               <div>&nbsp;</div>

@@ -13,25 +13,25 @@
           <img src="{{ls.localTeam.image_path}}" alt="local team flag">
           <h5 class="team-name">{{ls.localTeam.name}}</h5>
         </div>
-        <h4 *ngIf="localTeamStatus" class="score">{{localTeamStatus}}</h4>
-        <div *ngFor="let run of ls.runs">
-          <h4 class="score" *ngIf="ls.localTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <span> ({{run.over}}
-              Ovs)</span>
+        <!-- <h4 *ngIf="localTeamStatus" class="score">{{localTeamStatus}}</h4> -->
+        <!-- <div *ngFor="let run of ls.runs"> -->
+        <div>
+          <h4 class="score">
+              {{getTeamRun(ls.localTeamId)}}
           </h4>
 
         </div>
       </div>
       <div class="visitar-team">
 
-        <div *ngFor="let run of ls.runs">
-          <h4 class="score" *ngIf="ls.visitarTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <span> ({{run.over}}
-              Ovs)</span>
+        <!-- <div *ngFor="let run of ls.runs"> -->
+        <div >
+          <h4 class="score">
+              {{getTeamRun(ls.visitarTeamId)}}
           </h4>
 
-
-
         </div>
-        <h4 class="score">{{visitarTeamStatus}}</h4>
+        <!-- <h4 class="score">{{visitarTeamStatus}}</h4> -->
         <div>
           <img src="{{ls.visitarTeam.image_path}}" alt="visitar team flag">
           <h5 class="team-name">{{ls.visitarTeam.name}}</h5>
