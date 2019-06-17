@@ -141,8 +141,8 @@ export class HeaderComponent implements OnInit {
         if (run) {
           score = '';
           score += run.score ? run.score.toString() : '0';
-          score += (run.wickets ? '/' + run.wickets.toString() : '0');
-          score += (run.overs ? '(' + run.overs + ')' : '0');
+          score += (run.wickets ? '/' + run.wickets.toString() : '/0');
+          score += (run.overs ? '(' + run.overs + ')' : '(0)');
         }
       }
     }
