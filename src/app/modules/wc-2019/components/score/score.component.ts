@@ -141,6 +141,7 @@ export class ScoreComponent implements OnInit {
         _liveScore.note = f.note;
         _liveScore.tossWinTeamId = f.toss_won_team_id;
         _liveScore.elected = f.elected;
+        _liveScore.fixture_id = parseInt(f.id, 10);
         _liveScore.status = f.status;
         _liveScore.localTeam = JSON.parse(f.localteam);
         _liveScore.visitarTeam = JSON.parse(f.visitorteam);
@@ -216,6 +217,25 @@ export class ScoreComponent implements OnInit {
     }
     return runs;
 
+  }
+
+
+  public getTeamRun(teamId: string) {
+    console.log('team id : ', teamId);
+    const currentFix: liveScoreModel = this.liveScore[0];
+    let score = '0/0 (0)';
+    if (currentFix) {
+      if (currentFix.runs && currentFix.runs.length > 0) {
+        const run = currentFix.runs.find(r => r.teamId === parseInt(teamId, 10));
+        if (run) {
+          score = '';
+          score += run.score ? run.score.toString() : '0';
+          score += (run.wicket ? '/' + run.wicket.toString() : '0');
+          score += (run.over ? '(' + run.over + ')' : '0');
+        }
+      }
+    }
+    return score;
   }
 
   ngOnInit() {

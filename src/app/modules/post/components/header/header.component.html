@@ -89,12 +89,17 @@
     <section class="lf-wrap">
       <aside class="lf-single" *ngFor="let lFix of liveFixtures">
         <a class="lf-link" [routerLink]="['/world-cup/full-scorecard', lFix.id]">
-          <header class="lf-header">{{lFix.localteam.code}} VS {{lFix.visitorteam.code}} | {{(lFix.note.length ? lFix.note : (lFix.status === 'NS' ? 'Match not stated' : ''))}}</header>
+          <header class="lf-header">{{lFix.localteam.code}} VS {{lFix.visitorteam.code}}
+            {{(lFix.note.length ? lFix.note : (lFix.status === 'NS' ? '| Match not stated' : ''))}}</header>
           <div class="lf-sc-wrap" *ngIf="lFix.runs && lFix.runs.length > 0">
             <div class="lf-sc-single"><span>{{lFix.localteam.code}}</span>
-              <span>{{lFix?.runs[0]?.score}}/{{lFix?.runs[0]?.wickets}} ({{lFix?.runs[0]?.overs}})</span> </div>
+              <!-- <span>{{lFix?.runs[0]?.score || 0}}/{{lFix?.runs[0]?.wickets || 0}} ({{lFix?.runs[0]?.overs || 0}})</span> </div> -->
+              <span>{{getTeamRun(lFix.localteam_id, lFix.id)}}</span>
+            </div>
             <div class="lf-sc-single"><span>{{lFix.visitorteam.code}}</span>
-              <span>{{lFix?.runs[1]?.score}}/{{lFix?.runs[1]?.wickets}} ({{lFix?.runs[1]?.overs}})</span> </div>
+              <!-- <span>{{lFix?.runs[1]?.score || 0}}/{{lFix?.runs[1]?.wickets || 0}} ({{lFix?.runs[1]?.overs || 0}})</span> </div> -->
+              <span>{{getTeamRun(lFix.visitorteam_id, lFix.id)}}</span>
+            </div>
           </div>
         </a>
       </aside>

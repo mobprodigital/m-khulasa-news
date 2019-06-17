@@ -132,4 +132,21 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  public getTeamRun(teamId: number, fixId: number) {
+    const currentFix: FixtureModel = this.liveFixtures.find(f => f.id === fixId);
+    let score = '0/0 (0)';
+    if (currentFix) {
+      if (currentFix.runs && currentFix.runs.length > 0) {
+        const run = currentFix.runs.find(r => r.team_id === teamId);
+        if (run) {
+          score = '';
+          score += run.score ? run.score.toString() : '0';
+          score += (run.wickets ? '/' + run.wickets.toString() : '0');
+          score += (run.overs ? '(' + run.overs + ')' : '0');
+        }
+      }
+    }
+    return score;
+  }
+
 }
