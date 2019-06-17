@@ -54,9 +54,16 @@ section.lc-card-wrap {
       }
     }
   }
-  time.fix-date {
-    text-align: center;
-    display: block;
-    color: #848484;
+  footer.lc-bottom {
+    display: flex;
+    justify-content: space-between;
+
+    time.fix-date {
+      text-align: center;
+      display: block;
+      color: #848484;
+      font-size: 13px;
+    }
+    
   }
 }

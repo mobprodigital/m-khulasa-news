@@ -35,6 +35,14 @@ export class FixturesListComponent implements OnInit {
     return score;
   }
 
+  public isPastMatch(ifx: FixtureModel): boolean {
+    if (ifx) {
+      return ifx.starting_at < new Date();
+    } else {
+      return false;
+    }
+  }
+
   ngOnInit() {
   }
 

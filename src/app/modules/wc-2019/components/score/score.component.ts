@@ -209,7 +209,7 @@ export class ScoreComponent implements OnInit {
 
 
   public getTeamRun(teamId: string) {
-    console.log('team id : ', teamId);
+    
     const currentFix: liveScoreModel = this.liveScore[0];
     let score = '0/0 (0)';
     if (currentFix) {

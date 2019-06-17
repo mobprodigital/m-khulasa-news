@@ -151,7 +151,7 @@ export class Wc2019Service {
         }
 
         fix.id = parseInt(d.id, 10);
-        fix.live = d.live === true;
+        fix.live = parseInt(d.live, 10) === 1;
         fix.localteam = null;
         if (d.localteam) {
           fix.localteam = this.parseTeamModel(JSON.parse(d.localteam));

@@ -23,11 +23,12 @@ body {
   justify-content: space-between;
 }
 
-
 .align-items-center {
   align-items: center;
 }
-
+.invisible {
+  visibility: hidden !important;
+}
 
 .w-100 {
   max-width: 100%;
@@ -53,7 +54,7 @@ body {
 }
 
 .p-lr {
-  padding: 0px 10px
+  padding: 0px 10px;
 }
 
 .scroll {
@@ -93,7 +94,7 @@ body {
 }
 
 .portal {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -101,7 +102,7 @@ body {
   .single-post-content {
     color: #3d3d3d;
     text-align: justify;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-weight: lighter;
 
     img {
@@ -119,10 +120,7 @@ body {
       width: 100%;
       height: auto;
     }
-
   }
-
-
 
   .tablepress-table-description {
     color: white;
@@ -151,7 +149,6 @@ body {
 
     tbody {
       td {
-
         font-size: 12px;
         padding: 3px 10px;
         text-align: center;
@@ -171,9 +168,6 @@ body {
         padding: 5px;
       }
     }
-
-
-
   }
 
   br {

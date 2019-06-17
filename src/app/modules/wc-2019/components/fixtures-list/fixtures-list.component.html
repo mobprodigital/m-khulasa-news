@@ -1,7 +1,9 @@
 <div style="margin-top: 10px;" class="p-lr" *ngIf="fixList && fixList.length > 0">
   <section *ngFor="let fix of fixList" class="lc-card-wrap">
-    <div class="lc-score-wrap"><a class="lc-score-link" [routerLink]="['full-scorecard', fix.id]">
-        <div class="lc-note"> <span>{{fix.round}} | {{(fix.note.length ? fix.note : (fix.status === 'NS' ? 'Match Not Started' : ''))}}</span></div>
+    <div class="lc-score-wrap">
+      <a class="lc-score-link" [routerLink]="(isPastMatch(fix) ? ['full-scorecard', fix.id] : null)">
+        <div class="lc-note"> <span>{{fix.round}} |
+            {{(fix.note.length ? fix.note : (fix.status === 'NS' ? 'Match Not Started' : ''))}}</span></div>
         <section class="fix-t-wrap">
           <section class="lc-team">
             <div class="lc-tm-info"> <span class="flag-wrap">
@@ -34,7 +36,10 @@
           <!--lc-team visiter-->
         </section>
         <!--fix-t-wrap-->
-        <time class="fix-date">{{fix.starting_at | date:'medium'}}</time>
+        <footer class="lc-bottom">
+          <time class="fix-date">{{fix.starting_at | date:'medium'}}</time>
+          <button [ngClass]="{'invisible' : !isPastMatch(fix) }" class="vfsc-btn">View Full Scorecard</button>
+        </footer>
         <!--fix-date-->
       </a></div>
   </section>
