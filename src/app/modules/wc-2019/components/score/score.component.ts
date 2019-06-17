@@ -73,6 +73,7 @@ export class ScoreComponent implements OnInit {
   // }
 
   public getLiveScore() {
+  
     // let date = new Date()
     // let liveMatch: fixtureModel[] = this.fixturesList.filter(f => (parseInt(f.live) == 1) && (this.matchStaus.indexOf(f.status) > -1) && (f.date <= date));
     // let liveMatchFixtureId = liveMatch.map(lm => lm.id);
@@ -91,9 +92,20 @@ export class ScoreComponent implements OnInit {
             this.localTeamStatus = "Yet to bat";
             this.visitarTeamStatus = "Yet to bat";
           }
-          else if (this.liveScore[0].runs.length == 1) {
-            this.visitarTeamStatus = "Yet to bat";
+          else if (this.liveScore[0].runs.length == 2) {
+            this.localTeamStatus = "";
+            this.visitarTeamStatus = "";
           }
+          else {
+            if (this.liveScore[0].runs[0].teamId == this.liveScore[0].visitarTeam.id) {
+              this.localTeamStatus = "Yet to bat";
+
+            }
+            if (this.liveScore[0].runs[0].teamId == this.liveScore[0].localTeam.id) {
+              this.visitarTeamStatus = "Yet to bat";
+            }
+          }
+
           {
 
           }
@@ -142,7 +154,7 @@ export class ScoreComponent implements OnInit {
         else if (_liveScore.visitarTeam.id == _liveScore.tossWinTeamId) {
           _liveScore.tossWinTeamName = _liveScore.visitarTeam.name;
         }
-        
+
         return _liveScore;
       })
     }
