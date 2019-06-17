@@ -11,7 +11,6 @@ export class liveScoreModel {
     tossWinTeamName: string;
     elected: string;
     status: string;
-
     localTeam: any;
     visitarTeam: any;
     batting: battingModel[];
