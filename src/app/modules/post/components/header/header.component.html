@@ -90,7 +90,7 @@
       <aside class="lf-single" *ngFor="let lFix of liveFixtures">
         <a class="lf-link" [routerLink]="['/world-cup/full-scorecard', lFix.id]">
           <header class="lf-header">{{lFix.localteam.code}} VS {{lFix.visitorteam.code}}
-            {{(lFix.note.length ? lFix.note : (lFix.status === 'NS' ? '| Match not stated' : ''))}}</header>
+            {{(lFix.note.length ? lFix.note : (lFix.status === 'NS' ? '| Match not started' : ''))}}</header>
           <div class="lf-sc-wrap" *ngIf="lFix.runs && lFix.runs.length > 0">
             <div class="lf-sc-single"><span>{{lFix.localteam.code}}</span>
               <!-- <span>{{lFix?.runs[0]?.score || 0}}/{{lFix?.runs[0]?.wickets || 0}} ({{lFix?.runs[0]?.overs || 0}})</span> </div> -->

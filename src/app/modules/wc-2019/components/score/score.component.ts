@@ -230,8 +230,8 @@ export class ScoreComponent implements OnInit {
         if (run) {
           score = '';
           score += run.score ? run.score.toString() : '0';
-          score += (run.wicket ? '/' + run.wicket.toString() : '0');
-          score += (run.over ? '(' + run.over + ')' : '0');
+          score += (run.wicket ? '/' + run.wicket.toString() : '/0');
+          score += (run.over ? '(' + run.over + ')' : '(0)');
         }
       }
     }
