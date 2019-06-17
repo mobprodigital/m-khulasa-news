@@ -1,50 +1,90 @@
 <div class="p-lr" *ngIf="liveScore">
   <div style="margin-top: 10px;" *ngFor="let ls of liveScore">
-    <h1 class="match-title">{{ls.round}}  <span *ngIf="(ls.tossWinTeamId>0); else showNote">| ( Toss Won by {{ls.tossWinTeamName}} and
-        elected {{ls.elected}} )</span> 
-        <ng-template #showNote>
-          | {{ls.note.length ? ls.note : (ls.status === 'NS' ? 'Match not started' : '') }}
-        </ng-template>
-      
-      </h1>
-    <div class="team-detail-container">
-      <div class="local-team">
-        <div>
-          <img src="{{ls.localTeam.image_path}}" alt="local team flag">
-          <h5 class="team-name">{{ls.localTeam.name}}</h5>
-        </div>
-        <h4 *ngIf="localTeamStatus" class="score">{{localTeamStatus}}</h4>
-        <div *ngFor="let run of ls.runs">
-          <h4 class="score" *ngIf="ls.localTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <span> ({{run.over}}
-              Ovs)</span>
-          </h4>
+    <h1 class="match-title">{{ls.round}} <span *ngIf="(ls.tossWinTeamId>0); else showNote">| ( Toss Won by
+        {{ls.tossWinTeamName}} and
+        elected {{ls.elected}} )</span>
+      <ng-template #showNote>
+        | {{ls.note.length ? ls.note : (ls.status === 'NS' ? 'Match not started' : '') }}
+      </ng-template>
+    </h1>
 
+
+    <div>
+      <div class="team-detail-container" *ngIf="ls.batting[0].teamId==ls.localTeam.id">
+        <div class="local-team">
+          <div>
+            <img src="{{ls.localTeam.image_path}}" alt="local team flag">
+            <h5 class="team-name">{{ls.localTeam.name}}</h5>
+          </div>
+          <h4 *ngIf="localTeamStatus" class="score">{{localTeamStatus}}</h4>
+          <div *ngFor="let run of ls.runs">
+            <h4 class="score" *ngIf="ls.localTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <span> ({{run.over}}
+                Ovs)</span>
+            </h4>
+
+          </div>
+        </div>
+        <div class="visitar-team">
+          <div *ngFor="let run of ls.runs">
+            <h4 class="score" *ngIf="ls.visitarTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <span> ({{run.over}}
+                Ovs)</span>
+            </h4>
+          </div>
+          <h4 *ngIf="visitarTeamStatus" class="score">{{visitarTeamStatus}}</h4>
+          <div>
+            <img src="{{ls.visitarTeam.image_path}}" alt="visitar team flag">
+            <h5 class="team-name">{{ls.visitarTeam.name}}</h5>
+          </div>
         </div>
       </div>
-      <div class="visitar-team">
+      <div class="team-detail-container" *ngIf="ls.batting[0].teamId==ls.visitarTeam.id">
 
-        <div *ngFor="let run of ls.runs">
-          <h4 class="score" *ngIf="ls.visitarTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <span> ({{run.over}}
-              Ovs)</span>
-          </h4>
-
-
-
+        <div class="visitar-team">
+          <div>
+            <img src="{{ls.visitarTeam.image_path}}" alt="visitar team flag">
+            <h5 class="team-name">{{ls.visitarTeam.name}}</h5>
+          </div>
+          <h4 *ngIf="visitarTeamStatus" class="score">{{visitarTeamStatus}}</h4>
+          <div *ngFor="let run of ls.runs">
+            <h4 class="score" *ngIf="ls.visitarTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <span> ({{run.over}}
+                Ovs)</span>
+            </h4>
+          </div>
         </div>
-        <h4 class="score">{{visitarTeamStatus}}</h4>
-        <div>
-          <img src="{{ls.visitarTeam.image_path}}" alt="visitar team flag">
-          <h5 class="team-name">{{ls.visitarTeam.name}}</h5>
+        <div class="local-team">
+          <div *ngFor="let run of ls.runs">
+            <h4 class="score" *ngIf="ls.localTeam.id==run.teamId">{{run.score}}/ {{run.wicket}} <span> ({{run.over}}
+                Ovs)</span>
+            </h4>
+
+          </div>
+          <h4 *ngIf="localTeamStatus" class="score">{{localTeamStatus}}</h4>
+          <div>
+            <img src="{{ls.localTeam.image_path}}" alt="local team flag">
+            <h5 class="team-name">{{ls.localTeam.name}}</h5>
+          </div>
+
         </div>
       </div>
     </div>
+
     <h4 class="match-note"> {{ls.note}} </h4>
-    <div class="score-card-button-container">
+
+    <div class="score-card-button-container" *ngIf="ls.batting[0].teamId==ls.localTeam.id">
       <button type="button" [ngClass]="{'score-card-button':scoreCard=='localTeam'}"
         (click)="scoreCard='localTeam'">{{ls.localTeam.name}}</button>
       <button type="button" [ngClass]="{'score-card-button':scoreCard=='visitarTeam'}"
         (click)="scoreCard='visitarTeam'">{{ls.visitarTeam.name}}</button>
     </div>
+
+    <div class="score-card-button-container" *ngIf="ls.batting[0].teamId==ls.visitarTeam.id">
+      <button type="button" [ngClass]="{'score-card-button':scoreCard=='visitarTeam'}"
+        (click)="scoreCard='localTeam'">{{ls.visitarTeam.name}}</button>
+      <button type="button" [ngClass]="{'score-card-button':scoreCard=='localTeam'}"
+        (click)="scoreCard='visitarTeam'">{{ls.localTeam.name}}</button>
+    </div>
+
+
     <div [ngSwitch]="scoreCard">
       <div *ngSwitchCase="'localTeam'">
 
