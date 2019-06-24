@@ -91,16 +91,34 @@
         <a class="lf-link" [routerLink]="['/world-cup/full-scorecard', lFix.id]">
           <header class="lf-header">{{lFix.localteam.code}} VS {{lFix.visitorteam.code}}
             {{(lFix.note.length ? lFix.note : (lFix.status === 'NS' ? '| Match not started' : ''))}}</header>
-          <div class="lf-sc-wrap" *ngIf="lFix.runs && lFix.runs.length > 0">
-            <div class="lf-sc-single"><span>{{lFix.localteam.code}}</span>
-              <!-- <span>{{lFix?.runs[0]?.score || 0}}/{{lFix?.runs[0]?.wickets || 0}} ({{lFix?.runs[0]?.overs || 0}})</span> </div> -->
-              <span>{{getTeamRun(lFix.localteam_id, lFix.id)}}</span>
-            </div>
-            <div class="lf-sc-single"><span>{{lFix.visitorteam.code}}</span>
-              <!-- <span>{{lFix?.runs[1]?.score || 0}}/{{lFix?.runs[1]?.wickets || 0}} ({{lFix?.runs[1]?.overs || 0}})</span> </div> -->
-              <span>{{getTeamRun(lFix.visitorteam_id, lFix.id)}}</span>
+          <div *ngIf="lFix.batting.length>0 && lFix.batting[0].team_id==lFix.localteam_id">
+            <div class="lf-sc-wrap" *ngIf="lFix.runs && lFix.runs.length > 0">
+              <div class="lf-sc-single"><span>{{lFix.localteam.code}}</span>
+                <!-- <span>{{lFix?.runs[0]?.score || 0}}/{{lFix?.runs[0]?.wickets || 0}} ({{lFix?.runs[0]?.overs || 0}})</span> </div> -->
+                <span>{{getTeamRun(lFix.localteam_id, lFix.id)}}</span>
+              </div>
+              <div class="lf-sc-single"><span>{{lFix.visitorteam.code}}</span>
+                <!-- <span>{{lFix?.runs[1]?.score || 0}}/{{lFix?.runs[1]?.wickets || 0}} ({{lFix?.runs[1]?.overs || 0}})</span> </div> -->
+                <span>{{getTeamRun(lFix.visitorteam_id, lFix.id)}}</span>
+              </div>
             </div>
           </div>
+          <div *ngIf="lFix.batting.length>0 && lFix.batting[0].team_id==lFix.visitorteam_id">
+
+            <div class="lf-sc-wrap" *ngIf="lFix.runs && lFix.runs.length > 0">
+              <div class="lf-sc-single"><span>{{lFix.visitorteam.code}}</span>
+                <!-- <span>{{lFix?.runs[1]?.score || 0}}/{{lFix?.runs[1]?.wickets || 0}} ({{lFix?.runs[1]?.overs || 0}})</span> </div> -->
+                <span>{{getTeamRun(lFix.visitorteam_id, lFix.id)}}</span>
+              </div>
+              <div class="lf-sc-single"><span>{{lFix.localteam.code}}</span>
+                <!-- <span>{{lFix?.runs[0]?.score || 0}}/{{lFix?.runs[0]?.wickets || 0}} ({{lFix?.runs[0]?.overs || 0}})</span> </div> -->
+                <span>{{getTeamRun(lFix.localteam_id, lFix.id)}}</span>
+              </div>
+            </div>
+          </div>
+
+
+
         </a>
       </aside>
     </section>

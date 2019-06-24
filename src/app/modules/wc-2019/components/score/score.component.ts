@@ -20,10 +20,10 @@ export class ScoreComponent implements OnInit {
   public fixturesList: fixtureModel[] = [];
   public liveScore: liveScoreModel[];
   public scoreCard: string = 'localTeam';
+  public scoreCard1: string = 'visitarTeam';
   public fixId: string;
   private timer: any;
   private routerSubscribe: Subscription;
-
   public localTeamStatus: string;
   public visitarTeamStatus: string;
   public matchStaus: string[] = [
@@ -51,8 +51,9 @@ export class ScoreComponent implements OnInit {
     this.routerSubscribe = route.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
         this.fixId = activatedRouter.snapshot.paramMap.get('fixid');
+        this.scoreCard = "localTeam"
         this.getLiveScore();
-        this.timer = setInterval(() => { this.getLiveScore(); }, 10000);
+        this.timer = setInterval(() => { this.getLiveScore(); }, 20000);
       }
     })
   }
@@ -73,7 +74,7 @@ export class ScoreComponent implements OnInit {
   // }
 
   public getLiveScore() {
-  
+
     // let date = new Date()
     // let liveMatch: fixtureModel[] = this.fixturesList.filter(f => (parseInt(f.live) == 1) && (this.matchStaus.indexOf(f.status) > -1) && (f.date <= date));
     // let liveMatchFixtureId = liveMatch.map(lm => lm.id);
@@ -83,36 +84,19 @@ export class ScoreComponent implements OnInit {
       this.httpService.getLiveScore(params)
         .then((data: any[]) => {
           this.liveScore = this.parseLiveScore(data);
+
+          if (this.liveScore[0].batting.length > 0 && this.liveScore[0].batting[0].teamId == this.liveScore[0].visitarTeam.id) {
+            this.scoreCard = "visitarTeam"
+
+          }
           if (this.liveScore[0].status === "Finished" || this.liveScore[0].status === "NS" || this.liveScore[0].status === "Aban" || this.liveScore[0].status === 'Cancl') {
             if (this.timer) {
               window.clearTimeout(this.timer)
             }
           }
-          if (this.liveScore[0].runs.length == 0) {
-            this.localTeamStatus = "Yet to bat";
-            this.visitarTeamStatus = "Yet to bat";
-          }
-          else if (this.liveScore[0].runs.length == 2) {
-            this.localTeamStatus = "";
-            this.visitarTeamStatus = "";
-          }
-          else {
-            if (this.liveScore[0].runs[0].teamId == this.liveScore[0].visitarTeam.id) {
-              this.localTeamStatus = "Yet to bat";
-
-            }
-            if (this.liveScore[0].runs[0].teamId == this.liveScore[0].localTeam.id) {
-              this.visitarTeamStatus = "Yet to bat";
-            }
-          }
-
-          {
-
-          }
         })
         .catch(err => { console.log(err) });
     }
-
   }
 
   public parseFixtures(fixtures: any[]) {
@@ -169,7 +153,12 @@ export class ScoreComponent implements OnInit {
         _batting.teamId = bt.team_id
         _batting.playerId = bt.player_id;
         _batting.playerName = bt.playerName;
-        _batting.playerImagePath = bt.playerImage || 'assets/images/news/default.jpg';
+        if (bt.playerImage == 'https://cdn.sportmonks.com') {
+          _batting.playerImagePath = 'assets/images/news/default.jpg';
+        }
+        else {
+          _batting.playerImagePath = bt.playerImage || 'assets/images/news/default.jpg';
+        }
         _batting.ball = bt.ball;
         _batting.score = bt.score;
         _batting.sRate = bt.rate;
@@ -195,7 +184,12 @@ export class ScoreComponent implements OnInit {
         _bowling.wide = bw.wide;
         _bowling.noBall = bw.noball;
         _bowling.playarName = bw.playerName;
-        _bowling.playerImage = bw.playerImage || 'assets/images/news/default.jpg';
+        if (bw.playerImage == 'https://cdn.sportmonks.com') {
+          _bowling.playerImage = 'assets/images/news/default.jpg';
+        }
+        else {
+          _bowling.playerImage = bw.playerImage || 'assets/images/news/default.jpg';
+        }
         return _bowling;
       })
     }
@@ -216,12 +210,9 @@ export class ScoreComponent implements OnInit {
       })
     }
     return runs;
-
   }
 
-
   public getTeamRun(teamId: string) {
-    
     const currentFix: liveScoreModel = this.liveScore[0];
     let score = '0/0 (0)';
     if (currentFix) {

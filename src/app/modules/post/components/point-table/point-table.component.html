@@ -1,5 +1,6 @@
-<div class="table-container">
+<app-loader *ngIf="loader" [count]="10"></app-loader>
 
+<div *ngIf="pointTableData && pointTableData.length>0" class="table-container">
   <table>
     <thead>
       <tr>
@@ -10,123 +11,21 @@
         <th>L</th>
         <th>NRR</th>
         <th>Pts</th>
-
       </tr>
     </thead>
     <tbody>
-
-
-
-      <!-- AUS -->
-      <tr class="point_row">
-        <td>1</td>
-        <td><img src="assets/images/world_cup/aus.png" alt="">AUS</td>
-        <td>5</td>
-        <td>4</td>
-        <td>1</td>
-        <td>+0.812</td>
-        <td>8</td>
+      <tr class="point_row" *ngFor="let pt of pointTableData;let i = index">
+        <td>{{i+1}}</td>
+        <td> <img src="{{pt.teamImage}}" alt=""> &nbsp;&nbsp;{{pt.teamCode}}</td>
+        <td>{{pt.playedMatch}}</td>
+        <td>{{pt.wonMatch}}</td>
+        <td>{{pt.lostMatch}}</td>
+        <td>{{pt.nrr}}</td>
+        <td>{{pt.points}}</td>
       </tr>
-
-      <!-- NZ -->
-      <tr class="point_row">
-        <td>2</td>
-        <td><img src="assets/images/world_cup/nz.png" alt="">NZ</td>
-        <td>4</td>
-        <td>3</td>
-        <td>0</td>
-        <td>+2.163</td>
-        <td>7</td>
-      </tr>
-      <!-- IND -->
-      <tr class="point_row">
-        <td>3</td>
-        <td><img src="assets/images/world_cup/ind.png" alt="">IND</td>
-        <td>4</td>
-        <td>3</td>
-        <td>0</td>
-        <td>+1.029</td>
-        <td>7</td>
-      </tr>
-
-      <!-- ENG -->
-      <tr class="point_row">
-        <td>4</td>
-        <td><img src="assets/images/world_cup/eng.png" alt=""> ENG</td>
-        <td>4</td>
-        <td>3</td>
-        <td>1</td>
-        <td>+1.557</td>
-        <td>6</td>
-      </tr>
-
-      <!-- SL -->
-      <tr class="point_row">
-        <td>5</td>
-        <td><img src="assets/images/world_cup/sl.png" alt="">SL</td>
-        <td>5</td>
-        <td>1</td>
-        <td>2</td>
-        <td>-1.778</td>
-        <td>4</td>
-      </tr>
-
-      <!-- WI -->
-      <tr class="point_row">
-        <td>6</td>
-        <td><img src="assets/images/world_cup/wi.png" alt="">WI</td>
-        <td>4</td>
-        <td>1</td>
-        <td>2</td>
-        <td>+0.666</td>
-        <td>3</td>
-      </tr>
-      <!-- SA -->
-      <tr class="point_row">
-        <td>7</td>
-        <td><img src="assets/images/world_cup/sa.png" alt="">SA</td>
-        <td>5</td>
-        <td>1</td>
-        <td>3</td>
-        <td>-0.208</td>
-        <td>3</td>
-      </tr>
-
-      <!-- BAN -->
-      <tr class="point_row">
-        <td>8</td>
-        <td><img src="assets/images/world_cup/ban.png" alt="">BAN</td>
-        <td>4</td>
-        <td>1</td>
-        <td>2</td>
-        <td>-0.714</td>
-        <td>3</td>
-      </tr>
-
-      <!-- PAK -->
-      <tr class="point_row">
-        <td>9</td>
-        <td><img src="assets/images/world_cup/pak.png" alt="">PAK</td>
-        <td>5</td>
-        <td>1</td>
-        <td>3</td>
-        <td>-1.933</td>
-        <td>3</td>
-      </tr>
-
-
-
-      <!-- AFG -->
-      <tr class="point_row">
-        <td>10</td>
-        <td><img src="assets/images/world_cup/afg.png" alt="">AFG</td>
-        <td>4</td>
-        <td>0</td>
-        <td>4</td>
-        <td>-1.638</td>
-        <td>0</td>
-      </tr>
-
     </tbody>
   </table>
+</div>
+<div *ngIf="errMsg" class="error-msg-box">
+  <div class="error-msg ">{{errMsg}}</div>
 </div>

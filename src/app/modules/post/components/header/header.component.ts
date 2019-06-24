@@ -21,6 +21,8 @@ export class HeaderComponent implements OnInit {
   public langBtn: boolean = true;
   public liHome: string;
   public lang: string;
+  public localTeam;
+  public visitarTeam;
 
   public wcCatId: number = 32448;
   public liveScore: string;
@@ -31,6 +33,7 @@ export class HeaderComponent implements OnInit {
 
   public liveFixtures: FixtureModel[] = [];
   private liveFixTimer: any;
+  public timer;
 
   @ViewChild('nav') nav: ElementRef;
 
@@ -52,9 +55,10 @@ export class HeaderComponent implements OnInit {
 
     this.getLiveFixes();
 
-    setTimeout(() => {
+    this.timer = setInterval(() => {
       this.getLiveFixes();
-    }, 50000);
+
+    }, 20000);
 
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -128,6 +132,11 @@ export class HeaderComponent implements OnInit {
   public getLiveFixes() {
     this.wcCupService.getLiveFixtures().then(liveFix => {
       this.liveFixtures = liveFix;
+      if (this.liveFixtures[0].status === "Finished" || this.liveFixtures[0].status === "NS" || this.liveFixtures[0].status === "Aban" || this.liveFixtures[0].status === 'Cancl') {
+        if (this.timer) {
+          window.clearTimeout(this.timer)
+        }
+      }
     }).catch(err => {
     });
   }
