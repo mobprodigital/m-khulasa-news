@@ -20,8 +20,8 @@ export class ScoreComponent implements OnInit {
   public fixturesList: fixtureModel[] = [];
   public liveScore: liveScoreModel[];
   public scoreCard: string = 'localTeam';
-  public scoreCard1: string = 'visitarTeam';
   public fixId: string;
+  public isVisitarTeam: boolean;
   private timer: any;
   private routerSubscribe: Subscription;
   public localTeamStatus: string;
@@ -51,7 +51,8 @@ export class ScoreComponent implements OnInit {
     this.routerSubscribe = route.events.subscribe(ev => {
       if (ev instanceof NavigationEnd) {
         this.fixId = activatedRouter.snapshot.paramMap.get('fixid');
-        this.scoreCard = "localTeam"
+        this.scoreCard = "localTeam";
+        this.isVisitarTeam = true;
         this.getLiveScore();
         this.timer = setInterval(() => { this.getLiveScore(); }, 20000);
       }
@@ -85,9 +86,9 @@ export class ScoreComponent implements OnInit {
         .then((data: any[]) => {
           this.liveScore = this.parseLiveScore(data);
 
-          if (this.liveScore[0].batting.length > 0 && this.liveScore[0].batting[0].teamId == this.liveScore[0].visitarTeam.id) {
-            this.scoreCard = "visitarTeam"
-
+          if (this.isVisitarTeam && this.liveScore[0].batting.length > 0 && this.liveScore[0].batting[0].teamId == this.liveScore[0].visitarTeam.id) {
+            this.scoreCard = "visitarTeam";
+            this.isVisitarTeam = false;
           }
           if (this.liveScore[0].status === "Finished" || this.liveScore[0].status === "NS" || this.liveScore[0].status === "Aban" || this.liveScore[0].status === 'Cancl') {
             if (this.timer) {
