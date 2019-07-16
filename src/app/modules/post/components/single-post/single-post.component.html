@@ -15,9 +15,13 @@
       <app-share-to-app [post]="post"></app-share-to-app>
 
     </div>
-    <a href="https://jack.vnative.net/5d089ebeb6920d5cf72dfcf5" target="_blank">
-      <img style="margin-bottom: 5px ; " class="w-100" src="assets/images/banner/telugubanner.jpg" alt="" srcset="">
+    <a href="https://app.appsflyer.com/video.like?pid=morrisdigital_int&af_sub1={publisher_id}_{source}&af_click_lookback=7d&clickid={click_id}"
+      target="_blank">
+      <img class="w-100" src="assets/images/banner/like3.jpg" alt="" srcset="">
     </a>
+    <!-- <a href="https://jack.vnative.net/5d089ebeb6920d5cf72dfcf5" target="_blank">
+      <img style="margin-bottom: 5px ; " class="w-100" src="assets/images/banner/telugubanner.jpg" alt="" srcset="">
+    </a> -->
     <img *ngIf="!ytVideo" class="w-100" [src]="post.featuredImage.original" [alt]="post.featuredImage.original">
 
     <div class="single-post-content" #postContent [innerHTML]='post.content'></div>
