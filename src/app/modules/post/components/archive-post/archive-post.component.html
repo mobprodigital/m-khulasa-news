@@ -6,10 +6,12 @@
 </div> -->
 <div class="p-lr" style="margin-top:10px;">
   <a href="http://www.development.bdigimedia.com/apk/filehunt/jmm01-12.1.13-APK.apk" download>
-    <img style="width:100%; border:solid 1px #e3e3e3 " src="assets/images/banner/dailyhunt.jpg" alt="" srcset="">
+    <img *ngIf="lang=='hin'" style="width:100%; border:solid 1px #e3e3e3 " src="assets/images/banner/dailyhunt-hin1.jpg"
+      alt="" srcset="">
+    <img *ngIf="lang=='eng'" style="width:100%; border:solid 1px #e3e3e3 " src="assets/images/banner/dailyhunt-eng1.jpg"
+      alt="" srcset="">
   </a>
 </div>
-
 
 
 <app-news-template class="scroll" [categoryID]="categoryId"></app-news-template>

@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public catIdList: number[] = [];
   private langChangeSubscription: Subscription;
+  public lang;
 
   constructor(
     private langSvc: AppLangServiceService
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.langChangeSubscription = this.langSvc.langChangedEmitter.subscribe(
       (lang: AppLangEnum) => {
         this.catIdList = [];
+        this.lang = this.langSvc.selectedAppLang
         setTimeout(() => {
           this.catIdList = [42, 43, 48, 41];
         });
@@ -28,6 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.lang = this.langSvc.selectedAppLang
   }
 
   ngOnDestroy() {

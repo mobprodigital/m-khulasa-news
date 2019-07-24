@@ -29,6 +29,8 @@ export class SinglePostComponent implements OnInit {
   public relatedPostList: PostModel[] = [];
   public relatedPostError: string = '';
   public relatedPostLoader: boolean = true;
+
+  public lang;
   @ViewChild('postContent') postContent: ElementRef;
 
   constructor(
@@ -43,9 +45,17 @@ export class SinglePostComponent implements OnInit {
       if (ev instanceof NavigationEnd) {
         this.getPostSlug();
         this.scrollToTop();
+
       }
     })
+
+    this.appLangService.langChangedEmitter.subscribe(
+      () => {
+        this.lang = this.appLangService.selectedAppLang
+      }
+    );
   }
+
 
   public getPostSlug() {
     this.postSlug = this.activatedRoute.snapshot.paramMap.get('slug');
@@ -163,7 +173,7 @@ export class SinglePostComponent implements OnInit {
     }
   }
   ngOnInit() {
-
+    this.lang = this.appLangService.selectedAppLang
   }
 
   ngOnDestroy(): void {
