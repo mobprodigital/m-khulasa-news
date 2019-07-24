@@ -55,19 +55,22 @@
           [routerLink]="['/category', catList.id]">{{catList.name}}</a></li>
     </ul>
 
-    <!-- <ul class="world-cup-menu">
+    <ul class="world-cup-menu">
 
       <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="world-cup-link-active" [routerLink]="['/world-cup']">{{worldCupFixtures}}
         </a></li>
-      <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
+      <!-- <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
           routerLinkActive="world-cup-link-active" [routerLink]="['/category', wcCatId]">{{worldCupNews}}
-        </a></li>
-      <li class="world-cup-menu-item"> <a class="world-cup-link" [routerLinkActiveOptions]="{ exact: true }"
-          routerLinkActive="world-cup-link-active" [routerLink]="['/point-table']">{{worldCupPointTable}}
-        </a></li>
+        </a></li> -->
+      <li class="world-cup-menu-item">
+        <!--   <a  class="world-cup-link"
+          [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="world-cup-link-active"
+          [routerLink]="['/point-table']">  {{worldCupPointTable}} </a> -->
 
-    </ul> -->
+        <span class="world-cup-link"> {{worldCupPointTable}}</span></li>
+
+    </ul>
 
   </nav>
   <!-- <div [hidden]="!langBtn">
@@ -114,9 +117,6 @@
               </div>
             </div>
           </div>
-
-
-
         </a>
       </aside>
     </section>

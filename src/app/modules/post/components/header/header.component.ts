@@ -134,10 +134,14 @@ export class HeaderComponent implements OnInit {
       this.liveFixtures = liveFix;
       if (this.liveFixtures[0].status === "Finished" || this.liveFixtures[0].status === "NS" || this.liveFixtures[0].status === "Aban" || this.liveFixtures[0].status === 'Cancl') {
         if (this.timer) {
-          window.clearTimeout(this.timer)
+          window.clearInterval(this.timer)
         }
       }
     }).catch(err => {
+      console.log(err)
+      if (this.timer) {
+        window.clearInterval(this.timer)
+      }
     });
   }
 

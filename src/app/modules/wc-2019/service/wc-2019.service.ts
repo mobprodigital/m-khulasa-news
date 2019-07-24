@@ -56,9 +56,9 @@ export class Wc2019Service {
   getFixtures(fixtureId: Number): Promise<FixtureModel>;
   getFixtures(fixtureId?: number): Promise<FixtureModel[] | FixtureModel> {
     return new Promise((resolve, reject) => {
-     
 
-      let params = new HttpParams().set('league_id', '2').set('season_id', '41');
+
+      let params = new HttpParams().set('league_id', '4').set('season_id', '38');
       if (fixtureId) {
         params = params.set('fixtureId', fixtureId.toString());
       }
