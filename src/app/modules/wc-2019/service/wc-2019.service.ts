@@ -64,7 +64,7 @@ export class Wc2019Service {
       }
 
       this.httpClient.get(this.baseurl + 'getAllfixtures.php', {
-        params: params
+        // params: params
       }).subscribe(
         (resp: {
           data: any,
