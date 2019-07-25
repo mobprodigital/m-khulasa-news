@@ -81,7 +81,7 @@ export class ScoreComponent implements OnInit {
     // let liveMatchFixtureId = liveMatch.map(lm => lm.id);
 
     if (this.fixId) {
-      let params = new HttpParams().set("league_id", '4').set('season_id', '38').set('fixtureId', this.fixId.toString());
+      let params = new HttpParams().set('fixtureId', this.fixId.toString());
       this.httpService.getLiveScore(params)
         .then((data: any[]) => {
           this.liveScore = this.parseLiveScore(data);
