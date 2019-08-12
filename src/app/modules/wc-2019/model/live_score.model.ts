@@ -11,10 +11,15 @@ export class liveScoreModel {
     tossWinTeamName: string;
     elected: string;
     status: string;
-    fixture_id : number;
+    fixture_id: number;
     localTeam: any;
     visitarTeam: any;
     batting: battingModel[];
     bowling: bowlingModel[];
     runs: runModel[];
+    localTeamBowling: bowlingModel[];
+    visiterTeamBowling: bowlingModel[];
+    loaclTeamBatting: battingModel[];
+    visiterTeamBatting: battingModel[];
+    matchType:string;
 }
