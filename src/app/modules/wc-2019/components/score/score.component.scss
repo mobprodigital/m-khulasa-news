@@ -81,8 +81,8 @@ table {
 
 .team-detail-container {
   img {
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
     margin: 0px 7px;
     border: solid 2px #1055b7;
     border-radius: 2pc;
@@ -124,8 +124,36 @@ table {
 .score {
   font-size: 10px;
   font-weight: 600;
+  margin: 5px 0px;
 
   span {
     display: block;
   }
+}
+
+.inning {
+  text-align: center;
+  margin: 10px 0px;
+  padding: 10px;
+  border-radius: 4px;
+  background: #e3e3e3;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  background-color: #343434a1;
+  color: #fff;
+  padding: 10px 15px;
+  align-items: center;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.player-status {
+  margin-left: auto;
+  margin-right: 11px;
+  font-size: 12px;
+  font-weight: 600;
 }
