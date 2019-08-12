@@ -23,7 +23,10 @@ export class FixturesListComponent implements OnInit {
     let score = '0/0 (0)';
     if (currentFix) {
       if (currentFix.runs && currentFix.runs.length > 0) {
-        const run = currentFix.runs.find(r => r.team_id === teamId);
+
+        const runlist = currentFix.runs.filter(r => r.team_id === teamId);
+        let i = runlist.length - 1
+        let run = runlist[i]
         if (run) {
           score = '';
           score += run.score ? run.score.toString() : '0';

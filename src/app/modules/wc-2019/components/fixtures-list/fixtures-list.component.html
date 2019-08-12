@@ -1,8 +1,8 @@
 <div style="margin-top: 10px;" class="p-lr" *ngIf="fixList && fixList.length > 0">
   <section *ngFor="let fix of fixList" class="lc-card-wrap">
     <div class="lc-score-wrap">
-      <a class="lc-score-link" [routerLink]="(isPastMatch(fix) ? ['full-scorecard', fix.id] : null)">
-        <!-- <a class="lc-score-link" [routerLink]="['full-scorecard', fix.id]"> -->
+      <!-- <a class="lc-score-link" [routerLink]="(isPastMatch(fix) ? ['full-scorecard', fix.id] : null)"> -->
+        <a class="lc-score-link" [routerLink]="['full-scorecard', fix.id]">
         <div class="lc-note"> <span>{{fix.round}} |
             {{(fix.note.length ? fix.note : (fix.status === 'NS' ? 'Match Not Started' : ''))}}</span></div>
         <section class="fix-t-wrap">
