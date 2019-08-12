@@ -9,4 +9,8 @@ export class bowlingModel {
     runs: number;
     overs: number;
     medians: number;
+    scoreboard: string;
+    // constructor() {
+    //     this.scoreboard = null
+    // }
 }
