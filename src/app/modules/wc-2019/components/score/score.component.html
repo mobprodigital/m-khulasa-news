@@ -17,6 +17,9 @@
         </div>
         <div>
           <h4 class="score">
+            {{getTeamRunF(ls.localTeamId)}}
+          </h4>
+          <h4 class="score" *ngIf="ls.matchType==MTTest">
             {{getTeamRun(ls.localTeamId)}}
           </h4>
         </div>
@@ -24,6 +27,9 @@
       <div class="visitar-team">
         <div>
           <h4 class="score">
+            {{getTeamRunF(ls.visitarTeamId)}}
+          </h4>
+          <h4 class="score" *ngIf="ls.matchType==MTTest">
             {{getTeamRun(ls.visitarTeamId)}}
           </h4>
         </div>
@@ -41,6 +47,9 @@
         </div>
         <div>
           <h4 class="score">
+            {{getTeamRunF(ls.visitarTeamId)}}
+          </h4>
+          <h4 class="score" *ngIf="ls.matchType==MTTest">
             {{getTeamRun(ls.visitarTeamId)}}
           </h4>
         </div>
@@ -48,6 +57,9 @@
       <div class="local-team">
         <div>
           <h4 class="score">
+            {{getTeamRunF(ls.localTeamId)}}
+          </h4>
+          <h4 class="score" *ngIf="ls.matchType==MTTest">
             {{getTeamRun(ls.localTeamId)}}
           </h4>
         </div>
@@ -98,105 +110,343 @@
     </div>
 
     <div *ngIf="ls.batting.length>0" [ngSwitch]="scoreCard">
-      <div *ngSwitchCase="'localTeam'">
-        <table>
-          <thead>
-            <tr>
-              <th>Batting</th>
-              <th>R</th>
-              <th>B</th>
-              <th>4s</th>
-              <th>6s</th>
-              <th>S/R</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let bt of ls.batting" [hidden]="bt.teamId!=ls.localTeamId">
-              <td> <span> <img src="{{bt.playerImagePath}}" alt=""> </span> <span>{{bt.playerName}}</span></td>
-              <td>{{bt.score}}</td>
-              <td>{{bt.ball}}</td>
-              <td>{{bt.four}}</td>
-              <td>{{bt.six}}</td>
-              <td>{{bt.sRate}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div *ngIf="ls.matchType==MTOneDay||ls.matchType==MTt20||ls.matchType==MTt20i||ls.matchType==MTt10">
+        <div *ngSwitchCase="'localTeam'">
+          <table>
+            <thead>
+              <tr>
+                <th>Batting</th>
+                <th>R</th>
+                <th>B</th>
+                <th>4s</th>
+                <th>6s</th>
+                <th>S/R</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bt of ls.loaclTeamBatting">
+                <td> <span> <img src="{{bt.playerImagePath}}" alt=""> </span> <span>{{bt.playerName}}</span>
+                  <span class="player-status">{{bt.playerStatus}}</span></td>
+                <td>{{bt.score}}</td>
+                <td>{{bt.ball}}</td>
+                <td>{{bt.four}}</td>
+                <td>{{bt.six}}</td>
+                <td>{{bt.sRate}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="total">
+            <div>total</div>
+            <div> {{getTeamRunF(ls.localTeamId)}}</div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Bowling </th>
+                <th>O</th>
+                <th>W/B</th>
+                <th>N/B</th>
+                <th>M/O</th>
+                <th>R</th>
+                <th>W</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bw of ls.visiterTeamBowling">
+                <td> <span><img src="{{bw.playerImage}}" alt=""></span> <span>{{bw.playarName}}</span></td>
+                <td>{{bw.overs}}</td>
+                <td>{{bw.wide}}</td>
+                <td>{{bw.noBall}}</td>
+                <td>{{bw.medians}}</td>
+                <td>{{bw.runs}}</td>
+                <td>{{bw.wickets}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Bowling </th>
-              <th>O</th>
-              <th>W/B</th>
-              <th>N/B</th>
-              <th>M/O</th>
-              <th>R</th>
-              <th>W</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let bw of ls.bowling" [hidden]="bw.teamId!=ls.visitarTeamId">
-              <td> <span><img src="{{bw.playerImage}}" alt=""></span> <span>{{bw.playarName}}</span></td>
-              <td>{{bw.overs}}</td>
-              <td>{{bw.wide}}</td>
-              <td>{{bw.noBall}}</td>
-              <td>{{bw.medians}}</td>
-              <td>{{bw.runs}}</td>
-              <td>{{bw.wickets}}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div *ngSwitchCase="'visitarTeam'">
+          <table>
+            <thead>
+              <tr>
+                <th>Batting</th>
+                <th>R</th>
+                <th>B</th>
+                <th>4s</th>
+                <th>6s</th>
+                <th>S/R</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bt of ls.visiterTeamBatting">
+                <td><span> <img src="{{bt.playerImagePath}}" alt=""></span>
+                  <span>{{bt.playerName}}</span> <span class="player-status">{{bt.playerStatus}}</span></td>
+                <td>{{bt.score}}</td>
+                <td>{{bt.ball}}</td>
+                <td>{{bt.four}}</td>
+                <td>{{bt.six}}</td>
+                <td>{{bt.sRate}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="total">
+            <div>total</div>
+            <div>{{getTeamRunF(ls.visitarTeamId)}}</div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Bowling </th>
+                <th>O</th>
+                <th>W/B</th>
+                <th>N/B</th>
+                <th>M/O</th>
+                <th>R</th>
+                <th>W</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bw of ls.localTeamBowling">
+                <td><span><img src="{{bw.playerImage}}" alt=""></span> <span>{{bw.playarName}}</span></td>
+                <td>{{bw.overs}}</td>
+                <td>{{bw.wide}}</td>
+                <td>{{bw.noBall}}</td>
+                <td>{{bw.medians}}</td>
+                <td>{{bw.runs}}</td>
+                <td>{{bw.wickets}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div *ngSwitchCase="'visitarTeam'">
 
-        <table>
-          <thead>
-            <tr>
-              <th>Batting</th>
-              <th>R</th>
-              <th>B</th>
-              <th>4s</th>
-              <th>6s</th>
-              <th>S/R</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let bt of ls.batting" [hidden]="bt.teamId!=ls.visitarTeamId">
-              <td><span> <img src="{{bt.playerImagePath}}" alt=""></span> <span>{{bt.playerName}}</span></td>
-              <td>{{bt.score}}</td>
-              <td>{{bt.ball}}</td>
-              <td>{{bt.four}}</td>
-              <td>{{bt.six}}</td>
-              <td>{{bt.sRate}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div *ngIf="ls.matchType==MTTest||ls.matchType==MTTest5">
+        <div *ngSwitchCase="'localTeam'">
+          <!-- <div *ngIf="ls.batting[0]."></div> -->
+          <div class="inning"> {{ls.localTeam.name}} 1st Innings </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Bowling </th>
-              <th>O</th>
-              <th>W/B</th>
-              <th>N/B</th>
-              <th>M/O</th>
-              <th>R</th>
-              <th>W</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let bw of ls.bowling" [hidden]="bw.teamId!=ls.localTeamId">
-              <td><span><img src="{{bw.playerImage}}" alt=""></span> <span>{{bw.playarName}}</span></td>
-              <td>{{bw.overs}}</td>
-              <td>{{bw.wide}}</td>
-              <td>{{bw.noBall}}</td>
-              <td>{{bw.medians}}</td>
-              <td>{{bw.runs}}</td>
-              <td>{{bw.wickets}}</td>
-            </tr>
-          </tbody>
-        </table>
+          <table>
+            <thead>
+              <tr>
+                <th>Batting</th>
+                <th>R</th>
+                <th>B</th>
+                <th>4s</th>
+                <th>6s</th>
+                <th>S/R</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bt of ls.loaclTeamBatting" [hidden]="bt.scoreboard!=localTBattingFSB">
+                <td> <span> <img src="{{bt.playerImagePath}}" alt=""> </span> <span>{{bt.playerName}}</span><span
+                    class="player-status">{{bt.playerStatus}}</span></td>
+                <td>{{bt.score}}</td>
+                <td>{{bt.ball}}</td>
+                <td>{{bt.four}}</td>
+                <td>{{bt.six}}</td>
+                <td>{{bt.sRate}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="total">
+            <div>total</div>
+            <div> {{getTeamRunF(ls.localTeamId)}}</div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Bowling </th>
+                <th>O</th>
+                <th>W/B</th>
+                <th>N/B</th>
+                <th>M/O</th>
+                <th>R</th>
+                <th>W</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bw of ls.visiterTeamBowling" [hidden]=" bw.scoreboard!=visitarTBowlingFSB">
+                <td> <span><img src="{{bw.playerImage}}" alt=""></span> <span>{{bw.playarName}}</span></td>
+                <td>{{bw.overs}}</td>
+                <td>{{bw.wide}}</td>
+                <td>{{bw.noBall}}</td>
+                <td>{{bw.medians}}</td>
+                <td>{{bw.runs}}</td>
+                <td>{{bw.wickets}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div *ngIf="localTBattingLSb!=localTBattingFSB ">
+            <div class="inning"> {{ls.localTeam.name}} 2nd Innings </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Batting</th>
+                  <th>R</th>
+                  <th>B</th>
+                  <th>4s</th>
+                  <th>6s</th>
+                  <th>S/R</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bt of ls.loaclTeamBatting" [hidden]="bt.scoreboard!=localTBattingLSB">
+                  <td> <span> <img src="{{bt.playerImagePath}}" alt=""> </span> <span>{{bt.playerName}}</span><span
+                      class="player-status">{{bt.playerStatus}}</span></td>
+                  <td>{{bt.score}}</td>
+                  <td>{{bt.ball}}</td>
+                  <td>{{bt.four}}</td>
+                  <td>{{bt.six}}</td>
+                  <td>{{bt.sRate}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="total">
+              <div>total</div>
+              <div>{{getTeamRun(ls.localTeamId)}}</div>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Bowling </th>
+                  <th>O</th>
+                  <th>W/B</th>
+                  <th>N/B</th>
+                  <th>M/O</th>
+                  <th>R</th>
+                  <th>W</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bw of ls.visiterTeamBowling" [hidden]=" bw.scoreboard!=visitarTBowlingLSB">
+                  <td> <span><img src="{{bw.playerImage}}" alt=""></span> <span>{{bw.playarName}}</span></td>
+                  <td>{{bw.overs}}</td>
+                  <td>{{bw.wide}}</td>
+                  <td>{{bw.noBall}}</td>
+                  <td>{{bw.medians}}</td>
+                  <td>{{bw.runs}}</td>
+                  <td>{{bw.wickets}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'visitarTeam'">
+          <div class="inning">{{ls.visitarTeam.name}} 1st Innings</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Batting</th>
+                <th>R</th>
+                <th>B</th>
+                <th>4s</th>
+                <th>6s</th>
+                <th>S/R</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bt of ls.visiterTeamBatting" [hidden]=" bt.scoreboard!=visitarTBattingFSB">
+                <td><span> <img src="{{bt.playerImagePath}}" alt=""></span> <span>{{bt.playerName}}</span><span
+                    class="player-status">{{bt.playerStatus}}</span></td>
+                <td>{{bt.score}}</td>
+                <td>{{bt.ball}}</td>
+                <td>{{bt.four}}</td>
+                <td>{{bt.six}}</td>
+                <td>{{bt.sRate}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="total">
+            <div>total</div>
+            <div>{{getTeamRunF(ls.visitarTeamId)}}</div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Bowling </th>
+                <th>O</th>
+                <th>W/B</th>
+                <th>N/B</th>
+                <th>M/O</th>
+                <th>R</th>
+                <th>W</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let bw of ls.localTeamBowling" [hidden]=" bw.scoreboard!=localTBowlingFSB">
+                <td><span><img src="{{bw.playerImage}}" alt=""></span> <span>{{bw.playarName}}</span></td>
+                <td>{{bw.overs}}</td>
+                <td>{{bw.wide}}</td>
+                <td>{{bw.noBall}}</td>
+                <td>{{bw.medians}}</td>
+                <td>{{bw.runs}}</td>
+                <td>{{bw.wickets}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div *ngIf="visitarTBattingLSB!=visitarTBattingFSB">
+            <div class="inning">{{ ls.visitarTeam.name}} 2nd Innings</div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Batting</th>
+                  <th>R</th>
+                  <th>B</th>
+                  <th>4s</th>
+                  <th>6s</th>
+                  <th>S/R</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bt of ls.visiterTeamBatting" [hidden]=" bt.scoreboard!=visitarTBattingLSB">
+                  <td><span> <img src="{{bt.playerImagePath}}" alt=""></span> <span>{{bt.playerName}}</span><span
+                      class="player-status">{{bt.playerStatus}}</span></td>
+                  <td>{{bt.score}}</td>
+                  <td>{{bt.ball}}</td>
+                  <td>{{bt.four}}</td>
+                  <td>{{bt.six}}</td>
+                  <td>{{bt.sRate}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="total">
+              <div>total</div>
+              <div> {{getTeamRun(ls.visitarTeamId)}}</div>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Bowling </th>
+                  <th>O</th>
+                  <th>W/B</th>
+                  <th>N/B</th>
+                  <th>M/O</th>
+                  <th>R</th>
+                  <th>W</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bw of ls.localTeamBowling" [hidden]=" bw.scoreboard!=localTBowlingLSB">
+                  <td><span><img src="{{bw.playerImage}}" alt=""></span> <span>{{bw.playarName}}</span></td>
+                  <td>{{bw.overs}}</td>
+                  <td>{{bw.wide}}</td>
+                  <td>{{bw.noBall}}</td>
+                  <td>{{bw.medians}}</td>
+                  <td>{{bw.runs}}</td>
+                  <td>{{bw.wickets}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
