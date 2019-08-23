@@ -53,12 +53,12 @@ export class HeaderComponent implements OnInit {
       }
     );
 
-    this.getLiveFixes();
+    // this.getLiveFixes();
 
-    this.timer = setInterval(() => {
-      this.getLiveFixes();
+    // this.timer = setInterval(() => {
+    //   this.getLiveFixes();
 
-    }, 20000);
+    // }, 20000);
 
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

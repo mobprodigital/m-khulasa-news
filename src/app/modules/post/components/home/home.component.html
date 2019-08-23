@@ -3,12 +3,10 @@
     <img style="width:100%" src="assets/images/banner/dailyhunt.jpg" alt="" srcset="">
   </a>
 </div> -->
-<div class="p-lr" style="margin-top:10px;">
-  <a href="http://www.development.bdigimedia.com/apk/filehunt/jmm01-12.1.13-APK.apk" download>
-    <img *ngIf="lang=='hin'" style="width:100%; border:solid 1px #e3e3e3 " src="assets/images/banner/dailyhunt-hin2.jpg"
-      alt="" srcset="">
-    <img *ngIf="lang=='eng'" style="width:100%; border:solid 1px #e3e3e3 " src="assets/images/banner/dailyhunt-eng2.jpg"
-      alt="" srcset="">
+<div class="p-lr">
+  <a href="https://app.appsflyer.com/video.like?pid=morrisdigital_int&af_sub1={publisher_id}_{source}&af_click_lookback=7d&clickid={click_id}"
+    target="_blank">
+    <img style="width:100%;" src="assets/images/banner/like4.jpg" alt="" srcset="">
   </a>
 </div>
 
@@ -20,12 +18,17 @@
   <app-news-template [categoryID]="catIdList[2]" [count]='5'></app-news-template>
   <app-ad-banner [slotId]="'2163562243'"></app-ad-banner>
   <app-news-template [categoryID]="catIdList[3]" [count]='5'></app-news-template>
-  <div class="p-lr">
-    <a href="https://app.appsflyer.com/video.like?pid=morrisdigital_int&af_sub1={publisher_id}_{source}&af_click_lookback=7d&clickid={click_id}"
-      target="_blank">
-      <img style="width:100%;" src="assets/images/banner/like4.jpg" alt="" srcset="">
+
+
+  <div class="p-lr" style="margin-top:10px;">
+    <a href="http://www.development.bdigimedia.com/apk/filehunt/jmm01-12.1.13-APK.apk" download>
+      <img *ngIf="lang=='hin'" style="width:100%; border:solid 1px #e3e3e3 "
+        src="assets/images/banner/dailyhunt-hin2.jpg" alt="" srcset="">
+      <img *ngIf="lang=='eng'" style="width:100%; border:solid 1px #e3e3e3 "
+        src="assets/images/banner/dailyhunt-eng2.jpg" alt="" srcset="">
     </a>
   </div>
+
   <app-ad-banner [slotId]="'2185782979'"></app-ad-banner>
 
 </div>
